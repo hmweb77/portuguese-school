@@ -1,86 +1,254 @@
 "use client"
-import { Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Youtube, Linkedin, Mail, MapPin, Phone, Heart, ArrowUp } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
-    console.log('Newsletter signup:', newsletterEmail);
-    setNewsletterEmail("");
+    setIsSubmitting(true);
+    
+    setTimeout(() => {
+      console.log('Newsletter signup:', newsletterEmail);
+      setShowSuccess(true);
+      setNewsletterEmail("");
+      setIsSubmitting(false);
+      
+      setTimeout(() => setShowSuccess(false), 3000);
+    }, 1000);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const socialLinks = [
+    { icon: Facebook, href: "#", label: "Facebook", color: "hover:bg-blue-500" },
+    { icon: Instagram, href: "#", label: "Instagram", color: "hover:bg-pink-500" },
+    { icon: Youtube, href: "#", label: "YouTube", color: "hover:bg-red-500" },
+    { icon: Linkedin, href: "#", label: "LinkedIn", color: "hover:bg-blue-600" }
+  ];
+
+  const quickLinks = [
+    { label: "About the Program", href: "#about" },
+    { label: "Benefits", href: "#benefits" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "Testimonials", href: "#testimonials" },
+    { label: "FAQ", href: "#faq" }
+  ];
+
+  const contactInfo = [
+    { icon: Mail, text: "hello@ifli.com" },
+    { icon: Phone, text: "+351 XXX XXX XXX" },
+    { icon: MapPin, text: "Lisbon, Portugal" }
+  ];
+
   return (
-    <footer className="bg-white border-t border-[#E3E5E8]" data-testid="footer">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-3 gap-12 mb-8">
-          <div>
-            <h3 className="text-2xl font-bold mb-4 text-[#3BA9A3]">IFLI</h3>
-            <p className="text-[#6B8299] mb-4">
+    <footer className="relative bg-gradient-to-b from-white to-[#F5F6F7] border-t border-[#E3E5E8]" data-testid="footer">
+      {/* Decorative top wave */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#3BA9A3] via-[#FF8A5C] to-[#3BA9A3]" />
+
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* Brand Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.div 
+              className="mb-6"
+              whileHover={{ scale: 1.05 }}
+            >
+              <Image
+                src="/horizontal-original-sin fondo-letras blancas-400x218px.png"
+                alt="IFLI Logo"
+                width={180}
+                height={50}
+                className="brightness-0"
+              />
+            </motion.div>
+            <p className="text-[#6B8299] mb-6 leading-relaxed">
               Learn Portuguese fast with live classes, expert teachers, and a global community.
             </p>
-            <div className="flex gap-4">
-              <button className="p-2 hover:bg-[#F5F6F7] rounded-[12px] transition-colors" data-testid="button-social-facebook">
-                <Facebook className="w-5 h-5 text-[#394D5C]" />
-              </button>
-              <button className="p-2 hover:bg-[#F5F6F7] rounded-[12px] transition-colors" data-testid="button-social-instagram">
-                <Instagram className="w-5 h-5 text-[#394D5C]" />
-              </button>
-              <button className="p-2 hover:bg-[#F5F6F7] rounded-[12px] transition-colors" data-testid="button-social-youtube">
-                <Youtube className="w-5 h-5 text-[#394D5C]" />
-              </button>
-              <button className="p-2 hover:bg-[#F5F6F7] rounded-[12px] transition-colors" data-testid="button-social-linkedin">
-                <Linkedin className="w-5 h-5 text-[#394D5C]" />
-              </button>
+            
+            {/* Social Links */}
+            <div className="flex gap-3">
+              {socialLinks.map((social, index) => {
+                const IconComponent = social.icon;
+                return (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    aria-label={social.label}
+                    className={`p-3 bg-white border-2 border-[#E3E5E8] rounded-xl transition-all duration-300 ${social.color} hover:text-white hover:border-transparent group`}
+                    data-testid={`button-social-${social.label.toLowerCase()}`}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <IconComponent className="w-5 h-5 text-[#394D5C] group-hover:text-white transition-colors" />
+                  </motion.a>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <h4 className="font-bold text-lg mb-6 text-[#394D5C]">Quick Links</h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link, index) => (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + index * 0.05 }}
+                >
+                  <a 
+                    href={link.href} 
+                    className="text-[#6B8299] hover:text-[#3BA9A3] transition-colors flex items-center gap-2 group"
+                    data-testid={`link-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E3E5E8] group-hover:bg-[#3BA9A3] transition-colors" />
+                    {link.label}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h4 className="font-bold text-lg mb-6 text-[#394D5C]">Contact Us</h4>
+            <ul className="space-y-4">
+              {contactInfo.map((info, index) => {
+                const IconComponent = info.icon;
+                return (
+                  <motion.li
+                    key={index}
+                    className="flex items-start gap-3"
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + index * 0.05 }}
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[#3BA9A3]/10 flex items-center justify-center flex-shrink-0">
+                      <IconComponent className="w-5 h-5 text-[#3BA9A3]" />
+                    </div>
+                    <div>
+                      <p className="text-[#6B8299] text-sm">{info.text}</p>
+                    </div>
+                  </motion.li>
+                );
+              })}
+            </ul>
+          </motion.div>
+
+          {/* Newsletter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <h4 className="font-bold text-lg mb-6 text-[#394D5C]">Stay Updated</h4>
+            <p className="text-[#6B8299] mb-4 text-sm leading-relaxed">
+              Get course updates, Portuguese tips, and exclusive offers delivered to your inbox.
+            </p>
+            
+            <form onSubmit={handleNewsletterSubmit} className="space-y-3">
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  required
+                  className="w-full h-12 pl-12 pr-4 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all"
+                  data-testid="input-newsletter"
+                />
+              </div>
+              
+              <motion.button 
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-12 bg-gradient-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+                data-testid="button-newsletter"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isSubmitting ? "Subscribing..." : showSuccess ? "✓ Subscribed!" : "Subscribe"}
+              </motion.button>
+            </form>
+          </motion.div>
+        </div>
+
+        {/* Bottom Bar */}
+        <motion.div 
+          className="border-t border-[#E3E5E8] pt-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2 text-sm text-[#6B8299]">
+              <p>© 2026 IFLI. All rights reserved.</p>
+              <span className="hidden md:inline">•</span>
+              <p className="flex items-center gap-1">
+                Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> in Portugal
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap gap-6 text-sm">
+              <a href="#privacy" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-privacy">
+                Privacy Policy
+              </a>
+              <a href="#terms" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-terms">
+                Terms of Service
+              </a>
+              <a href="#refund" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-refund">
+                Refund Policy
+              </a>
             </div>
           </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-[#394D5C]">Quick Links</h4>
-            <ul className="space-y-2">
-              <li><a href="#about" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-about">About the Program</a></li>
-              <li><a href="#pricing" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-pricing">Pricing</a></li>
-              <li><a href="#faq" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-faq">FAQ</a></li>
-              <li><a href="#contact" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-contact">Contact Us</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-[#394D5C]">Stay Updated</h4>
-            <p className="text-[#6B8299] mb-4 text-sm">
-              Get course updates, Portuguese tips, and exclusive offers.
-            </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Your email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                required
-                className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
-                data-testid="input-newsletter"
-              />
-              <button 
-                type="submit"
-                className="px-4 py-2 bg-[#3BA9A3] text-white rounded-[12px] font-medium hover:bg-[#359690] transition-colors duration-200"
-                data-testid="button-newsletter"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <div className="border-t border-[#E3E5E8] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#6B8299]">
-          <p>© 2026 IFLI. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#privacy" className="hover:text-[#394D5C] transition-colors" data-testid="link-privacy">Privacy Policy</a>
-            <a href="#terms" className="hover:text-[#394D5C] transition-colors" data-testid="link-terms">Terms of Service</a>
-            <a href="#refund" className="hover:text-[#394D5C] transition-colors" data-testid="link-refund">Refund Policy</a>
-          </div>
-        </div>
+        </motion.div>
       </div>
+
+      {/* Scroll to Top Button */}
+      <motion.button
+        onClick={scrollToTop}
+        className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-full shadow-lg hover:shadow-xl transition-all z-40"
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.1, y: -5 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <ArrowUp className="w-6 h-6" />
+      </motion.button>
     </footer>
   );
 }

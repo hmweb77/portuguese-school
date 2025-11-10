@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
-
 import HeroSection from "@/components/Hero";
 import AboutProgram from "@/components/About";
 import BenefitsSection from "@/components/Benefits";

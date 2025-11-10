@@ -1,17 +1,32 @@
 "use client"
 import { useState, useEffect } from "react";
-import { Menu, X, LogIn } from "lucide-react";
+import { Menu, X, LogIn, ChevronDown } from "lucide-react";
 import Link from 'next/link';
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar({ onEnrollClick }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Track active section
+      const sections = ["about", "benefits", "pricing", "testimonials", "faq"];
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      setActiveSection(current || "");
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -33,95 +48,209 @@ export default function Navbar({ onEnrollClick }) {
   };
 
   return (
-    <nav 
+    <motion.nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-md border-b border-[#E3E5E8] shadow-[0px_2px_4px_-1px_rgba(0,0,0,0.06),0px_1px_2px_-1px_rgba(0,0,0,0.06)]" : "bg-transparent"
+        isScrolled 
+          ? "bg-white/95 backdrop-blur-md border-b border-[#E3E5E8] shadow-lg" 
+          : "bg-transparent"
       }`}
       data-testid="navbar"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold text-[#3BA9A3]" data-testid="link-logo">
-           <Image src="/horizontal-original-sin fondo-letras blancas-400x218px.png" alt="logo" width={200} height={50} />
-          </a>
+          {/* Logo */}
+          <motion.a 
+            href="#" 
+            className="text-2xl font-bold relative z-10" 
+            data-testid="link-logo"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Image 
+              src="/horizontal-original-sin fondo-letras blancas-400x218px.png" 
+              alt="IFLI Logo" 
+              width={180} 
+              height={50}
+              className={`transition-all duration-300 ${
+                isScrolled ? "brightness-0" : "brightness-100"
+              }`}
+            />
+          </motion.a>
 
-          <div className="hidden md:flex items-center gap-4">
-            {navLinks.map((link) => (
-              <button
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link, index) => (
+              <motion.button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className={`text-sm font-medium transition-all border-b-2 border-transparent hover:border-[#FF8A5C] ${
+                className={`text-sm font-medium transition-all relative ${
                   isScrolled ? "text-[#394D5C]" : "text-white"
-                }`}
+                } ${activeSection === link.href.slice(1) ? "font-bold" : ""}`}
                 data-testid={`link-nav-${link.label.toLowerCase()}`}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                whileHover={{ scale: 1.05 }}
               >
                 {link.label}
-              </button>
+                {activeSection === link.href.slice(1) && (
+                  <motion.div
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FF8A5C]"
+                    layoutId="activeSection"
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+              </motion.button>
             ))}
-            <Link 
-              href="/dashboard"
-              className="px-4 py-2 border-2 border-[#E3E5E8] rounded-full font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 flex items-center gap-2"
-              data-testid="button-signin-nav"
+
+            {/* Sign In Button */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
             >
-              <LogIn className="h-4 w-4" />
-              Sign In
-            </Link>
-            <button 
+              <Link 
+                href="/dashboard"
+                className={`px-4 py-2 border-2 rounded-full font-medium transition-all flex items-center gap-2 ${
+                  isScrolled 
+                    ? "border-[#E3E5E8] text-[#394D5C] hover:bg-[#F5F6F7]" 
+                    : "border-white/30 text-white hover:bg-white/10"
+                }`}
+                data-testid="button-signin-nav"
+              >
+                <LogIn className="h-4 w-4" />
+                <span className="hidden lg:inline">Sign In</span>
+              </Link>
+            </motion.div>
+
+            {/* Enroll Button */}
+            <motion.button 
               onClick={onEnrollClick}
-              className="px-4 py-2 bg-[#FF8A5C] text-white rounded-full font-medium hover:bg-[#FF7A4C] transition-colors duration-200"
+              className="relative px-6 py-2 bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white rounded-full font-semibold overflow-hidden group"
               data-testid="button-enroll-nav"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: 0.35 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Enroll Now
-            </button>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-[#FF7A4C] to-[#FF6A3C]"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10">Enroll Now</span>
+            </motion.button>
           </div>
 
-          <button
+          {/* Mobile Menu Button */}
+          <motion.button
             className="md:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             data-testid="button-mobile-menu"
+            whileTap={{ scale: 0.9 }}
           >
-            {isMobileMenuOpen ? (
-              <X className={`w-6 h-6 ${isScrolled ? "text-[#394D5C]" : "text-white"}`} />
-            ) : (
-              <Menu className={`w-6 h-6 ${isScrolled ? "text-[#394D5C]" : "text-white"}`} />
-            )}
-          </button>
+            <AnimatePresence mode="wait">
+              {isMobileMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className={`w-6 h-6 ${isScrolled ? "text-[#394D5C]" : "text-white"}`} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className={`w-6 h-6 ${isScrolled ? "text-[#394D5C]" : "text-white"}`} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
 
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-3" data-testid="mobile-menu">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollToSection(link.href)}
-                className="block w-full text-left px-4 py-2 text-sm font-medium hover:bg-[#FF8A5C]/10 rounded-[12px] transition-colors border-l-2 border-transparent hover:border-[#FF8A5C] text-[#394D5C]"
-                data-testid={`link-mobile-${link.label.toLowerCase()}`}
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              className="md:hidden mt-4 pb-4 space-y-3 bg-white rounded-2xl p-4 shadow-xl border border-[#E3E5E8]" 
+              data-testid="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {navLinks.map((link, index) => (
+                <motion.button
+                  key={link.href}
+                  onClick={() => scrollToSection(link.href)}
+                  className={`block w-full text-left px-4 py-3 text-sm font-medium rounded-xl transition-all ${
+                    activeSection === link.href.slice(1)
+                      ? "bg-[#FF8A5C] text-white"
+                      : "hover:bg-[#FF8A5C]/10 text-[#394D5C] border-l-2 border-transparent hover:border-[#FF8A5C]"
+                  }`}
+                  data-testid={`link-mobile-${link.label.toLowerCase()}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {link.label}
+                </motion.button>
+              ))}
+              
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
               >
-                {link.label}
-              </button>
-            ))}
-            <Link 
-              href="/dashboard"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-full font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 flex items-center justify-center gap-2"
-              data-testid="button-signin-mobile"
-            >
-              <LogIn className="h-4 w-4" />
-              Sign In
-            </Link>
-            <button 
-              onClick={() => {
-                onEnrollClick();
-                setIsMobileMenuOpen(false);
-              }}
-              className="w-full px-4 py-2 bg-[#FF8A5C] text-white rounded-full font-medium hover:bg-[#FF7A4C] transition-colors duration-200"
-              data-testid="button-enroll-mobile"
-            >
-              Enroll Now
-            </button>
-          </div>
-        )}
+                <Link 
+                  href="/dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full px-4 py-3 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 flex items-center justify-center gap-2"
+                  data-testid="button-signin-mobile"
+                >
+                  <LogIn className="h-4 w-4" />
+                  Sign In
+                </Link>
+              </motion.div>
+              
+              <motion.button 
+                onClick={() => {
+                  onEnrollClick();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full px-4 py-3 bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-200"
+                data-testid="button-enroll-mobile"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Enroll Now
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+
+      {/* Progress Bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-[#3BA9A3] to-[#FF8A5C]"
+        style={{ width: `${(window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100}%` }}
+        initial={{ width: 0 }}
+      />
+    </motion.nav>
   );
 }

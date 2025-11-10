@@ -1,7 +1,9 @@
 "use client"
-import { Check } from "lucide-react";
-import materialsImage from "../../public/Portuguese_learning_materials_flatlay_c6fe93fe.png";
+import { Check, Video, BookOpen, Users, Award, Download, Smartphone, BarChart3, MessageSquare } from "lucide-react";
+import materialsImage from "../../public/getSec.png";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import Image from "next/image";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -18,9 +20,14 @@ const staggerItem = (index) => ({
 });
 
 export default function WhatYouGetSection({ onEnrollClick }) {
+  const [activeCategory, setActiveCategory] = useState(0);
+
   const deliverables = [
     {
       category: "Live Learning",
+      icon: Video,
+      color: "from-red-400 to-pink-500",
+      bgColor: "bg-red-50",
       items: [
         "30+ live interactive sessions with native speakers",
         "Real-time Q&A and instant feedback",
@@ -30,6 +37,9 @@ export default function WhatYouGetSection({ onEnrollClick }) {
     },
     {
       category: "Learning Materials",
+      icon: BookOpen,
+      color: "from-blue-400 to-cyan-500",
+      bgColor: "bg-blue-50",
       items: [
         "Complete A1 Portuguese textbook",
         "Workbook with 200+ exercises",
@@ -39,6 +49,9 @@ export default function WhatYouGetSection({ onEnrollClick }) {
     },
     {
       category: "Digital Resources",
+      icon: Smartphone,
+      color: "from-purple-400 to-purple-600",
+      bgColor: "bg-purple-50",
       items: [
         "All session recordings (lifetime access)",
         "Portuguese media library (podcasts, videos)",
@@ -48,6 +61,9 @@ export default function WhatYouGetSection({ onEnrollClick }) {
     },
     {
       category: "Community & Support",
+      icon: Users,
+      color: "from-green-400 to-emerald-500",
+      bgColor: "bg-green-50",
       items: [
         "Access to student community forum",
         "Study groups with peers",
@@ -57,10 +73,39 @@ export default function WhatYouGetSection({ onEnrollClick }) {
     }
   ];
 
+  const features = [
+    { icon: Video, title: "30+ Live Sessions", description: "Interactive classes" },
+    { icon: Download, title: "Lifetime Access", description: "All materials forever" },
+    { icon: Award, title: "Certificate", description: "Official completion" },
+    { icon: BarChart3, title: "Track Progress", description: "Monitor your growth" },
+    { icon: MessageSquare, title: "Community", description: "Connect with peers" },
+    { icon: Smartphone, title: "Mobile App", description: "Learn anywhere" }
+  ];
+
   return (
-    <section className="py-24 md:py-32 px-6 bg-white" data-testid="section-what-you-get">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative py-24 md:py-32 px-6 bg-white overflow-hidden" data-testid="section-what-you-get">
+      {/* Background elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-0 w-96 h-96 bg-[#3BA9A3]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-0 w-72 h-72 bg-[#FF8A5C]/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
         <motion.div className="text-center mb-20" {...fadeInUp}>
+          <motion.div
+            className="inline-block mb-6 px-5 py-2 bg-[#3BA9A3]/10 text-[#3BA9A3] rounded-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="text-sm font-semibold flex items-center gap-2">
+              <Award className="w-4 h-4" />
+              Complete Learning Package
+            </span>
+          </motion.div>
+
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-[#394D5C]" data-testid="text-deliverables-headline">
             Everything You Need to Succeed
           </h2>
@@ -69,36 +114,135 @@ export default function WhatYouGetSection({ onEnrollClick }) {
           </p>
         </motion.div>
 
+        {/* Quick Feature Icons */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <motion.div
+                key={index}
+                className="text-center p-4 bg-white border-2 border-[#E3E5E8] rounded-xl hover:border-[#3BA9A3] transition-all"
+                whileHover={{ y: -5, scale: 1.05 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+              >
+                <div className="w-12 h-12 mx-auto mb-2 rounded-xl bg-gradient-to-br from-[#3BA9A3] to-[#2D8B85] flex items-center justify-center">
+                  <IconComponent className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-sm font-bold text-[#394D5C] mb-1">{feature.title}</div>
+                <div className="text-xs text-[#6B8299]">{feature.description}</div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Main Content */}
         <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Image with 3D Effect */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative"
           >
-            <img 
-              src={materialsImage} 
-              alt="Portuguese learning materials" 
-              className="rounded-3xl w-full shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)]"
-              data-testid="img-materials"
-            />
+            <motion.div
+              whileHover={{ scale: 1.02, rotateY: 5 }}
+              transition={{ duration: 0.3 }}
+              style={{ transformStyle: "preserve-3d" }}
+              className="relative"
+            >
+              <Image 
+                src={materialsImage} 
+                alt="Portuguese learning materials" 
+                className="rounded-3xl w-full shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)] relative z-10"
+                data-testid="img-materials"
+              />
+
+              {/* Floating elements */}
+           
+
+             
+            </motion.div>
           </motion.div>
 
-          <div className="space-y-10">
+          {/* Deliverables with Interactive Tabs */}
+          <div className="space-y-8">
+            {/* Category Tabs */}
+            <div className="flex flex-wrap gap-3 mb-6">
+              {deliverables.map((category, index) => {
+                const IconComponent = category.icon;
+                return (
+                  <motion.button
+                    key={index}
+                    onClick={() => setActiveCategory(index)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
+                      activeCategory === index
+                        ? `bg-gradient-to-r ${category.color} text-white shadow-lg`
+                        : 'bg-gray-100 text-[#6B8299] hover:bg-gray-200'
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <IconComponent className="w-4 h-4" />
+                    <span className="text-sm">{category.category}</span>
+                  </motion.button>
+                );
+              })}
+            </div>
+
+            {/* Content for Each Category */}
             {deliverables.map((section, sectionIndex) => (
-              <motion.div key={sectionIndex} {...staggerItem(sectionIndex)}>
-                <h3 className="text-2xl font-bold mb-4 text-[#3BA9A3]">{section.category}</h3>
-                <ul className="space-y-3">
-                  {section.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start gap-3" data-testid={`text-deliverable-${sectionIndex}-${itemIndex}`}>
-                      <Check className="w-5 h-5 text-[#3BA9A3] shrink-0 mt-0.5" />
-                      <span className="text-base leading-relaxed text-[#394D5C]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              <motion.div 
+                key={sectionIndex}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ 
+                  opacity: activeCategory === sectionIndex ? 1 : 0,
+                  height: activeCategory === sectionIndex ? 'auto' : 0
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                {activeCategory === sectionIndex && (
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${section.color} flex items-center justify-center`}>
+                        <section.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-[#394D5C]">{section.category}</h3>
+                    </div>
+                    
+                    <ul className="space-y-3">
+                      {section.items.map((item, itemIndex) => (
+                        <motion.li 
+                          key={itemIndex} 
+                          className="flex items-start gap-3"
+                          data-testid={`text-deliverable-${sectionIndex}-${itemIndex}`}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: itemIndex * 0.1 }}
+                        >
+                          <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                            <Check className="w-4 h-4 text-white" />
+                          </div>
+                          <span className="text-base leading-relaxed text-[#394D5C]">{item}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </motion.div>
             ))}
 
+            {/* CTA Button */}
             <motion.div 
               className="pt-8"
               initial={{ opacity: 0, y: 30 }}
@@ -106,13 +250,29 @@ export default function WhatYouGetSection({ onEnrollClick }) {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             >
-              <button 
-                className="w-full md:w-auto px-10 py-6 rounded-full text-base font-semibold bg-[#FF8A5C] text-white hover:bg-[#FF7A4C] transition-colors duration-200"
+              <motion.button 
+                className="group relative w-full md:w-auto px-10 py-6 rounded-full text-base font-semibold bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg"
                 onClick={onEnrollClick}
                 data-testid="button-enroll-deliverables"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                Start Your Portuguese Journey
-              </button>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-[#FF7A4C] to-[#FF6A3C]"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Start Your Portuguese Journey
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    →
+                  </motion.span>
+                </span>
+              </motion.button>
             </motion.div>
           </div>
         </div>
