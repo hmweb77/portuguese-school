@@ -248,7 +248,12 @@ export default function Navbar({ onEnrollClick }) {
       {/* Progress Bar */}
       <motion.div
         className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-[#3BA9A3] to-[#FF8A5C]"
-        style={{ width: `${(window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100}%` }}
+        // Guard against server-side rendering where `window` is not defined
+        style={{
+          width: (typeof window === 'undefined')
+            ? '0%'
+            : `${(window.scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1)) * 100}%`
+        }}
         initial={{ width: 0 }}
       />
     </motion.nav>
