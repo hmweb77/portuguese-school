@@ -25,9 +25,9 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
 
   // Background images that will cycle
   const backgrounds = [
-    '/port1.png',
-    '/port2.png',
-    '/port3.png'
+    '/her1.png',
+    '/hero2.png',
+    '/hero3.png'
   ];
 
   // Floating elements animation with GSAP
