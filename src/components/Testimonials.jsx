@@ -4,7 +4,8 @@ import testimonial1 from "../../public/Portuguese_learning_materials_flatlay_c6f
 import testimonial2 from "../../public/Portuguese_learning_materials_flatlay_c6fe93fe.png";
 import testimonial3 from "../../public/Portuguese_learning_materials_flatlay_c6fe93fe.png";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -13,21 +14,12 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: "easeOut" }
 };
 
-const staggerItem = (index) => ({
-  initial: { opacity: 0, y: 40, scale: 0.95 },
-  whileInView: { opacity: 1, y: 0, scale: 1 },
-  viewport: { once: true, margin: "-100px" },
-  transition: { 
-    duration: 0.5, 
-    delay: index * 0.15, 
-    ease: "easeOut"
-  }
-});
-
 export default function TestimonialsSection() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const testimonials = [
     {
@@ -66,11 +58,10 @@ export default function TestimonialsSection() {
       gradient: "from-orange-400 to-red-500",
       hasVideo: true
     },
-  
     {
       name: "Priya Patel",
       role: "Travel Blogger",
-      country: " Netherlands",
+      country: "🇳🇱 Netherlands",
       location: "Amsterdam",
       achievement: "Confident traveler",
       rating: 5,
@@ -82,7 +73,7 @@ export default function TestimonialsSection() {
     {
       name: "Carlos Mendes",
       role: "Entrepreneur",
-      country: "Spain",
+      country: "🇪🇸 Spain",
       location: "Madrid",
       achievement: "Business expansion",
       rating: 5,
@@ -93,25 +84,58 @@ export default function TestimonialsSection() {
     }
   ];
 
+  const cardsToShow = typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 3;
+  const maxIndex = testimonials.length - cardsToShow;
+
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % Math.ceil(testimonials.length / 3));
+    setDirection(1);
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + Math.ceil(testimonials.length / 3)) % Math.ceil(testimonials.length / 3));
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
 
-  const stats = [
-    { value: "200+", label: "Happy Students", icon: Award },
-    { value: "95%", label: "Success Rate", icon: TrendingUp },
-    { value: "12", label: "Countries", icon: Star }
-  ];
+  const goToSlide = (index) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+  };
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (isAutoPlaying) {
+      const interval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [isAutoPlaying, currentIndex, nextSlide]);
+
+  // Pause auto-play on hover
+  const handleMouseEnter = () => setIsAutoPlaying(false);
+  const handleMouseLeave = () => setIsAutoPlaying(true);
+
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction) => ({
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  };
 
   return (
     <section 
       ref={sectionRef}
       id="testimonials" 
-      className="relative py-24 md:py-32 px-6 bg-gradient-to-b from-white via-[#F5F6F7] to-white overflow-hidden" 
+      className="relative py-24 md:py-32 px-6 bg-linear-to-br from-white via-[#F5F6F7] to-white overflow-hidden" 
       data-testid="section-testimonials"
     >
       {/* Background decorative elements */}
@@ -121,16 +145,7 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <motion.div className="text-center mb-20" {...fadeInUp}>
-          <motion.div
-            className="inline-flex items-center gap-2 px-5 py-2 bg-[#3BA9A3]/10 text-[#3BA9A3] rounded-full mb-6"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Star className="w-4 h-4" />
-            <span className="text-sm font-semibold">Student Success Stories</span>
-          </motion.div>
+          
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-[#394D5C]" data-testid="text-testimonials-headline">
             Join Students From Around the World
@@ -140,85 +155,148 @@ export default function TestimonialsSection() {
           </p>
         </motion.div>
 
+        {/* Carousel Container */}
+        <div 
+          className="relative"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Navigation Arrows */}
+          <motion.button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-12 h-12 bg-white border-2 border-[#E3E5E8] rounded-full flex items-center justify-center hover:bg-[#3BA9A3] hover:border-[#3BA9A3] hover:text-white transition-all duration-300 shadow-lg"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Previous testimonials"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </motion.button>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div key={index} {...staggerItem(index)}>
-              <motion.div 
-                className="group relative p-8 h-full bg-white border-2 border-[#E3E5E8] rounded-2xl overflow-hidden cursor-pointer" 
-                data-testid={`card-testimonial-${index}`}
-                whileHover={{ 
-                  y: -8,
-                  borderColor: "#3BA9A3",
-                  transition: { duration: 0.3 }
+          <motion.button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-12 h-12 bg-white border-2 border-[#E3E5E8] rounded-full flex items-center justify-center hover:bg-[#3BA9A3] hover:border-[#3BA9A3] hover:text-white transition-all duration-300 shadow-lg"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Next testimonials"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </motion.button>
+
+          {/* Testimonials Carousel */}
+          <div className="overflow-hidden px-4">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <motion.div
+                key={currentIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 }
                 }}
+                className="grid md:grid-cols-3 gap-8"
               >
-                {/* Gradient overlay on hover */}
-                <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${testimonial.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
-                />
-
-                {/* Quote icon */}
-                <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Quote className="w-16 h-16 text-[#3BA9A3]" />
-                </div>
-
-                {/* Star Rating */}
-                <div className="flex gap-1 mb-4 relative z-10">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 + i * 0.05 }}
-                    >
-                      <Star className="w-5 h-5 fill-[#3BA9A3] text-[#3BA9A3]" />
-                    </motion.div>
-                  ))}
-                </div>
-                
-                {/* Quote */}
-                <p className="text-base leading-relaxed mb-6 text-[#394D5C] relative z-10">
-                  "{testimonial.quote}"
-                </p>
-
-                {/* Student Info */}
-                <div className="flex items-center gap-4 mb-4 relative z-10">
+                {testimonials.slice(currentIndex, currentIndex + cardsToShow).map((testimonial, index) => (
                   <motion.div 
-                    className="relative w-14 h-14 rounded-full ring-2 ring-[#3BA9A3]/20 overflow-hidden" 
-                    data-testid={`avatar-testimonial-${index}`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    key={currentIndex + index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
-                    {testimonial.hasVideo && (
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Play className="w-6 h-6 text-white" />
+                    <motion.div 
+                      className="group relative p-8 h-full bg-white border-2 border-[#E3E5E8] rounded-2xl overflow-hidden cursor-pointer" 
+                      data-testid={`card-testimonial-${currentIndex + index}`}
+                      whileHover={{ 
+                        y: -8,
+                        borderColor: "#3BA9A3",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      {/* Gradient overlay on hover */}
+                      <motion.div
+                        className={`absolute inset-0 bg-linear-to-brr ${testimonial.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                      />
+
+                      {/* Quote icon */}
+                      <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <Quote className="w-16 h-16 text-[#3BA9A3]" />
                       </div>
-                    )}
+
+                      {/* Star Rating */}
+                      <div className="flex gap-1 mb-4 relative z-10">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.5 + i * 0.05 }}
+                          >
+                            <Star className="w-5 h-5 fill-[#3BA9A3] text-[#3BA9A3]" />
+                          </motion.div>
+                        ))}
+                      </div>
+                      
+                      {/* Quote */}
+                      <p className="text-base leading-relaxed mb-6 text-[#394D5C] relative z-10">
+                        {testimonial.quote}
+                      </p>
+
+                      {/* Student Info */}
+                      <div className="flex items-center gap-4 mb-4 relative z-10">
+                        <motion.div 
+                          className="relative w-14 h-14 rounded-full ring-2 ring-[#3BA9A3]/20 overflow-hidden" 
+                          data-testid={`avatar-testimonial-${currentIndex + index}`}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                        >
+                          <Image src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                          {testimonial.hasVideo && (
+                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                              <Play className="w-6 h-6 text-white" />
+                            </div>
+                          )}
+                        </motion.div>
+                        <div className="flex-1">
+                          <p className="font-bold text-base text-[#394D5C]">{testimonial.name}</p>
+                          <p className="text-sm text-[#6B8299]">{testimonial.role}</p>
+                          <p className="text-xs text-[#6B8299]">{testimonial.country} {testimonial.location}</p>
+                        </div>
+                      </div>
+
+                      {/* Achievement Badge */}
+                      <motion.div 
+                        className={`inline-block px-3 py-1 bg-linear-to-r ${testimonial.gradient} text-white rounded-full text-sm font-medium relative z-10`}
+                        data-testid={`badge-achievement-${currentIndex + index}`}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {testimonial.achievement}
+                      </motion.div>
+
+                      {/* Decorative corner */}
+                      <div className="absolute bottom-0 right-0 w-20 h-20 bg-linear-to-tl from-[#3BA9A3]/5 to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </motion.div>
                   </motion.div>
-                  <div className="flex-1">
-                    <p className="font-bold text-base text-[#394D5C]">{testimonial.name}</p>
-                    <p className="text-sm text-[#6B8299]">{testimonial.role}</p>
-                    <p className="text-xs text-[#6B8299]">{testimonial.country} {testimonial.location}</p>
-                  </div>
-                </div>
-
-                {/* Achievement Badge */}
-                <motion.div 
-                  className={`inline-block px-3 py-1 bg-gradient-to-r ${testimonial.gradient} text-white rounded-full text-sm font-medium relative z-10`}
-                  data-testid={`badge-achievement-${index}`}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {testimonial.achievement}
-                </motion.div>
-
-                {/* Decorative corner */}
-                <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-[#3BA9A3]/5 to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                ))}
               </motion.div>
-            </motion.div>
-          ))}
+            </AnimatePresence>
+          </div>
+
+          {/* Dots Navigation */}
+          <div className="flex justify-center gap-2 mt-8">
+            {[...Array(maxIndex + 1)].map((_, index) => (
+              <motion.button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  currentIndex === index ? 'w-8 bg-[#3BA9A3]' : 'w-2 bg-[#E3E5E8]'
+                }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Bottom CTA */}
@@ -230,15 +308,9 @@ export default function TestimonialsSection() {
           transition={{ delay: 0.4 }}
         >
           <p className="text-lg text-[#6B8299] mb-4">
-            Want to be our next success story?
+             Be our next success story
           </p>
-          <motion.div
-            className="inline-flex items-center gap-2 text-[#3BA9A3] font-semibold"
-            whileHover={{ x: 5 }}
-          >
-            <span>Read more testimonials</span>
-            <ChevronRight className="w-5 h-5" />
-          </motion.div>
+         
         </motion.div>
       </div>
     </section>

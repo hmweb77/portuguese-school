@@ -93,18 +93,7 @@ export default function WhatYouGetSection({ onEnrollClick }) {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div className="text-center mb-20" {...fadeInUp}>
-          <motion.div
-            className="inline-block mb-6 px-5 py-2 bg-[#3BA9A3]/10 text-[#3BA9A3] rounded-full"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <span className="text-sm font-semibold flex items-center gap-2">
-              <Award className="w-4 h-4" />
-              Complete Learning Package
-            </span>
-          </motion.div>
+          
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-[#394D5C]" data-testid="text-deliverables-headline">
             Everything You Need to Succeed
@@ -134,7 +123,7 @@ export default function WhatYouGetSection({ onEnrollClick }) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
               >
-                <div className="w-12 h-12 mx-auto mb-2 rounded-xl bg-gradient-to-br from-[#3BA9A3] to-[#2D8B85] flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto mb-2 rounded-xl bg-linear-to-br from-[#3BA9A3] to-[#2D8B85] flex items-center justify-center">
                   <IconComponent className="w-6 h-6 text-white" />
                 </div>
                 <div className="text-sm font-bold text-[#394D5C] mb-1">{feature.title}</div>
@@ -186,7 +175,7 @@ export default function WhatYouGetSection({ onEnrollClick }) {
                     onClick={() => setActiveCategory(index)}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
                       activeCategory === index
-                        ? `bg-gradient-to-r ${category.color} text-white shadow-lg`
+                        ? `bg-linear-to-r ${category.color} text-white shadow-lg`
                         : 'bg-gray-100 text-[#6B8299] hover:bg-gray-200'
                     }`}
                     whileHover={{ scale: 1.05 }}
@@ -214,7 +203,7 @@ export default function WhatYouGetSection({ onEnrollClick }) {
                 {activeCategory === sectionIndex && (
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${section.color} flex items-center justify-center`}>
+                      <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${section.color} flex items-center justify-center`}>
                         <section.icon className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-2xl font-bold text-[#394D5C]">{section.category}</h3>
@@ -230,7 +219,7 @@ export default function WhatYouGetSection({ onEnrollClick }) {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: itemIndex * 0.1 }}
                         >
-                          <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                          <div className={`w-6 h-6 rounded-full bg-linear-to-br ${section.color} flex items-center justify-center shrink-0 mt-0.5`}>
                             <Check className="w-4 h-4 text-white" />
                           </div>
                           <span className="text-base leading-relaxed text-[#394D5C]">{item}</span>
@@ -251,14 +240,14 @@ export default function WhatYouGetSection({ onEnrollClick }) {
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             >
               <motion.button 
-                className="group relative w-full md:w-auto px-10 py-6 rounded-full text-base font-semibold bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg"
+                className="group relative w-full md:w-auto px-10 py-6 rounded-full text-base font-semibold bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg"
                 onClick={onEnrollClick}
                 data-testid="button-enroll-deliverables"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-[#FF7A4C] to-[#FF6A3C]"
+                  className="absolute inset-0 bg-linear-to-r from-[#FF7A4C] to-[#FF6A3C]"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3 }}

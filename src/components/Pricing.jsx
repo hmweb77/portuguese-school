@@ -88,7 +88,7 @@ export default function PricingSection({ onSelectPlan }) {
     <section 
       ref={sectionRef}
       id="pricing" 
-      className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden" 
+      className="relative py-24 md:py-32 px-6 bg-linear-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden" 
       data-testid="section-pricing"
     >
       {/* Background decorative elements */}
@@ -136,6 +136,8 @@ export default function PricingSection({ onSelectPlan }) {
         <div className="grid md:grid-cols-3 gap-8 mt-16">
           {plans.map((plan, index) => {
             const IconComponent = plan.icon;
+            const hasBadge = plan.badge || plan.seatsLeft;
+            
             return (
               <motion.div 
                 key={index} 
@@ -144,9 +146,10 @@ export default function PricingSection({ onSelectPlan }) {
                 onHoverEnd={() => setHoveredPlan(null)}
               >
                 <motion.div 
-                  className={`relative p-8 flex flex-col h-full bg-white rounded-2xl overflow-hidden ${
+                  className={`relative p-8 flex flex-col bg-white rounded-2xl overflow-hidden ${
                     plan.featured ? 'shadow-[0px_30px_60px_-12px_rgba(0,0,0,0.25)]' : 'shadow-[0px_20px_40px_-12px_rgba(0,0,0,0.15)]'
                   }`}
+                  style={{ height: '100%', minHeight: hasBadge ? '680px' : '650px' }}
                   data-testid={`card-plan-${plan.name.toLowerCase()}`}
                   whileHover={{ 
                     y: -12,
@@ -155,7 +158,7 @@ export default function PricingSection({ onSelectPlan }) {
                 >
                   {/* Top gradient bar */}
                   <motion.div 
-                    className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${plan.gradient}`}
+                    className={`absolute top-0 left-0 right-0 h-2 bg-linear-to-br ${plan.gradient}`}
                     animate={plan.featured ? {
                       background: [
                         `linear-gradient(to right, #FB923C, #EF4444)`,
@@ -166,35 +169,37 @@ export default function PricingSection({ onSelectPlan }) {
                     transition={{ duration: 3, repeat: Infinity }}
                   />
 
-                  {/* Badges */}
-                  {plan.badge && (
-                    <motion.div 
-                      className={`absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r ${plan.gradient} text-white rounded-full text-sm font-semibold shadow-lg`}
-                      data-testid="badge-featured"
-                      animate={{ y: [0, -3, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <span className="flex items-center gap-1">
-                        <Sparkles className="w-3 h-3" />
-                        {plan.badge}
-                      </span>
-                    </motion.div>
-                  )}
-                  {plan.seatsLeft && (
-                    <motion.div 
-                      className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#DC2626] text-white rounded-full text-sm font-semibold shadow-lg" 
-                      data-testid="badge-seats-left"
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      Only {plan.seatsLeft} seats left
-                    </motion.div>
-                  )}
+                  {/* Badge Container - Fixed Position */}
+                  <div className="absolute top-3 left-0 right-0 flex justify-center" style={{ height: '28px' }}>
+                    {plan.badge && (
+                      <motion.div 
+                        className={`px-4 py-1 bg-linear-to-br ${plan.gradient} text-white rounded-full text-sm font-semibold shadow-lg`}
+                        data-testid="badge-featured"
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <span className="flex items-center gap-1">
+                          <Sparkles className="w-3 h-3" />
+                          {plan.badge}
+                        </span>
+                      </motion.div>
+                    )}
+                    {plan.seatsLeft && (
+                      <motion.div 
+                        className="px-4 py-1 bg-[#DC2626] text-white rounded-full text-sm font-semibold shadow-lg" 
+                        data-testid="badge-seats-left"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        Only {plan.seatsLeft} seats left
+                      </motion.div>
+                    )}
+                  </div>
                   
                   {/* Plan Header */}
-                  <div className="text-center mb-8 mt-4">
+                  <div className={`text-center ${hasBadge ? 'mb-6 mt-6' : 'mb-8 mt-4'}`}>
                     <motion.div
-                      className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${plan.iconColor} flex items-center justify-center shadow-lg`}
+                      className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-linear-to-br ${plan.iconColor} flex items-center justify-center shadow-lg`}
                       whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                     >
@@ -202,11 +207,11 @@ export default function PricingSection({ onSelectPlan }) {
                     </motion.div>
 
                     <h3 className="text-2xl font-bold mb-2 text-[#394D5C]">{plan.name}</h3>
-                    <p className="text-sm text-[#6B8299] mb-6">{plan.description}</p>
+                    <p className="text-sm text-[#6B8299] mb-6 min-h-10">{plan.description}</p>
                     
                     <div className="mb-2">
                       <motion.span 
-                        className={`text-5xl font-bold bg-gradient-to-r ${plan.gradient} bg-clip-text text-transparent`}
+                        className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}
                         animate={hoveredPlan === index ? { scale: [1, 1.05, 1] } : {}}
                         transition={{ duration: 0.3 }}
                       >
@@ -216,7 +221,7 @@ export default function PricingSection({ onSelectPlan }) {
                     <p className="text-sm text-[#6B8299]">{plan.subtitle}</p>
                   </div>
 
-                  {/* Features List */}
+                  {/* Features List - Equal Height */}
                   <ul className="space-y-4 mb-8 flex-1">
                     {plan.features.map((feature, featureIndex) => (
                       <motion.li 
@@ -229,11 +234,11 @@ export default function PricingSection({ onSelectPlan }) {
                         transition={{ delay: 0.5 + featureIndex * 0.05 }}
                       >
                         {feature.included ? (
-                          <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${plan.gradient} flex items-center justify-center flex-shrink-0`}>
+                          <div className={`w-6 h-6 rounded-full bg-linear-to-br ${plan.gradient} flex items-center justify-center shrink-0`}>
                             <Check className="w-4 h-4 text-white" />
                           </div>
                         ) : (
-                          <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                          <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
                             <X className="w-4 h-4 text-gray-300" />
                           </div>
                         )}
@@ -244,21 +249,21 @@ export default function PricingSection({ onSelectPlan }) {
                     ))}
                   </ul>
 
-                  {/* CTA Button */}
+                  {/* CTA Button - Fixed at Bottom */}
                   <motion.button 
-                    className={`w-full relative rounded-full py-6 text-base font-semibold text-white overflow-hidden shadow-lg`}
+                    className={`w-full relative rounded-full py-6 text-base font-semibold text-white overflow-hidden shadow-lg mt-auto`}
                     onClick={() => onSelectPlan(plan.name)}
                     data-testid={`button-select-${plan.name.toLowerCase()}`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <motion.div
-                      className={`absolute inset-0 bg-gradient-to-r ${plan.gradient}`}
+                      className={`absolute inset-0 bg-linear-to-br ${plan.gradient}`}
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.3 }}
                     />
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                      className="absolute inset-0 bg-linear-to-br from-transparent via-white/30 to-transparent"
                       initial={{ x: "-100%" }}
                       whileHover={{ x: "100%" }}
                       transition={{ duration: 0.6 }}
@@ -271,6 +276,26 @@ export default function PricingSection({ onSelectPlan }) {
           })}
         </div>
 
+        {/* Payment Methods Notice */}
+        <motion.div
+          className="mt-12 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center">
+            <p className="text-white/90 text-lg mb-3 font-semibold">
+              Multiple Payment Options Available
+            </p>
+            <p className="text-white/80 text-sm">
+              We accept credit cards, MBWAY (Portugal), Bizum (Spain), and Revolut for your convenience.
+              <br />
+              Choose your preferred payment method during checkout.
+            </p>
+          </div>
+        </motion.div>
+
         {/* Flex Pass Section */}
         <motion.div
           className="mt-16 max-w-4xl mx-auto"
@@ -281,7 +306,7 @@ export default function PricingSection({ onSelectPlan }) {
         >
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-linear-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
                 <Calendar className="w-6 h-6 text-white" />
               </div>
               <div>

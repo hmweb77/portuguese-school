@@ -42,7 +42,14 @@ export default function Navbar({ onEnrollClick }) {
   const scrollToSection = (href) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const navHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
       setIsMobileMenuOpen(false);
     }
   };
@@ -63,7 +70,7 @@ export default function Navbar({ onEnrollClick }) {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.a 
-            href="#" 
+            href="/" 
             className="text-2xl font-bold relative z-10" 
             data-testid="link-logo"
             whileHover={{ scale: 1.05 }}
@@ -72,11 +79,12 @@ export default function Navbar({ onEnrollClick }) {
             <Image 
               src="/horizontal-original-sin fondo-letras blancas-400x218px.png" 
               alt="IFLI Logo" 
-              width={180} 
-              height={50}
-              className={`transition-all duration-300 ${
+              width={300} 
+              height={100}
+              className={`h-24 w-auto transition-all duration-300 ${
                 isScrolled ? "brightness-0" : "brightness-100"
               }`}
+              priority
             />
           </motion.a>
 
@@ -106,30 +114,12 @@ export default function Navbar({ onEnrollClick }) {
               </motion.button>
             ))}
 
-            {/* Sign In Button */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
-            >
-              <Link 
-                href="/dashboard"
-                className={`px-4 py-2 border-2 rounded-full font-medium transition-all flex items-center gap-2 ${
-                  isScrolled 
-                    ? "border-[#E3E5E8] text-[#394D5C] hover:bg-[#F5F6F7]" 
-                    : "border-white/30 text-white hover:bg-white/10"
-                }`}
-                data-testid="button-signin-nav"
-              >
-                <LogIn className="h-4 w-4" />
-                <span className="hidden lg:inline">Sign In</span>
-              </Link>
-            </motion.div>
+            
 
             {/* Enroll Button */}
             <motion.button 
               onClick={onEnrollClick}
-              className="relative px-6 py-2 bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white rounded-full font-semibold overflow-hidden group"
+              className="relative px-6 py-2 bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white rounded-full font-semibold overflow-hidden group"
               data-testid="button-enroll-nav"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -138,7 +128,7 @@ export default function Navbar({ onEnrollClick }) {
               whileTap={{ scale: 0.95 }}
             >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-[#FF7A4C] to-[#FF6A3C]"
+                className="absolute inset-0 bg-linear-to-r from-[#FF7A4C] to-[#FF6A3C]"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
@@ -231,7 +221,7 @@ export default function Navbar({ onEnrollClick }) {
                   onEnrollClick();
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full px-4 py-3 bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-200"
+                className="w-full px-4 py-3 bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-200"
                 data-testid="button-enroll-mobile"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -248,7 +238,6 @@ export default function Navbar({ onEnrollClick }) {
       {/* Progress Bar */}
       <motion.div
         className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-[#3BA9A3] to-[#FF8A5C]"
-        // Guard against server-side rendering where `window` is not defined
         style={{
           width: (typeof window === 'undefined')
             ? '0%'

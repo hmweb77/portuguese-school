@@ -91,7 +91,7 @@ export default function FAQSection() {
     : filteredFaqs.filter(faq => faq.category === selectedCategory);
 
   return (
-    <section id="faq" className="relative py-24 md:py-32 px-6 bg-gradient-to-b from-white via-[#F5F6F7] to-white overflow-hidden" data-testid="section-faq">
+    <section id="faq" className="relative py-24 md:py-32 px-6 bg-linear-to-b from-white via-[#F5F6F7] to-white overflow-hidden" data-testid="section-faq">
       {/* Background elements */}
       <div className="absolute top-20 right-0 w-96 h-96 bg-[#3BA9A3]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-0 w-72 h-72 bg-[#FF8A5C]/5 rounded-full blur-3xl" />
@@ -99,16 +99,7 @@ export default function FAQSection() {
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
         <motion.div className="text-center mb-12" {...fadeInUp}>
-          <motion.div
-            className="inline-flex items-center gap-2 px-5 py-2 bg-[#3BA9A3]/10 text-[#3BA9A3] rounded-full mb-6"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <HelpCircle className="w-4 h-4" />
-            <span className="text-sm font-semibold">Got Questions?</span>
-          </motion.div>
+          
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-[#394D5C]" data-testid="text-faq-headline">
             Frequently Asked Questions
@@ -129,7 +120,7 @@ export default function FAQSection() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <p className="text-[#6B8299]">No questions found matching "{searchTerm}"</p>
+                <p className="text-[#6B8299]">No questions found matching &quot;{searchTerm}&quot;</p>
               </motion.div>
             ) : (
               displayedFaqs.map((faq, index) => (
@@ -144,7 +135,7 @@ export default function FAQSection() {
                       className="w-full text-left font-bold text-base px-6 py-6 flex items-center justify-between text-[#394D5C] hover:text-[#3BA9A3] transition-colors"
                     >
                       <span className="flex items-start gap-3 flex-1">
-                        <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                        <CheckCircle className={`w-5 h-5 shrink-0 mt-0.5 ${
                           openIndex === index ? "text-[#3BA9A3]" : "text-[#E3E5E8]"
                         }`} />
                         {faq.question}
@@ -153,7 +144,7 @@ export default function FAQSection() {
                         animate={{ rotate: openIndex === index ? 180 : 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <ChevronDown className="w-5 h-5 text-[#6B8299] flex-shrink-0" />
+                        <ChevronDown className="w-5 h-5 text-[#6B8299] shrink-0" />
                       </motion.div>
                     </button>
                     
@@ -198,11 +189,11 @@ export default function FAQSection() {
             Still have questions?
           </h3>
           <p className="text-[#6B8299] mb-6">
-            Our team is here to help! Contact us and we'll get back to you within 24 hours.
+            Our team is here to help! Contact us and we&apos;ll get back to you within 24 hours.
           </p>
           <motion.a
             href="mailto:support@ifli.com"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-full font-semibold hover:shadow-lg transition-all"
+            className="inline-block px-8 py-4 bg-[#FF8A5C] text-white rounded-full font-semibold hover:shadow-lg transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

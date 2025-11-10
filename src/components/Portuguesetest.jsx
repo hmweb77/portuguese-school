@@ -186,7 +186,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
       
       {/* Modal */}
       <div 
-        className="relative bg-white rounded-[12px] shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)] w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+        className="relative bg-white rounded-xl shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)] w-full max-w-2xl max-h-[90vh] overflow-y-auto"
         data-testid="modal-portuguese-test"
       >
         <div className="p-6">
@@ -231,7 +231,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                       <div 
                         key={index}
                         onClick={() => handleAnswerSelect(index.toString())}
-                        className={`flex items-center space-x-3 p-3 rounded-[12px] border-2 cursor-pointer transition-all ${
+                        className={`flex items-center space-x-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
                           selectedAnswer === index 
                             ? 'border-[#3BA9A3] bg-[#3BA9A3]/5' 
                             : 'border-[#E3E5E8] hover:border-[#3BA9A3]/50'
@@ -259,7 +259,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                   <button
                     onClick={handleBack}
                     disabled={currentQuestion === 0}
-                    className={`px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 flex items-center gap-2 ${
+                    className={`px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 flex items-center gap-2 ${
                       currentQuestion === 0 ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                     data-testid="button-back"
@@ -270,7 +270,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                   <button
                     onClick={handleNext}
                     disabled={selectedAnswer === null}
-                    className={`px-4 py-2 bg-[#3BA9A3] text-white rounded-[12px] font-medium hover:bg-[#359690] transition-colors duration-200 flex items-center gap-2 ${
+                    className={`px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200 flex items-center gap-2 ${
                       selectedAnswer === null ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                     data-testid="button-next"
@@ -317,7 +317,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full h-12 px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+                    className="w-full h-12 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
                     data-testid="input-test-email"
                   />
                 </div>
@@ -326,14 +326,14 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                   <button
                     type="button"
                     onClick={() => setShowEmailCapture(false)}
-                    className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
+                    className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
                     data-testid="button-back-to-test"
                   >
                     Back to Test
                   </button>
                   <button 
                     type="submit"
-                    className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-[12px] font-medium hover:bg-[#359690] transition-colors duration-200"
+                    className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200"
                     data-testid="button-show-results"
                   >
                     Show My Results
@@ -353,7 +353,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                       Your Test Results
                     </h2>
                     <p className="text-sm text-[#6B8299]">
-                      Here's how you did and our recommendation for you.
+                      Here&apos;s how you did and our recommendation for you.
                     </p>
                   </div>
                   <button
@@ -366,7 +366,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
               </div>
 
               <div className="space-y-6">
-                <div className="text-center p-8 bg-[#F5F6F7] rounded-[12px]">
+                <div className="text-center p-8 bg-[#F5F6F7] rounded-xl">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#3BA9A3]/10 mb-4">
                     <CheckCircle2 className="w-10 h-10 text-[#3BA9A3]" />
                   </div>
@@ -386,7 +386,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     </p>
                   </div>
 
-                  <div className="p-6 border-2 border-[#E3E5E8] rounded-[12px] bg-white">
+                  <div className="p-6 border-2 border-[#E3E5E8] rounded-xl bg-white">
                     <h4 className="font-semibold mb-2 text-[#394D5C]">Recommended Plan:</h4>
                     <p className="text-lg font-bold text-[#3BA9A3] mb-2">
                       {getRecommendation().recommendation}
@@ -400,7 +400,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                 <div className="flex gap-3 pt-4">
                   <button
                     onClick={handleClose}
-                    className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
+                    className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
                     data-testid="button-close-results"
                   >
                     Close
@@ -413,7 +413,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                         pricingSection?.scrollIntoView({ behavior: 'smooth' });
                       }, 300);
                     }}
-                    className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-[12px] font-medium hover:bg-[#359690] transition-colors duration-200"
+                    className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200"
                     data-testid="button-enroll-from-test"
                   >
                     Enroll Now

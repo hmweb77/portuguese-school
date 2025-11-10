@@ -49,9 +49,9 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-white to-[#F5F6F7] border-t border-[#E3E5E8]" data-testid="footer">
+    <footer className="relative bg-linear-to-b from-white to-[#F5F6F7] border-t border-[#E3E5E8]" data-testid="footer">
       {/* Decorative top wave */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#3BA9A3] via-[#FF8A5C] to-[#3BA9A3]" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#3BA9A3] via-[#FF8A5C] to-[#3BA9A3]" />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
@@ -153,7 +153,7 @@ export default function Footer() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 + index * 0.05 }}
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#3BA9A3]/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-[#3BA9A3]/10 flex items-center justify-center shrink-0">
                       <IconComponent className="w-5 h-5 text-[#3BA9A3]" />
                     </div>
                     <div>
@@ -194,7 +194,7 @@ export default function Footer() {
               <motion.button 
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-12 bg-gradient-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+                className="w-full h-12 bg-linear-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50"
                 data-testid="button-newsletter"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -240,7 +240,7 @@ export default function Footer() {
       {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-full shadow-lg hover:shadow-xl transition-all z-40"
+        className="fixed bottom-8 right-8 p-4 bg-linear-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-full shadow-lg hover:shadow-xl transition-all z-40"
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}

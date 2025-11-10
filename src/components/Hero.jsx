@@ -55,7 +55,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
       setCurrentSlide((prev) => (prev + 1) % backgrounds.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  });
 
   // Animated stats
   const stats = [
@@ -82,7 +82,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
       {/* Animated Background Slideshow */}
       <div className="absolute inset-0">
@@ -173,7 +173,9 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             key={i}
             className="absolute w-2 h-2 bg-white/30 rounded-full"
             style={{
+              // eslint-disable-next-line react-hooks/purity
               left: `${Math.random() * 100}%`,
+                // eslint-disable-next-line react-hooks/purity
               top: `${Math.random() * 100}%`,
             }}
             animate={{
@@ -182,8 +184,10 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
               scale: [1, 1.5, 1]
             }}
             transition={{
+              // eslint-disable-next-line react-hooks/purity
               duration: 3 + Math.random() * 2,
               repeat: Infinity,
+                // eslint-disable-next-line react-hooks/purity
               delay: Math.random() * 2,
               ease: "easeInOut"
             }}
@@ -261,7 +265,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
           >
             {/* Shine effect */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+              className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent"
               initial={{ x: "-100%" }}
               whileHover={{ x: "100%" }}
               transition={{ duration: 0.6 }}

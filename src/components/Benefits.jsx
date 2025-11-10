@@ -80,7 +80,7 @@ export default function BenefitsSection() {
     <section 
       ref={sectionRef}
       id="benefits" 
-      className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden" 
+      className="relative py-24 md:py-32 px-6 bg-linear-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden" 
       data-testid="section-benefits"
     >
       {/* Animated Background Elements */}
@@ -119,7 +119,9 @@ export default function BenefitsSection() {
             key={i}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
             style={{
+              // eslint-disable-next-line react-hooks/purity
               left: `${Math.random() * 100}%`,
+                      // eslint-disable-next-line react-hooks/purity
               top: `${Math.random() * 100}%`,
             }}
             animate={{
@@ -128,8 +130,10 @@ export default function BenefitsSection() {
               scale: [1, 1.5, 1]
             }}
             transition={{
+                      // eslint-disable-next-line react-hooks/purity
               duration: 3 + Math.random() * 2,
               repeat: Infinity,
+                      // eslint-disable-next-line react-hooks/purity
               delay: Math.random() * 2,
               ease: "easeInOut"
             }}
@@ -148,17 +152,7 @@ export default function BenefitsSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <motion.div className="text-center mb-20" {...fadeInUp}>
-          <motion.div
-            className="inline-flex items-center gap-2 px-5 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-6"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Sparkles className="w-4 h-4 text-yellow-300" />
-            <span className="text-sm font-semibold">Transform Your Language Learning</span>
-          </motion.div>
+         
 
           <motion.h2 
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white" 
@@ -201,14 +195,14 @@ export default function BenefitsSection() {
                 >
                   {/* Gradient background on hover */}
                   <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${benefit.gradient} opacity-0`}
+                    className={`absolute inset-0 bg-linear-to-br ${benefit.gradient} opacity-0`}
                     whileHover={{ opacity: 0.05 }}
                     transition={{ duration: 0.3 }}
                   />
 
                   {/* Shine effect on hover */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent"
                     initial={{ x: "-100%", opacity: 0 }}
                     whileHover={{ x: "100%", opacity: 1 }}
                     transition={{ duration: 0.6 }}
@@ -216,7 +210,7 @@ export default function BenefitsSection() {
 
                   {/* Icon Container with Gradient */}
                   <motion.div
-                    className={`relative w-16 h-16 rounded-xl bg-gradient-to-br ${benefit.gradient} flex items-center justify-center mb-6 shadow-lg`}
+                    className={`relative w-16 h-16 rounded-xl bg-linear-to-br ${benefit.gradient} flex items-center justify-center mb-6 shadow-lg`}
                     whileHover={{ 
                       rotate: [0, -10, 10, -10, 0],
                       scale: 1.1
@@ -247,7 +241,7 @@ export default function BenefitsSection() {
 
                   {/* Decorative corner element */}
                   <motion.div
-                    className={`absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br ${benefit.gradient} opacity-0 blur-2xl`}
+                    className={`absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-linear-to-br ${benefit.gradient} opacity-0 blur-2xl`}
                     whileHover={{ opacity: 0.1 }}
                     transition={{ duration: 0.3 }}
                   />
@@ -258,7 +252,7 @@ export default function BenefitsSection() {
                     initial={{ x: -10 }}
                     whileHover={{ x: 0 }}
                   >
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#3BA9A3] to-[#2D8B85] flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-linear-to-br from-[#3BA9A3] to-[#2D8B85] flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
