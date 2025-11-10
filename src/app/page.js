@@ -1,65 +1,120 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+
+import HeroSection from "@/components/Hero";
+import AboutProgram from "@/components/About";
+import BenefitsSection from "@/components/Benefits";
+import PricingSection from "@/components/Pricing";
+import TestimonialsSection from "@/components/Testimonials";
+import WhatYouGetSection from "@/components/WhatYouGet";
+import LeadMagnetSection from "@/components/LeadMagnet";
+import FinalCTASection from "@/components/FinalCTA";
+import FAQSection from "@/components/FAQ";
+import Footer from "@/components/Footer";
+import EnrollmentModal from "@/components/Enrollment";
+import PortugueseTestModal from "@/components/Portuguesetest";
+import FloatingCTA from "@/components/FloatingCTA";
+import Toast from "@/components/Toast";
+
 
 export default function Home() {
+  const [enrollmentModalOpen, setEnrollmentModalOpen] = useState(false);
+  const [testModalOpen, setTestModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(undefined);
+  const [toasts, setToasts] = useState([]);
+
+  const showToast = (title, description) => {
+    const id = Date.now();
+    setToasts(prev => [...prev, { id, title, description }]);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+      setToasts(prev => prev.filter(toast => toast.id !== id));
+    }, 5000);
+  };
+
+  const removeToast = (id) => {
+    setToasts(prev => prev.filter(toast => toast.id !== id));
+  };
+
+  const handleEnrollClick = (plan) => {
+    setSelectedPlan(plan);
+    setEnrollmentModalOpen(true);
+  };
+
+  const handleEnrollmentSubmit = (data) => {
+    console.log('Enrollment submitted:', data);
+    showToast(
+      "Enrollment Received!",
+      "We'll contact you within 24 hours to complete your enrollment."
+    );
+  };
+
+  const handleLeadMagnetSubmit = (email) => {
+    console.log('Lead magnet email:', email);
+    showToast(
+      "Guide Downloaded!",
+      "Check your email for the Portuguese Starter Guide."
+    );
+  };
+
+  const handleTestClick = () => {
+    setTestModalOpen(true);
+  };
+
+  const handleTestComplete = (email, score) => {
+    console.log('Test completed:', { email, score });
+    showToast(
+      "Results Ready!",
+      `You scored ${score}/12. Check your email for your Portuguese starter guide!`
+    );
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="min-h-screen">
+      <Navbar onEnrollClick={() => handleEnrollClick()} />
+      <HeroSection 
+        onEnrollClick={() => handleEnrollClick()}
+        onTestClick={handleTestClick}
+      />
+      <AboutProgram />
+      <BenefitsSection />
+      <PricingSection onSelectPlan={handleEnrollClick} />
+      <TestimonialsSection />
+      <WhatYouGetSection onEnrollClick={() => handleEnrollClick()} />
+      <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />
+      <FinalCTASection onEnrollClick={() => handleEnrollClick()} />
+      <FAQSection />
+      <Footer />
+      
+      <EnrollmentModal
+        open={enrollmentModalOpen}
+        onClose={() => setEnrollmentModalOpen(false)}
+        onSubmit={handleEnrollmentSubmit}
+        selectedPlan={selectedPlan}
+      />
+      
+      <PortugueseTestModal
+        open={testModalOpen}
+        onClose={() => setTestModalOpen(false)}
+        onComplete={handleTestComplete}
+      />
+      
+      <FloatingCTA onEnrollClick={() => handleEnrollClick()} />
+      
+      {/* Toast Container */}
+      <div className="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none">
+        {toasts.map(toast => (
+          <Toast
+            key={toast.id}
+            title={toast.title}
+            description={toast.description}
+            onClose={() => removeToast(toast.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

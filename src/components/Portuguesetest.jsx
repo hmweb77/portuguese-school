@@ -1,0 +1,429 @@
+"use client"
+import { useState } from "react";
+import { X, CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
+
+const questions = [
+  {
+    id: 1,
+    question: "How do you say 'Hello' in Portuguese?",
+    options: ["Adeus", "Olá", "Por favor", "Obrigado"],
+    correctAnswer: 1
+  },
+  {
+    id: 2,
+    question: "What does 'Obrigado' mean?",
+    options: ["Please", "Thank you", "Sorry", "Goodbye"],
+    correctAnswer: 1
+  },
+  {
+    id: 3,
+    question: "Which word means 'water'?",
+    options: ["Pão", "Água", "Leite", "Café"],
+    correctAnswer: 1
+  },
+  {
+    id: 4,
+    question: "How do you say 'I am' in Portuguese?",
+    options: ["Eu sou", "Tu és", "Ele é", "Nós somos"],
+    correctAnswer: 0
+  },
+  {
+    id: 5,
+    question: "What is the Portuguese word for 'house'?",
+    options: ["Carro", "Casa", "Mesa", "Cadeira"],
+    correctAnswer: 1
+  },
+  {
+    id: 6,
+    question: "How do you ask 'How are you?' in Portuguese?",
+    options: ["Como está?", "Onde está?", "Quando é?", "Por que não?"],
+    correctAnswer: 0
+  },
+  {
+    id: 7,
+    question: "What does 'Bom dia' mean?",
+    options: ["Good night", "Good afternoon", "Good morning", "Good evening"],
+    correctAnswer: 2
+  },
+  {
+    id: 8,
+    question: "Which number is 'cinco'?",
+    options: ["3", "4", "5", "6"],
+    correctAnswer: 2
+  },
+  {
+    id: 9,
+    question: "How do you say 'I speak Portuguese'?",
+    options: ["Eu falo português", "Eu como português", "Eu bebo português", "Eu vejo português"],
+    correctAnswer: 0
+  },
+  {
+    id: 10,
+    question: "What is 'família' in English?",
+    options: ["Friend", "Family", "Food", "Phone"],
+    correctAnswer: 1
+  },
+  {
+    id: 11,
+    question: "How do you say 'Where is...?' in Portuguese?",
+    options: ["Como é?", "Quando é?", "Onde está?", "Quem é?"],
+    correctAnswer: 2
+  },
+  {
+    id: 12,
+    question: "What does 'Muito obrigado' mean?",
+    options: ["Very sorry", "Thank you very much", "Very good", "Very bad"],
+    correctAnswer: 1
+  }
+];
+
+export default function PortugueseTestModal({ open, onClose, onComplete }) {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [showEmailCapture, setShowEmailCapture] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [email, setEmail] = useState("");
+  const [score, setScore] = useState(0);
+
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+  const handleAnswerSelect = (value) => {
+    setSelectedAnswer(parseInt(value));
+  };
+
+  const handleNext = () => {
+    if (selectedAnswer !== null) {
+      const newAnswers = [...answers];
+      newAnswers[currentQuestion] = selectedAnswer;
+      setAnswers(newAnswers);
+
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedAnswer(newAnswers[currentQuestion + 1] ?? null);
+      } else {
+        setShowEmailCapture(true);
+      }
+    }
+  };
+
+  const handleBack = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+      setSelectedAnswer(answers[currentQuestion - 1] ?? null);
+    }
+  };
+
+  const calculateScore = () => {
+    let correctCount = 0;
+    answers.forEach((answer, index) => {
+      if (answer === questions[index].correctAnswer) {
+        correctCount++;
+      }
+    });
+    return correctCount;
+  };
+
+  const handleEmailSubmit = (e) => {
+    e.preventDefault();
+    const finalScore = calculateScore();
+    setScore(finalScore);
+    setShowResults(true);
+    onComplete(email, finalScore);
+  };
+
+  const getRecommendation = () => {
+    const percentage = (score / questions.length) * 100;
+    
+    if (percentage >= 75) {
+      return {
+        level: "A2 Ready",
+        message: "You have a good foundation in Portuguese!",
+        recommendation: "Online",
+        description: "You're ready for intermediate learning with live classes and interaction."
+      };
+    } else if (percentage >= 40) {
+      return {
+        level: "A1 Intermediate",
+        message: "You know some Portuguese basics.",
+        recommendation: "Online",
+        description: "Build your foundation with structured live classes."
+      };
+    } else {
+      return {
+        level: "Complete Beginner",
+        message: "Perfect! You're in the right place to start.",
+        recommendation: "Offline or Online",
+        description: "Start from scratch with our comprehensive beginner program."
+      };
+    }
+  };
+
+  const handleReset = () => {
+    setCurrentQuestion(0);
+    setAnswers([]);
+    setSelectedAnswer(null);
+    setShowEmailCapture(false);
+    setShowResults(false);
+    setEmail("");
+    setScore(0);
+  };
+
+  const handleClose = () => {
+    handleReset();
+    onClose();
+  };
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={handleClose}
+      />
+      
+      {/* Modal */}
+      <div 
+        className="relative bg-white rounded-[12px] shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)] w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+        data-testid="modal-portuguese-test"
+      >
+        <div className="p-6">
+          {!showEmailCapture && !showResults && (
+            <>
+              {/* Header */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#394D5C]" data-testid="text-test-title">
+                      Portuguese Level Test
+                    </h2>
+                    <p className="text-sm text-[#6B8299]">
+                      Question {currentQuestion + 1} of {questions.length}
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                {/* Progress Bar */}
+                <div className="w-full bg-[#E3E5E8] rounded-full h-2" data-testid="progress-test">
+                  <div 
+                    className="bg-[#3BA9A3] h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-[#394D5C]" data-testid={`text-question-${currentQuestion}`}>
+                    {questions[currentQuestion].question}
+                  </h3>
+
+                  <div className="space-y-3">
+                    {questions[currentQuestion].options.map((option, index) => (
+                      <div 
+                        key={index}
+                        onClick={() => handleAnswerSelect(index.toString())}
+                        className={`flex items-center space-x-3 p-3 rounded-[12px] border-2 cursor-pointer transition-all ${
+                          selectedAnswer === index 
+                            ? 'border-[#3BA9A3] bg-[#3BA9A3]/5' 
+                            : 'border-[#E3E5E8] hover:border-[#3BA9A3]/50'
+                        }`}
+                        data-testid={`option-${currentQuestion}-${index}`}
+                      >
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                          selectedAnswer === index 
+                            ? 'border-[#3BA9A3]' 
+                            : 'border-[#E3E5E8]'
+                        }`}>
+                          {selectedAnswer === index && (
+                            <div className="w-3 h-3 rounded-full bg-[#3BA9A3]" />
+                          )}
+                        </div>
+                        <label className="flex-1 cursor-pointer text-[#394D5C]">
+                          {option}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex justify-between pt-4">
+                  <button
+                    onClick={handleBack}
+                    disabled={currentQuestion === 0}
+                    className={`px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 flex items-center gap-2 ${
+                      currentQuestion === 0 ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                    data-testid="button-back"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    Back
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    disabled={selectedAnswer === null}
+                    className={`px-4 py-2 bg-[#3BA9A3] text-white rounded-[12px] font-medium hover:bg-[#359690] transition-colors duration-200 flex items-center gap-2 ${
+                      selectedAnswer === null ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                    data-testid="button-next"
+                  >
+                    {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+
+          {showEmailCapture && !showResults && (
+            <>
+              {/* Header */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#394D5C]" data-testid="text-email-title">
+                      Almost Done!
+                    </h2>
+                    <p className="text-sm text-[#6B8299]">
+                      Enter your email to see your results and personalized course recommendation.
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              <form onSubmit={handleEmailSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="test-email" className="block text-sm font-medium text-[#394D5C] mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    id="test-email"
+                    type="email"
+                    placeholder="your.email@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full h-12 px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+                    data-testid="input-test-email"
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowEmailCapture(false)}
+                    className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
+                    data-testid="button-back-to-test"
+                  >
+                    Back to Test
+                  </button>
+                  <button 
+                    type="submit"
+                    className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-[12px] font-medium hover:bg-[#359690] transition-colors duration-200"
+                    data-testid="button-show-results"
+                  >
+                    Show My Results
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+
+          {showResults && (
+            <>
+              {/* Header */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#394D5C]" data-testid="text-results-title">
+                      Your Test Results
+                    </h2>
+                    <p className="text-sm text-[#6B8299]">
+                      Here's how you did and our recommendation for you.
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div className="text-center p-8 bg-[#F5F6F7] rounded-[12px]">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#3BA9A3]/10 mb-4">
+                    <CheckCircle2 className="w-10 h-10 text-[#3BA9A3]" />
+                  </div>
+                  <div className="text-5xl font-bold mb-2 text-[#394D5C]" data-testid="text-score">
+                    {score}/{questions.length}
+                  </div>
+                  <p className="text-[#6B8299]">Questions Correct</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 text-[#394D5C]" data-testid="text-level">
+                      {getRecommendation().level}
+                    </h3>
+                    <p className="text-[#6B8299] mb-4">
+                      {getRecommendation().message}
+                    </p>
+                  </div>
+
+                  <div className="p-6 border-2 border-[#E3E5E8] rounded-[12px] bg-white">
+                    <h4 className="font-semibold mb-2 text-[#394D5C]">Recommended Plan:</h4>
+                    <p className="text-lg font-bold text-[#3BA9A3] mb-2">
+                      {getRecommendation().recommendation}
+                    </p>
+                    <p className="text-sm text-[#6B8299]">
+                      {getRecommendation().description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <button
+                    onClick={handleClose}
+                    className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
+                    data-testid="button-close-results"
+                  >
+                    Close
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleClose();
+                      setTimeout(() => {
+                        const pricingSection = document.getElementById('pricing');
+                        pricingSection?.scrollIntoView({ behavior: 'smooth' });
+                      }, 300);
+                    }}
+                    className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-[12px] font-medium hover:bg-[#359690] transition-colors duration-200"
+                    data-testid="button-enroll-from-test"
+                  >
+                    Enroll Now
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
