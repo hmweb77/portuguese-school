@@ -60,7 +60,7 @@ export default function AboutProgram() {
     { 
       icon: BookOpen, 
       title: "Complete Materials", 
-      description: "Books, recordings & library",
+      description: "Books, recordings & resources",
       color: "from-green-400 to-green-600",
       bgColor: "bg-green-50"
     },
@@ -74,8 +74,8 @@ export default function AboutProgram() {
   ];
 
   const stats = [
-    { value: 200, suffix: "+", label: "Students Enrolled", icon: Users },
-    { value: 100, suffix: "%", label: "Success Rate", icon: TrendingUp },
+    { value: 250, suffix: "+", label: "Students Enrolled", icon: Users },
+    { value: 98, suffix: "%", label: "Success Rate", icon: TrendingUp },
     { value: 30, suffix: "+", label: "Live Sessions", icon: BookOpen },
   ];
 
@@ -138,9 +138,6 @@ export default function AboutProgram() {
                 transition={{ duration: 3, repeat: Infinity }}
               />
             </motion.div>
-
-            {/* Floating badge */}
-           
           </motion.div>
 
           {/* Text Content */}
@@ -163,7 +160,7 @@ export default function AboutProgram() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <p className="text-lg leading-relaxed text-[#394D5C]">
-                You'll learn from <span className="font-semibold text-[#3BA9A3]">experienced native speakers</span> in live, interactive sessions. Every class is recorded so you can review anytime. Plus, you get lifetime access to our extensive Portuguese library.
+                You'll learn from <span className="font-semibold text-[#3BA9A3]">experienced native speakers</span> in live, interactive sessions. Every class is recorded so you can review during the program period. Plus, you get access to our extensive Portuguese library throughout your course.
               </p>
             </motion.div>
 
@@ -178,7 +175,7 @@ export default function AboutProgram() {
               {[
                 { icon: "✓", text: "Native Portuguese instructors" },
                 { icon: "✓", text: "Interactive live sessions" },
-                { icon: "✓", text: "Lifetime access to recordings" },
+                { icon: "✓", text: "Session recordings during program" },
                 { icon: "✓", text: "Comprehensive learning materials" }
               ].map((item, index) => (
                 <motion.div

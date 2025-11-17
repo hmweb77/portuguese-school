@@ -16,6 +16,7 @@ import Footer from "@/components/Footer";
 import EnrollmentModal from "@/components/Enrollment";
 import PortugueseTestModal from "@/components/Portuguesetest";
 import FloatingCTA from "@/components/FloatingCTA";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import Toast from "@/components/Toast";
 
 
@@ -83,7 +84,7 @@ export default function Home() {
       {/* <BenefitsSection /> */}
       <PricingSection onSelectPlan={handleEnrollClick} />
       <TestimonialsSection />
-      <WhatYouGetSection onEnrollClick={() => handleEnrollClick()} />
+      {/* <WhatYouGetSection onEnrollClick={() => handleEnrollClick()} /> */}
       <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />
       <FinalCTASection onEnrollClick={() => handleEnrollClick()} />
       <FAQSection />
@@ -102,7 +103,8 @@ export default function Home() {
         onComplete={handleTestComplete}
       />
       
-      <FloatingCTA onEnrollClick={() => handleEnrollClick()} />
+      {/* <FloatingCTA onEnrollClick={() => handleEnrollClick()} /> */}
+      <WhatsAppButton />
       
       {/* Toast Container */}
       <div className="fixed bottom-6 right-6  flex flex-col gap-3 pointer-events-none">

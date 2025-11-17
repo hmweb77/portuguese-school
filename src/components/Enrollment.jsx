@@ -1,18 +1,19 @@
 "use client"
 import { useState } from "react";
-import { X } from "lucide-react";
+import { X, Phone } from "lucide-react";
 
 export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    whatsapp: "",
     plan: selectedPlan || "online"
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-    setFormData({ name: "", email: "", plan: "online" });
+    setFormData({ name: "", email: "", whatsapp: "", plan: "online" });
     onClose();
   };
 
@@ -82,6 +83,27 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
             />
           </div>
 
+          {/* WhatsApp Number Input */}
+          <div>
+            <label htmlFor="whatsapp" className="block text-sm font-medium text-[#394D5C] mb-2">
+              WhatsApp Number
+            </label>
+            <div className="relative">
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
+              <input
+                id="whatsapp"
+                type="tel"
+                placeholder="+351 XXX XXX XXX"
+                value={formData.whatsapp}
+                onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                required
+                className="w-full pl-11 pr-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+                data-testid="input-whatsapp"
+              />
+            </div>
+            <p className="mt-1 text-xs text-[#6B8299]">Include country code (e.g., +351 for Portugal)</p>
+          </div>
+
           {/* Plan Select */}
           <div>
             <label htmlFor="plan" className="block text-sm font-medium text-[#394D5C] mb-2">
@@ -94,9 +116,9 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
               className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] bg-white"
               data-testid="select-plan"
             >
-              <option value="offline" data-testid="option-offline">Offline - $299</option>
-              <option value="online" data-testid="option-online">Online - $599 (Most Popular)</option>
-              <option value="premium" data-testid="option-premium">Premium - $999</option>
+              <option value="offline" data-testid="option-offline">Offline - €145</option>
+              <option value="online" data-testid="option-online">Online - €295 (Most Popular)</option>
+              <option value="premium" data-testid="option-premium">Premium - €345</option>
             </select>
           </div>
 

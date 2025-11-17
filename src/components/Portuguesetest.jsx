@@ -1,6 +1,9 @@
 "use client"
 import { useState } from "react";
-import { X, CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
+import { X, CheckCircle2, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { createTestResult } from "@/lib/airtable";
 
 const questions = [
   {
@@ -85,6 +88,8 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
   const [showResults, setShowResults] = useState(false);
   const [email, setEmail] = useState("");
   const [score, setScore] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const progress = ((currentQuestion + 1) / questions.length) * 100;
 
@@ -124,38 +129,77 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
     return correctCount;
   };
 
-  const handleEmailSubmit = (e) => {
-    e.preventDefault();
-    const finalScore = calculateScore();
-    setScore(finalScore);
-    setShowResults(true);
-    onComplete(email, finalScore);
-  };
-
-  const getRecommendation = () => {
-    const percentage = (score / questions.length) * 100;
+  const getRecommendation = (finalScore) => {
+    const percentage = (finalScore / questions.length) * 100;
     
     if (percentage >= 75) {
-      return {
-        level: "A2 Ready",
-        message: "You have a good foundation in Portuguese!",
-        recommendation: "Online",
-        description: "You're ready for intermediate learning with live classes and interaction."
-      };
+      return "Online";
     } else if (percentage >= 40) {
-      return {
-        level: "A1 Intermediate",
-        message: "You know some Portuguese basics.",
-        recommendation: "Online",
-        description: "Build your foundation with structured live classes."
-      };
+      return "Online";
     } else {
-      return {
-        level: "Complete Beginner",
-        message: "Perfect! You're in the right place to start.",
-        recommendation: "Offline or Online",
-        description: "Start from scratch with our comprehensive beginner program."
+      return "Offline or Online";
+    }
+  };
+
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const finalScore = calculateScore();
+      const recommendation = getRecommendation(finalScore);
+      const percentage = Math.round((finalScore / questions.length) * 100);
+
+      // 1. Save to Firebase
+      const testData = {
+        email: email,
+        score: finalScore,
+        totalQuestions: questions.length,
+        percentage: percentage,
+        recommendation: recommendation,
+        answers: answers,
+        createdAt: serverTimestamp()
       };
+
+      const docRef = await addDoc(collection(db, "testResults"), testData);
+
+      // 2. Save to Airtable
+      const airtableData = {
+        Email: email,
+        Score: finalScore,
+        "Total Questions": questions.length,
+        Percentage: percentage,
+        Recommendation: recommendation,
+        "Created At": new Date().toISOString(),
+        "Firebase ID": docRef.id
+      };
+
+      await createTestResult(airtableData);
+
+      // 3. Send results email via Brevo
+      await fetch('/api/send-test-results-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          score: finalScore,
+          totalQuestions: questions.length,
+          recommendation: recommendation
+        }),
+      });
+
+      // 4. Show results and call parent callback
+      setScore(finalScore);
+      setShowResults(true);
+      onComplete(email, finalScore);
+    } catch (err) {
+      console.error("Error submitting test results:", err);
+      setError("Failed to submit test results. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -167,6 +211,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
     setShowResults(false);
     setEmail("");
     setScore(0);
+    setError("");
   };
 
   const handleClose = () => {
@@ -299,11 +344,18 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                   <button
                     onClick={handleClose}
                     className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
+                    disabled={isSubmitting}
                   >
                     <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
+
+              {error && (
+                <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                  {error}
+                </div>
+              )}
 
               <form onSubmit={handleEmailSubmit} className="space-y-4">
                 <div>
@@ -317,7 +369,8 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full h-12 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+                    disabled={isSubmitting}
+                    className="w-full h-12 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] disabled:bg-gray-50 disabled:cursor-not-allowed"
                     data-testid="input-test-email"
                   />
                 </div>
@@ -326,17 +379,26 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                   <button
                     type="button"
                     onClick={() => setShowEmailCapture(false)}
-                    className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
+                    disabled={isSubmitting}
+                    className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     data-testid="button-back-to-test"
                   >
                     Back to Test
                   </button>
                   <button 
                     type="submit"
-                    className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200"
+                    disabled={isSubmitting}
+                    className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     data-testid="button-show-results"
                   >
-                    Show My Results
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Show My Results"
+                    )}
                   </button>
                 </div>
               </form>
@@ -353,7 +415,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                       Your Test Results
                     </h2>
                     <p className="text-sm text-[#6B8299]">
-                      Here&apos;s how you did and our recommendation for you.
+                      Check your email for your complete results and Portuguese starter guide!
                     </p>
                   </div>
                   <button
@@ -377,22 +439,13 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                 </div>
 
                 <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-bold mb-2 text-[#394D5C]" data-testid="text-level">
-                      {getRecommendation().level}
-                    </h3>
-                    <p className="text-[#6B8299] mb-4">
-                      {getRecommendation().message}
-                    </p>
-                  </div>
-
                   <div className="p-6 border-2 border-[#E3E5E8] rounded-xl bg-white">
                     <h4 className="font-semibold mb-2 text-[#394D5C]">Recommended Plan:</h4>
                     <p className="text-lg font-bold text-[#3BA9A3] mb-2">
-                      {getRecommendation().recommendation}
+                      {getRecommendation(score)}
                     </p>
                     <p className="text-sm text-[#6B8299]">
-                      {getRecommendation().description}
+                      Based on your results, this plan will help you achieve your Portuguese goals.
                     </p>
                   </div>
                 </div>

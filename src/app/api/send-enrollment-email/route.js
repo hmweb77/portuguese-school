@@ -1,0 +1,103 @@
+import { NextResponse } from 'next/server';
+
+export async function POST(request) {
+  try {
+    const { email, name, plan } = await request.json();
+
+    const BREVO_API_KEY = process.env.BREVO_API_KEY;
+    const senderEmail = process.env.NEXT_PUBLIC_BREVO_SENDER_EMAIL;
+    const senderName = process.env.NEXT_PUBLIC_BREVO_SENDER_NAME;
+
+    if (!BREVO_API_KEY) {
+      throw new Error('Brevo API key is not configured');
+    }
+
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': BREVO_API_KEY,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        sender: {
+          name: senderName,
+          email: senderEmail,
+        },
+        to: [
+          {
+            email: email,
+            name: name,
+          },
+        ],
+        subject: 'Enrollment Received - IFLI Winter Immersion 2026',
+        htmlContent: `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Enrollment Confirmation</title>
+            </head>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #394D5C; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <div style="background: linear-gradient(135deg, #3BA9A3 0%, #2D8B85 100%); padding: 40px 20px; text-align: center; border-radius: 12px 12px 0 0;">
+                <h1 style="color: white; margin: 0; font-size: 28px;">Thank You for Your Interest!</h1>
+              </div>
+              
+              <div style="background: #ffffff; padding: 40px 30px; border: 1px solid #E3E5E8; border-top: none; border-radius: 0 0 12px 12px;">
+                <p style="font-size: 16px; margin-bottom: 20px;">Dear ${name},</p>
+                
+                <p style="font-size: 16px; margin-bottom: 20px;">
+                  We've received your enrollment request for the <strong>${plan}</strong> plan of our Winter Immersion Program 2026!
+                </p>
+                
+                <div style="background: #F5F6F7; padding: 20px; border-radius: 8px; margin: 30px 0;">
+                  <h2 style="color: #3BA9A3; margin-top: 0; font-size: 20px;">What Happens Next?</h2>
+                  <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li style="margin-bottom: 10px;">Our team will review your enrollment within 24 hours</li>
+                    <li style="margin-bottom: 10px;">You'll receive payment instructions via email</li>
+                    <li style="margin-bottom: 10px;">Once payment is confirmed, you'll get access to the student portal</li>
+                    <li style="margin-bottom: 10px;">Program starts on <strong>January 19, 2026</strong></li>
+                  </ul>
+                </div>
+                
+                <div style="background: #FFF3E0; border-left: 4px solid #FF8A5C; padding: 15px; margin: 30px 0;">
+                  <p style="margin: 0; font-size: 14px;">
+                    <strong>⏰ Important:</strong> Enrollment closes on <strong>January 10, 2026</strong>. Secure your spot now!
+                  </p>
+                </div>
+                
+                <p style="font-size: 16px; margin-bottom: 20px;">
+                  If you have any questions in the meantime, feel free to reply to this email.
+                </p>
+                
+                <p style="font-size: 16px; margin-bottom: 10px;">
+                  Best regards,<br>
+                  <strong>The IFLI Team</strong>
+                </p>
+              </div>
+              
+              <div style="text-align: center; padding: 20px; color: #6B8299; font-size: 12px;">
+                <p>© 2026 IFLI - Instituto de Formação em Língua Portuguesa</p>
+                <p>Lisbon, Portugal</p>
+              </div>
+            </body>
+          </html>
+        `,
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to send email');
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error sending enrollment email:', error);
+    return NextResponse.json(
+      { error: error.message || 'Failed to send email' },
+      { status: 500 }
+    );
+  }
+}

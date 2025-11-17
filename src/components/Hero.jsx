@@ -82,7 +82,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative  flex items-center justify-center overflow-hidden pt-20"
     >
       {/* Animated Background Slideshow */}
       <div className="absolute inset-0">
