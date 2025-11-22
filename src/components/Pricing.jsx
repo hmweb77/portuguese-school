@@ -24,12 +24,26 @@ const staggerItem = (index) => ({
 export default function PricingSection({ onSelectPlan }) {
   const sectionRef = useRef(null);
   const [hoveredPlan, setHoveredPlan] = useState(null);
+  const [selectedOnlineLevel, setSelectedOnlineLevel] = useState("A1");
+  const [selectedPremiumLevel, setSelectedPremiumLevel] = useState("A1");
+
+  const onlineLevels = {
+    "A1": { price: "295€", label: "A1 Level" },
+    "A2-I": { price: "395€", label: "A2 Part I" },
+    "A2-II": { price: "445€", label: "A2 Part II" }
+  };
+
+  const premiumLevels = {
+    "A1": { price: "345€", label: "A1 Level" },
+    "A2-I": { price: "445€", label: "A2 Part I" },
+    "A2-II": { price: "495€", label: "A2 Part II" }
+  };
 
   const plans = [
     {
       name: "Offline",
       price: "145€",
-      subtitle: "per 10 weeks",
+      subtitle: "6-month access",
       description: "Perfect for self-directed learners",
       icon: Zap,
       iconColor: "from-blue-400 to-blue-600",
@@ -46,17 +60,18 @@ export default function PricingSection({ onSelectPlan }) {
     },
     {
       name: "Online",
-      price: "295€",
-      subtitle: "per 10 weeks",
+      price: onlineLevels[selectedOnlineLevel].price,
+      subtitle: "6-month access",
       description: "The complete live learning experience",
       icon: MessageCircle,
       iconColor: "from-orange-400 to-orange-600",
+      hasLevelSelector: true,
       features: [
-        { name: "Access to session recordings", included: true },
-        { name: "Access to online library", included: true },
+        { name: "Access to 50hs of session recordings", included: true },
+        { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
-        { name: "Access to live online sessions", included: true },
-        { name: "Access to weekend resources", included: false }
+        { name: "Access to 50hs of live online sessions", included: true },
+        { name: "Access to additional 1-1 supports", included: true }
       ],
       cta: "Enroll Now",
       featured: true,
@@ -65,17 +80,19 @@ export default function PricingSection({ onSelectPlan }) {
     },
     {
       name: "Premium",
-      price: "345€",
-      subtitle: "per 10 weeks",
+      price: premiumLevels[selectedPremiumLevel].price,
+      subtitle: "6-month access",
       description: "Maximum results with 1-on-1 support",
       icon: Crown,
       iconColor: "from-purple-400 to-purple-600",
+      hasLevelSelector: true,
       features: [
-        { name: "Access to session recordings", included: true },
-        { name: "Access to online library", included: true },
+        { name: "50hs of session recordings", included: true },
+        { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
-        { name: "Access to live online sessions", included: true },
-        { name: "Access to weekend resources", included: true }
+        { name: "50hs of live online sessions", included: true },
+        { name: "Additional 1-on-1 support", included: true },
+        { name: "4x 30 min private sessions", included: true },
       ],
       cta: "Go Premium",
       featured: false,
@@ -128,7 +145,7 @@ export default function PricingSection({ onSelectPlan }) {
             Choose Your Learning Path
           </h2>
           <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-            All plans include lifetime access to materials and our student community.
+          All plans include 3-month access to materials and lifetime access to our student community.
           </p>
         </motion.div>
 
@@ -209,11 +226,33 @@ export default function PricingSection({ onSelectPlan }) {
                     <h3 className="text-2xl font-bold mb-2 text-[#394D5C]">{plan.name}</h3>
                     <p className="text-sm text-[#6B8299] mb-6 min-h-10">{plan.description}</p>
                     
+                    {/* Level Selector for Online and Premium Plans */}
+                    {plan.hasLevelSelector && (
+                      <div className="mb-4 px-2">
+                        <div className="flex gap-2 bg-gray-100 p-1.5 rounded-xl">
+                          {Object.entries(plan.name === "Online" ? onlineLevels : premiumLevels).map(([key, level]) => (
+                            <button
+                              key={key}
+                              onClick={() => plan.name === "Online" ? setSelectedOnlineLevel(key) : setSelectedPremiumLevel(key)}
+                              className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-300 ${
+                                (plan.name === "Online" ? selectedOnlineLevel : selectedPremiumLevel) === key
+                                  ? 'bg-linear-to-br ' + plan.gradient + ' text-white shadow-md'
+                                  : 'text-gray-600 hover:bg-gray-200'
+                              }`}
+                            >
+                              {level.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="mb-2">
                       <motion.span 
                         className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}
                         animate={hoveredPlan === index ? { scale: [1, 1.05, 1] } : {}}
                         transition={{ duration: 0.3 }}
+                        key={plan.price}
                       >
                         {plan.price}
                       </motion.span>
@@ -252,7 +291,12 @@ export default function PricingSection({ onSelectPlan }) {
                   {/* CTA Button - Fixed at Bottom */}
                   <motion.button 
                     className={`w-full relative rounded-full py-6 text-base font-semibold text-white overflow-hidden shadow-lg mt-auto`}
-                    onClick={() => onSelectPlan(plan.name)}
+                    onClick={() => onSelectPlan(
+                      plan.name, 
+                      plan.hasLevelSelector 
+                        ? (plan.name === "Online" ? selectedOnlineLevel : selectedPremiumLevel)
+                        : null
+                    )}
                     data-testid={`button-select-${plan.name.toLowerCase()}`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -294,48 +338,7 @@ export default function PricingSection({ onSelectPlan }) {
               Choose your preferred payment method during checkout.
             </p>
           </div>
-        </motion.div>
-
-        {/* Flex Pass Section */}
-        <motion.div
-          className="mt-16 max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-linear-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">Morning-Evening Flex Pass Available</h3>
-                <p className="text-white/80 text-sm">Schedule flexibility for busy professionals</p>
-              </div>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <p className="text-white/90 mb-4">
-                  Attend morning and evening sessions: <span className="text-2xl font-bold text-yellow-300">+150€*</span>
-                </p>
-                <p className="text-sm text-white/70 italic">
-                  *Only available if there are at least 6 learners in each group.
-                </p>
-              </div>
-              
-              <div className="bg-white/10 rounded-xl p-4">
-                <p className="text-white/90 text-sm mb-2">
-                  To have schedule flexibility and be able to attend both the morning or the evening sessions.
-                </p>
-                <p className="text-xs text-white/70 italic">
-                  *Only available in some courses. Minimum 6 learners in each group.
-                </p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        </motion.div>     
 
         {/* Bottom Trust Message */}
         <motion.div
@@ -346,7 +349,7 @@ export default function PricingSection({ onSelectPlan }) {
           transition={{ delay: 0.6 }}
         >
           <p className="text-white/80 text-sm">
-            🔒 Secure payment • 💯 14-day money-back guarantee • 🌟 Join 200+ students
+            🔒 Secure payment • 💯 5-day money-back guarantee • 🌟 Join 200+ happy learners
           </p>
         </motion.div>
       </div>

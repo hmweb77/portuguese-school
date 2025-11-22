@@ -58,7 +58,7 @@ export default function Navbar({ onEnrollClick }) {
     <motion.nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "bg-white/95 backdrop-blur-md border-b border-[#E3E5E8] shadow-lg" 
+          ? "bg-[#3FA7A3] backdrop-blur-md border-b border-[#E3E5E8] shadow-lg" 
           : "bg-transparent"
       }`}
       data-testid="navbar"
@@ -81,9 +81,7 @@ export default function Navbar({ onEnrollClick }) {
               alt="IFLI Logo" 
               width={300} 
               height={100}
-              className={`h-24 w-auto transition-all duration-300 ${
-                isScrolled ? "brightness-0" : "brightness-100"
-              }`}
+              className={`h-24 w-auto transition-all duration-300 `}
               priority
             />
           </motion.a>

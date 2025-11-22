@@ -81,7 +81,7 @@ export default function Home() {
         onTestClick={handleTestClick}
       />
       <AboutProgram />
-      {/* <BenefitsSection /> */}
+      <BenefitsSection />
       <PricingSection onSelectPlan={handleEnrollClick} />
       <TestimonialsSection />
       {/* <WhatYouGetSection onEnrollClick={() => handleEnrollClick()} /> */}

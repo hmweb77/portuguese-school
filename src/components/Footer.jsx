@@ -3,6 +3,7 @@ import { Facebook, Instagram, Youtube, Linkedin, Mail, MapPin, Phone, Heart, Arr
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
@@ -35,18 +36,14 @@ export default function Footer() {
   ];
 
   const quickLinks = [
-    { label: "About the Program", href: "#about" },
+    { label: "About the IFLI Immersion Experiences", href: "#about" },
     { label: "Benefits", href: "#benefits" },
     { label: "Pricing", href: "#pricing" },
     { label: "Testimonials", href: "#testimonials" },
     { label: "FAQ", href: "#faq" }
   ];
 
-  const contactInfo = [
-    { icon: Mail, text: "hello@ifli.com" },
-    { icon: Phone, text: "+351 XXX XXX XXX" },
-    { icon: MapPin, text: "Lisbon, Portugal" }
-  ];
+
 
   return (
     <footer className="relative bg-linear-to-b from-white to-[#F5F6F7] border-t border-[#E3E5E8]" data-testid="footer">
@@ -75,7 +72,7 @@ export default function Footer() {
               />
             </motion.div>
             <p className="text-[#6B8299] mb-6 leading-relaxed">
-              Learn Portuguese fast with live classes, expert teachers, and a global community.
+            Learn European Portuguese fast with live online sessions, native facilitators, and a global community.
             </p>
             
             {/* Social Links */}
@@ -142,27 +139,52 @@ export default function Footer() {
           >
             <h4 className="font-bold text-lg mb-6 text-[#394D5C]">Contact Us</h4>
             <ul className="space-y-4">
-              {contactInfo.map((info, index) => {
-                const IconComponent = info.icon;
-                return (
-                  <motion.li
-                    key={index}
-                    className="flex items-start gap-3"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + index * 0.05 }}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-[#3BA9A3]/10 flex items-center justify-center shrink-0">
-                      <IconComponent className="w-5 h-5 text-[#3BA9A3]" />
-                    </div>
-                    <div>
-                      <p className="text-[#6B8299] text-sm">{info.text}</p>
-                    </div>
-                  </motion.li>
-                );
-              })}
-            </ul>
+
+{/* PHONE */}
+<motion.li
+  className="flex items-start gap-3"
+  initial={{ opacity: 0, x: -10 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.3 }}
+>
+  <div className="w-10 h-10 rounded-xl bg-[#3BA9A3]/10 flex items-center justify-center shrink-0">
+    <Phone className="w-5 h-5 text-[#3BA9A3]" />
+  </div>
+
+  <Link
+    href="tel:+351933292112"
+    className="text-[#6B8299] text-sm hover:text-[#3BA9A3] transition"
+  >
+    +351 933 292 112
+  </Link>
+</motion.li>
+
+{/* EMAIL */}
+<motion.li
+  className="flex items-start gap-3"
+  initial={{ opacity: 0, x: -10 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.35 }}
+>
+  <div className="w-10 h-10 rounded-xl bg-[#3BA9A3]/10 flex items-center justify-center shrink-0">
+    <Mail className="w-5 h-5 text-[#3BA9A3]" />
+  </div>
+
+  <Link
+    href="mailto:info@iflimmersion.com"
+    className="text-[#6B8299] text-sm hover:text-[#3BA9A3] transition"
+  >
+   info@iflimmersion.com
+  </Link>
+</motion.li>
+
+
+
+</ul>
+
+
           </motion.div>
 
           {/* Newsletter */}

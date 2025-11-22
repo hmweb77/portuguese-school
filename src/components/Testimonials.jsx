@@ -23,65 +23,43 @@ export default function TestimonialsSection() {
 
   const testimonials = [
     {
-      name: "Sarah Chen",
+      name: "Raele",
       role: "Software Engineer",
       country: "🇺🇸 USA",
-      location: "San Francisco, CA",
-      achievement: "A1 → B1 in 10 weeks",
+      location: "Porto",
+      achievement: "A1",
       rating: 5,
-      quote: "I went from zero Portuguese to having real conversations with locals during my trip to Lisbon. The live classes made all the difference! The teachers are so patient and the small group size means you actually get to practice speaking.",
+      quote: "Always useful and educational, often fun. Classes are challenging, but manageable.",
       image: testimonial1,
       gradient: "from-blue-400 to-cyan-500",
       hasVideo: true
     },
     {
-      name: "Marcus Silva",
+      name: "Kira",
       role: "Business Consultant",
       country: "🇬🇧 UK",
-      location: "London",
-      achievement: "Career breakthrough",
+      location: "Lisbon",
+      achievement: "A1",
       rating: 5,
-      quote: "Learning Portuguese opened up job opportunities I never imagined. The small group sizes meant I actually got to practice speaking every session. Now I'm leading projects in Portugal!",
+      quote: "I learn a lot every week. I really appreciate that it is Monday to Friday.",
       image: testimonial2,
       gradient: "from-purple-400 to-pink-500",
       hasVideo: false
     },
     {
-      name: "Emma Rodriguez",
+      name: "Tasha",
       role: "Digital Nomad",
       country: "🇨🇦 Canada",
-      location: "Toronto → Lisbon",
-      achievement: "Reconnected with family",
+      location: "US",
+      achievement: "A1",
       rating: 5,
-      quote: "As a digital nomad, the flexible schedule was perfect. I could attend live or watch recordings. Now I can finally talk to my Portuguese relatives! The cultural insights made learning so much richer.",
+      quote: "Class is the high point of my day — I look forward to it.",
       image: testimonial3,
       gradient: "from-orange-400 to-red-500",
       hasVideo: true
     },
-    {
-      name: "Priya Patel",
-      role: "Travel Blogger",
-      country: "🇳🇱 Netherlands",
-      location: "Amsterdam",
-      achievement: "Confident traveler",
-      rating: 5,
-      quote: "I travel to Portugal frequently for my blog. Being able to speak Portuguese transformed my experience. Locals are so much more welcoming when you make the effort. Worth every penny!",
-      image: testimonial2,
-      gradient: "from-yellow-400 to-orange-500",
-      hasVideo: true
-    },
-    {
-      name: "Carlos Mendes",
-      role: "Entrepreneur",
-      country: "🇪🇸 Spain",
-      location: "Madrid",
-      achievement: "Business expansion",
-      rating: 5,
-      quote: "I needed to improve my Portuguese for business negotiations. The Premium plan with 1-on-1 sessions was exactly what I needed. My confidence skyrocketed!",
-      image: testimonial3,
-      gradient: "from-indigo-400 to-purple-500",
-      hasVideo: false
-    }
+    
+    
   ];
 
   const cardsToShow = typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 3;
@@ -148,10 +126,10 @@ export default function TestimonialsSection() {
           
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-[#394D5C]" data-testid="text-testimonials-headline">
-            Join Students From Around the World
+          Join Learners From Around the World
           </h2>
           <p className="text-xl text-[#6B8299] max-w-2xl mx-auto leading-relaxed">
-            Real stories from real students who transformed their Portuguese in 10 weeks.
+          Real stories from real learners who became confident at speaking Portuguese in 10 weeks.
           </p>
         </motion.div>
 
@@ -245,7 +223,7 @@ export default function TestimonialsSection() {
 
                       {/* Student Info */}
                       <div className="flex items-center gap-4 mb-4 relative z-10">
-                        <motion.div 
+                        {/* <motion.div 
                           className="relative w-14 h-14 rounded-full ring-2 ring-[#3BA9A3]/20 overflow-hidden" 
                           data-testid={`avatar-testimonial-${currentIndex + index}`}
                           whileHover={{ scale: 1.1, rotate: 5 }}
@@ -256,11 +234,11 @@ export default function TestimonialsSection() {
                               <Play className="w-6 h-6 text-white" />
                             </div>
                           )}
-                        </motion.div>
+                        </motion.div> */}
                         <div className="flex-1">
                           <p className="font-bold text-base text-[#394D5C]">{testimonial.name}</p>
-                          <p className="text-sm text-[#6B8299]">{testimonial.role}</p>
-                          <p className="text-xs text-[#6B8299]">{testimonial.country} {testimonial.location}</p>
+                          {/* <p className="text-sm text-[#6B8299]">{testimonial.role}</p>
+                          <p className="text-xs text-[#6B8299]">{testimonial.country} {testimonial.location}</p> */}
                         </div>
                       </div>
 

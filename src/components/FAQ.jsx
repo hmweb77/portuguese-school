@@ -24,52 +24,47 @@ export default function FAQSection() {
   const faqs = [
     {
       question: "What if I can't attend all the live sessions?",
-      answer: "No problem! Every live session is recorded and available for lifetime access. You can watch them anytime at your own pace. We recommend attending live when possible for the interactive experience, but recordings ensure you never miss content.",
+      answer: "No problem! Every live session is recorded and available for at least 3 months. You can watch them anytime at your own pace. We recommend attending live when possible for the interactive experience, but recordings ensure you never miss content.",
 
     },
     {
       question: "I'm a complete beginner. Is this course right for me?",
-      answer: "Absolutely! The Winter Immersion is designed specifically for A1 level (complete beginners). Our experienced teachers will guide you from your first Portuguese word to confident basic conversations. No prior knowledge required.",
+      answer: "Yes! These programs are designed for all levels, and they are extremely beneficial for beginners.",
 
     },
     {
       question: "What's your refund policy?",
-      answer: "We offer a 14-day money-back guarantee. If you're not satisfied within the first two weeks, we'll refund your payment in full, no questions asked. After 14 days, all sales are final.",
+      answer: "We offer a 5-day money-back guarantee.",
 
     },
     {
       question: "How much time do I need to commit each week?",
-      answer: "We recommend 5-7 hours per week: 3 hours for live sessions and 2-4 hours for homework and practice. The more you invest, the faster you'll progress. But the flexible format lets you adapt to your schedule.",
+      answer: "You just need to commit to doing something in Portuguese about an hour a day. This could be joining one of our live online sessions, watching the recording of a missed session, listening to Portuguese music, watching TV in Portuguese, speaking to Portuguese people in the street, or anything that involves listening to or practising your Portuguese.",
 
     },
     {
       question: "Will I really be conversational in 10 weeks?",
-      answer: "Yes! Our immersion method focuses on practical communication from day one. Most students can handle basic conversations (ordering food, asking directions, making small talk) by week 5-6. By week 10, you'll have a solid A1-A2 foundation.",
+      answer: "Yes! You will be conversational at your level. Our proven system helps you become confident at communicating with the language you know within 10 weeks, provided you practise every day.",
 
     },
     {
       question: "Do I get to keep the materials after the course ends?",
-      answer: "Yes! You get lifetime access to all course materials, recordings, and the Portuguese library. You can review and continue learning long after the 10 weeks end.",
+      answer: "Yes. You’ll have access to all materials, recordings, and resources for at least 3 months after the course ends.",
 
     },
     {
       question: "What's the difference between the plans?",
-      answer: "Offline (€145) gives you all materials and recordings. Online (€295) adds live sessions with teachers and classmates. Premium (€345) includes everything plus weekend resources and enhanced support. Choose based on how much live interaction you want.",
+      answer: "The main differences are the inclusion of live sessions and additional 1-on-1 support.",
 
     },
     {
       question: "Is there a certificate at the end?",
-      answer: "Yes! All students who complete the program receive an official IFLI completion certificate for Portuguese A1 level.",
-
-    },
-    {
-      question: "What's the Flex Pass option?",
-      answer: "The Flex Pass (+€150) allows you to attend both morning and evening sessions for ultimate flexibility. This is available only if there are at least 6 learners in each group.",
+      answer: "Yes, all participants receive a certificate of participation at the end of the experience. This certificate is not valid for nationality, though.",
 
     },
     {
       question: "Can I switch between plans later?",
-      answer: "Yes! You can upgrade your plan anytime during the course. Contact our support team and we'll help you with the transition and pricing difference.",
+      answer: "Yes, you can upgrade or switch plans anytime before the course starts.",
 
     }
   ];
@@ -105,7 +100,7 @@ export default function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-xl text-[#6B8299] leading-relaxed">
-            Everything you need to know about the Winter Immersion Experience.
+          Everything you need to know about the IFLI Immersion Experiences.
           </p>
         </motion.div>
 

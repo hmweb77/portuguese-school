@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import { useState } from "react";
-import { Download, CheckCircle, Mail, FileText, Sparkles, Lock } from "lucide-react";
+import { Download, CheckCircle, Mail, FileText, Sparkles, Lock, User, Phone } from "lucide-react";
 import pdfImage from "../../public/leadSec.png";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -13,38 +13,49 @@ const fadeInUp = {
 };
 
 export default function LeadMagnetSection({ onSubmit }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitting(true);
-      
-      // Simulate submission
+
+    if (!name || !email || !whatsapp) return;
+
+    setIsSubmitting(true);
+
+    // Optional: send data somewhere first
+    try {
+      if (onSubmit) {
+        await onSubmit({ name, email, whatsapp });
+      }
+
+      setShowSuccess(true);
+
+      // Small delay for UX, then redirect to sample page
       setTimeout(() => {
-        onSubmit(email);
-        setIsSubmitting(false);
-        setShowSuccess(true);
-        setEmail("");
-        
-        // Reset success message after 5 seconds
-        setTimeout(() => {
-          setShowSuccess(false);
-        }, 5000);
-      }, 1000);
+        if (typeof window !== "undefined") {
+          window.location.href = "https://iflimmersion.com/en/ifli-portugues-sample-page/";
+        }
+      }, 800);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const benefits = [
-    { icon: FileText, text: "50+ Essential Portuguese phrases" },
-    { icon: Sparkles, text: "Pronunciation guide with audio" },
-    { icon: CheckCircle, text: "Cultural tips for travelers" },
+    { icon: FileText, text: "Sample IFLI account view" },
+    { icon: Sparkles, text: "1h recording of a sample session" },
+    { icon: CheckCircle, text: "A taste of our digital library" },
   ];
 
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden" data-testid="section-lead-magnet">
+    <section
+      className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden"
+      data-testid="section-lead-magnet"
+    >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -98,9 +109,9 @@ export default function LeadMagnetSection({ onSubmit }) {
                       key={i}
                       className="absolute w-3 h-3 rounded-full"
                       style={{
-                        left: '50%',
-                        top: '50%',
-                        background: ['#3BA9A3', '#FF8A5C', '#394D5C', '#FFD700'][i % 4],
+                        left: "50%",
+                        top: "50%",
+                        background: ["#3BA9A3", "#FF8A5C", "#394D5C", "#FFD700"][i % 4],
                       }}
                       initial={{ scale: 0, x: 0, y: 0 }}
                       animate={{
@@ -127,15 +138,18 @@ export default function LeadMagnetSection({ onSubmit }) {
                   whileHover={{ scale: 1.05 }}
                 >
                   <Sparkles className="w-4 h-4" />
-                  <span className="text-sm font-semibold">FREE Resource</span>
+                  <span className="text-sm font-semibold">FREE Resources</span>
                 </motion.div>
 
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-[#394D5C]" data-testid="text-lead-magnet-headline">
-                  Not Ready to Enroll Yet?
+                <h2
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-[#394D5C]"
+                  data-testid="text-lead-magnet-headline"
+                >
+                  Get INSTANT Access to FREE SAMPLE RESOUCES
                 </h2>
-                
+
                 <p className="text-lg text-[#6B8299] mb-6 leading-relaxed">
-                  Get our <span className="font-bold text-[#3BA9A3]">free Portuguese Starter Guide</span>. Learn essential phrases, pronunciation tips, and culture insights.
+                  See how IFLI will help you speak Portuguese confidently—no commitment, just value.
                 </p>
 
                 {/* Benefits List */}
@@ -169,6 +183,21 @@ export default function LeadMagnetSection({ onSubmit }) {
                       initial={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                     >
+                      {/* Name */}
+                      <div className="relative">
+                        <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
+                        <motion.input
+                          type="text"
+                          placeholder="Enter your name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all"
+                          whileFocus={{ scale: 1.02 }}
+                        />
+                      </div>
+
+                      {/* Email */}
                       <div className="relative">
                         <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
                         <motion.input
@@ -182,8 +211,22 @@ export default function LeadMagnetSection({ onSubmit }) {
                           whileFocus={{ scale: 1.02 }}
                         />
                       </div>
-                      
-                      <motion.button 
+
+                      {/* WhatsApp */}
+                      <div className="relative">
+                        <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
+                        <motion.input
+                          type="tel"
+                          placeholder="Enter your WhatsApp number"
+                          value={whatsapp}
+                          onChange={(e) => setWhatsapp(e.target.value)}
+                          required
+                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all"
+                          whileFocus={{ scale: 1.02 }}
+                        />
+                      </div>
+
+                      <motion.button
                         type="submit"
                         disabled={isSubmitting}
                         className="group relative w-full rounded-full py-6 text-base font-semibold bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg disabled:opacity-50"
@@ -210,7 +253,7 @@ export default function LeadMagnetSection({ onSubmit }) {
                           ) : (
                             <>
                               <Download className="w-5 h-5" />
-                              Download Free Guide
+                              Access Your Free Sample Account
                             </>
                           )}
                         </span>
@@ -229,13 +272,15 @@ export default function LeadMagnetSection({ onSubmit }) {
                         </div>
                         <div>
                           <h3 className="font-bold text-green-900">Success!</h3>
-                          <p className="text-sm text-green-700">Check your email for the guide</p>
+                          <p className="text-sm text-green-700">
+                            Redirecting to your free sample account...
+                          </p>
                         </div>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-                
+
                 {/* Privacy Note */}
                 <motion.div
                   className="flex items-center gap-2 mt-6 text-sm text-[#6B8299]"
@@ -269,15 +314,12 @@ export default function LeadMagnetSection({ onSubmit }) {
                     transition={{ duration: 3, repeat: Infinity }}
                   />
 
-                  <Image 
-                    src={pdfImage} 
-                    alt="Portuguese Starter Guide" 
+                  <Image
+                    src={pdfImage}
+                    alt="IFLI Free Sample Account Preview"
                     className="relative z-10 w-full max-w-sm mx-auto drop-shadow-2xl rounded-2xl"
                     data-testid="img-guide"
                   />
-
-                  {/* Floating badge */}
-               
                 </motion.div>
               </div>
             </div>

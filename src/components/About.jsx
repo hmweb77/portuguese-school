@@ -53,14 +53,14 @@ export default function AboutProgram() {
     { 
       icon: Users, 
       title: "Small Groups", 
-      description: "Max 15 students per class",
+      description: "Max 12 participants per session",
       color: "from-purple-400 to-purple-600",
       bgColor: "bg-purple-50"
     },
     { 
       icon: BookOpen, 
-      title: "Complete Materials", 
-      description: "Books, recordings & resources",
+      title: "All Materials Included", 
+      description: "presentations, recordings & library",
       color: "from-green-400 to-green-600",
       bgColor: "bg-green-50"
     },
@@ -76,7 +76,7 @@ export default function AboutProgram() {
   const stats = [
     { value: 250, suffix: "+", label: "Students Enrolled", icon: Users },
     { value: 98, suffix: "%", label: "Success Rate", icon: TrendingUp },
-    { value: 30, suffix: "+", label: "Live Sessions", icon: BookOpen },
+    { value: 50, suffix: "+", label: "Live Sessions", icon: BookOpen },
   ];
 
   return (
@@ -102,10 +102,10 @@ export default function AboutProgram() {
           </motion.div>
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-[#394D5C]" data-testid="text-about-headline">
-            About the Winter Immersion Experience
+          About the Portuguese Immersion Experiences
           </h2>
           <p className="text-xl text-[#6B8299] max-w-3xl mx-auto leading-relaxed">
-            An intensive 10-week Portuguese language program designed for busy professionals who want real results, fast.
+          An intensive 10-week Portuguese language program designed for busy professionals and anyone who wants to become a fluent and confident speaker of Portuguese. Real results, fast.
           </p>
         </motion.div>
 
@@ -142,58 +142,63 @@ export default function AboutProgram() {
 
           {/* Text Content */}
           <motion.div className="space-y-8" {...fadeInRight}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <p className="text-lg leading-relaxed text-[#394D5C]">
-                The IFLI Winter Immersion is <span className="font-semibold text-[#3BA9A3]">more than just language classes</span>. It's a complete learning ecosystem designed to get you speaking Portuguese with confidence.
-              </p>
-            </motion.div>
+  {/* Paragraph 1 */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay: 0.1 }}
+  >
+    <p className="text-lg leading-relaxed text-[#394D5C]">
+      The IFLI Immersion Experience is <span className="font-semibold text-[#3BA9A3]">more than just language classes</span>. 
+      It’s a complete learning ecosystem designed to get you speaking Portuguese with confidence.
+    </p>
+  </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <p className="text-lg leading-relaxed text-[#394D5C]">
-                You'll learn from <span className="font-semibold text-[#3BA9A3]">experienced native speakers</span> in live, interactive sessions. Every class is recorded so you can review during the program period. Plus, you get access to our extensive Portuguese library throughout your course.
-              </p>
-            </motion.div>
+  {/* Paragraph 2 */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay: 0.2 }}
+  >
+    <p className="text-lg leading-relaxed text-[#394D5C]">
+      You’ll learn from <span className="font-semibold text-[#3BA9A3]">experienced native speakers</span> in live, online interactive sessions. 
+      Every class is recorded so you can review anytime. Plus, you get <span className="font-semibold">(lifetime)</span> access to our extensive Portuguese digital library.
+    </p>
+  </motion.div>
 
-            {/* Feature List with Icons */}
-            <motion.div
-              className="space-y-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              {[
-                { icon: "✓", text: "Native Portuguese instructors" },
-                { icon: "✓", text: "Interactive live sessions" },
-                { icon: "✓", text: "Session recordings during program" },
-                { icon: "✓", text: "Comprehensive learning materials" }
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center gap-3"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 + index * 0.1 }}
-                >
-                  <div className="w-6 h-6 rounded-full bg-[#3BA9A3]/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-[#3BA9A3] font-bold text-sm">{item.icon}</span>
-                  </div>
-                  <span className="text-[#394D5C]">{item.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
+  {/* Feature List */}
+  <motion.div
+    className="space-y-4"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay: 0.3 }}
+  >
+    {[
+      { icon: "✓", text: "Native Portuguese facilitators" },
+      { icon: "✓", text: "Interactive live sessions" },
+      { icon: "✓", text: "Session recordings (review anytime)" },
+      { icon: "✓", text: "Access to the recordings of your sessions" }
+    ].map((item, index) => (
+      <motion.div
+        key={index}
+        className="flex items-center gap-3"
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.4 + index * 0.1 }}
+      >
+        <div className="w-6 h-6 rounded-full bg-[#3BA9A3]/10 flex items-center justify-center flex-shrink-0">
+          <span className="text-[#3BA9A3] font-bold text-sm">{item.icon}</span>
+        </div>
+        <span className="text-[#394D5C]">{item.text}</span>
+      </motion.div>
+    ))}
+  </motion.div>
+</motion.div>
+
         </div>
 
         {/* Highlight Cards with Enhanced Design */}

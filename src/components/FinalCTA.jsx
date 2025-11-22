@@ -179,7 +179,7 @@ export default function FinalCTASection({ onEnrollClick }) {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Transform from beginner to confident speaker in just 10 weeks.
+          Become a confident Portuguese speaker in just 10 weeks.
         </motion.p>
 
         {/* Countdown Timer or Expired Message */}
@@ -288,7 +288,7 @@ export default function FinalCTASection({ onEnrollClick }) {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          🔒 Secure payment • 💯 14-day money-back guarantee
+          🔒 Secure payment • 💯  5-day money-back guarantee
         </motion.p>
       </div>
     </section>

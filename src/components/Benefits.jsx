@@ -29,7 +29,7 @@ export default function BenefitsSection() {
     {
       icon: Zap,
       title: "Fast Progress",
-      description: "Our intensive immersion method gets you conversational in 10 weeks. Most students report confidence in basic conversations by week 5.",
+      description: "Our intensive immersion method gets you conversational in 10 weeks. Most learners report confidence in basic conversations by week 5.",
       gradient: "from-yellow-400 via-orange-400 to-red-500",
       bgGradient: "from-yellow-50 to-orange-50",
       accentColor: "#F59E0B"
@@ -37,15 +37,15 @@ export default function BenefitsSection() {
     {
       icon: Users2,
       title: "Small Group Learning",
-      description: "Maximum 15 students per class means more speaking time, personal attention, and faster skill development.",
+      description: "Max 12 participants per session. means more speaking time, personal attention, and faster skill development.",
       gradient: "from-blue-400 via-cyan-400 to-teal-500",
       bgGradient: "from-blue-50 to-cyan-50",
       accentColor: "#3B82F6"
     },
     {
       icon: Globe2,
-      title: "Portuguese for Real Life",
-      description: "Learn practical, modern Portuguese used in everyday situations. Not just textbook phrases—real conversation skills.",
+      title: "European Portuguese for Real Life",
+      description: "Learn practical, modern European Portuguese used in everyday situations. Not just textbook phrases—real conversation skills.",
       gradient: "from-green-400 via-emerald-400 to-teal-500",
       bgGradient: "from-green-50 to-emerald-50",
       accentColor: "#10B981"
@@ -53,27 +53,12 @@ export default function BenefitsSection() {
     {
       icon: Clock,
       title: "Flexible Access",
-      description: "Can't make a live session? Every class is recorded. Study on your schedule with lifetime access to all materials.",
+      description: "Can't make a live session? Every class is recorded. Study on your schedule with 6 Months access to all materials.",
       gradient: "from-purple-400 via-pink-400 to-rose-500",
       bgGradient: "from-purple-50 to-pink-50",
       accentColor: "#A855F7"
     },
-    {
-      icon: Award,
-      title: "Cultural Immersion",
-      description: "Beyond grammar and vocabulary. Experience Portuguese culture, customs, and contexts through interactive activities.",
-      gradient: "from-indigo-400 via-purple-400 to-pink-500",
-      bgGradient: "from-indigo-50 to-purple-50",
-      accentColor: "#6366F1"
-    },
-    {
-      icon: TrendingUp,
-      title: "Proven Results",
-      description: "95% of our students achieve their language goals. Join hundreds of successful Portuguese learners worldwide.",
-      gradient: "from-orange-400 via-red-400 to-pink-500",
-      bgGradient: "from-orange-50 to-red-50",
-      accentColor: "#EF4444"
-    },
+   
   ];
 
   return (
@@ -162,7 +147,7 @@ export default function BenefitsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Why Join the Winter Immersion?
+       Immersion Experiences
           </motion.h2>
           
           <motion.p 
@@ -177,7 +162,7 @@ export default function BenefitsSection() {
         </motion.div>
 
         {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
           {benefits.map((benefit, index) => {
             const IconComponent = benefit.icon;
             return (
@@ -279,16 +264,7 @@ export default function BenefitsSection() {
           >
             Ready to start your Portuguese journey?
           </motion.p>
-          <motion.div
-            className="flex items-center justify-center gap-2 text-white/70 text-sm"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-          >
-            <Sparkles className="w-4 h-4" />
-            <span>Join 200+ students from 12 countries</span>
-          </motion.div>
+         
         </motion.div>
       </div>
     </section>

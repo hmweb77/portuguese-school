@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { CheckCircle2, Play, Globe, Users, BookOpen, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import gsap from "gsap";
+import Link from "next/link";
 
 export default function HeroSection({ onEnrollClick, onTestClick }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -59,9 +60,9 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
 
   // Animated stats
   const stats = [
-    { icon: Users, value: 200, suffix: "+", label: "Active Students" },
-    { icon: Globe, value: 12, suffix: "", label: "Countries" },
-    { icon: BookOpen, value: 95, suffix: "%", label: "Success Rate" }
+    { icon: Users, value: 30, suffix: "+ years", label: " helping learners speak " },
+    { icon: Globe, label: "Language immersion experience from anywhere in the world" },
+    { icon: BookOpen, value: 100, suffix: "%", label: "focus on oral communication" }
   ];
 
   // Typewriter effect for headline
@@ -199,8 +200,8 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
       <motion.div
         className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center text-white"
         style={{ 
-          opacity: opacityTransform,
-          scale: scale,
+   
+      
           y: smoothContentY
         }}
       >
@@ -212,7 +213,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
           className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/30 mb-8"
         >
           <Sparkles className="w-4 h-4 text-yellow-300" />
-          <span className="text-sm font-semibold">Winter Immersion 2026 - Enrollment Open</span>
+          <span className="text-sm font-semibold">Enrollment Open</span>
         </motion.div>
 
         {/* Animated Headline with Typewriter Effect */}
@@ -280,19 +281,19 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
               </motion.span>
             </span>
           </motion.button>
+          <Link href="/https://form.jotform.com/222385082740353">
+  <motion.button
+    className="group px-10 py-6 text-lg font-semibold text-white rounded-full min-w-[220px] bg-white/10 backdrop-blur-md border-2 border-white/30 relative overflow-hidden"
+    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+    whileTap={{ scale: 0.95 }}
+  >
+    <span className="relative z-10 flex items-center justify-center gap-2">
+      <Play className="w-5 h-5" />
+      Take Free Test
+    </span>
+  </motion.button>
+</Link>
 
-          <motion.button
-            className="group px-10 py-6 text-lg font-semibold text-white rounded-full min-w-[220px] bg-white/10 backdrop-blur-md border-2 border-white/30 relative overflow-hidden"
-            onClick={onTestClick}
-            data-testid="button-free-test-hero"
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              <Play className="w-5 h-5" />
-              Take Free Test
-            </span>
-          </motion.button>
         </motion.div>
 
         {/* Animated Stats */}
@@ -316,15 +317,17 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
               >
                 <Icon className="w-5 h-5" />
                 <div className="text-left">
-                  <motion.div 
-                    className="text-2xl font-bold"
-                    initial={{ opacity: 0 }}
-                    animate={isStatsInView ? { opacity: 1 } : {}}
-                  >
-                    {isStatsInView && (
-                      <CountUp end={stat.value} suffix={stat.suffix} />
-                    )}
-                  </motion.div>
+                <motion.div
+  className="text-2xl font-bold"
+  initial={{ opacity: 0 }}
+  animate={isStatsInView ? { opacity: 1 } : {}}
+>
+  {isStatsInView && stat.value != null && (
+    <CountUp end={stat.value} suffix={stat.suffix} />
+  )}
+</motion.div>
+
+
                   <div className="text-xs opacity-90">{stat.label}</div>
                 </div>
               </motion.div>
@@ -348,7 +351,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             <CheckCircle2 className="w-5 h-5 text-green-400" />
           </motion.div>
           <span className="text-sm font-medium">
-            Trusted by 200+ students from 12 countries
+          Trusted by 200+ learners from all over the world
           </span>
         </motion.div>
       </motion.div>
