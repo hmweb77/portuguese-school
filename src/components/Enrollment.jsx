@@ -29,7 +29,7 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
       
       {/* Modal */}
       <div 
-        className="relative bg-white rounded-[12px] shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)] w-full max-w-md mx-4 p-6"
+        className="relative bg-white rounded-xl shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)] w-full max-w-md mx-4 p-6"
         data-testid="modal-enrollment"
       >
         {/* Header */}
@@ -62,7 +62,7 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               required
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
               data-testid="input-name"
             />
           </div>
@@ -78,7 +78,7 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
               data-testid="input-email"
             />
           </div>
@@ -97,7 +97,7 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
                 value={formData.whatsapp}
                 onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
                 required
-                className="w-full pl-11 pr-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+                className="w-full pl-11 pr-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
                 data-testid="input-whatsapp"
               />
             </div>
@@ -113,7 +113,7 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
               id="plan"
               value={formData.plan}
               onChange={(e) => setFormData({ ...formData, plan: e.target.value })}
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] bg-white"
+              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] bg-white"
               data-testid="select-plan"
             >
               <option value="offline" data-testid="option-offline">Offline - €145</option>
@@ -127,14 +127,14 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
             <button 
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-[12px] font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
+              className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
               data-testid="button-cancel"
             >
               Cancel
             </button>
             <button 
               type="submit"
-              className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-[12px] font-medium hover:bg-[#359690] transition-colors duration-200 shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.08),0px_2px_4px_-1px_rgba(0,0,0,0.05)]"
+              className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200 shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.08),0px_2px_4px_-1px_rgba(0,0,0,0.05)]"
               data-testid="button-submit-enrollment"
             >
               Submit Enrollment

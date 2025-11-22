@@ -53,7 +53,7 @@ export default function LeadMagnetSection({ onSubmit }) {
 
   return (
     <section
-      className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden"
+      className="relative py-24 md:py-32 px-6 bg-linear-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden"
       data-testid="section-lead-magnet"
     >
       {/* Animated background elements */}
@@ -165,7 +165,7 @@ export default function LeadMagnetSection({ onSubmit }) {
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 + index * 0.1 }}
                       >
-                        <div className="w-8 h-8 rounded-full bg-[#3BA9A3]/10 flex items-center justify-center flex-shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-[#3BA9A3]/10 flex items-center justify-center shrink-0">
                           <IconComponent className="w-4 h-4 text-[#3BA9A3]" />
                         </div>
                         <span className="text-[#394D5C]">{benefit.text}</span>
@@ -229,13 +229,13 @@ export default function LeadMagnetSection({ onSubmit }) {
                       <motion.button
                         type="submit"
                         disabled={isSubmitting}
-                        className="group relative w-full rounded-full py-6 text-base font-semibold bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg disabled:opacity-50"
+                        className="group relative w-full rounded-full py-6 text-base font-semibold bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg disabled:opacity-50"
                         data-testid="button-download-guide"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
                         <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-[#FF7A4C] to-[#FF6A3C]"
+                          className="absolute inset-0 bg-linear-to-r from-[#FF7A4C] to-[#FF6A3C]"
                           initial={{ x: "-100%" }}
                           whileHover={{ x: 0 }}
                           transition={{ duration: 0.3 }}
@@ -306,7 +306,7 @@ export default function LeadMagnetSection({ onSubmit }) {
                 >
                   {/* Glow effect */}
                   <motion.div
-                    className="absolute -inset-4 bg-gradient-to-r from-[#3BA9A3] to-[#FF8A5C] rounded-3xl opacity-20 blur-2xl"
+                    className="absolute -inset-4 bg-linear-to-r from-[#3BA9A3] to-[#FF8A5C] rounded-3xl opacity-20 blur-2xl"
                     animate={{
                       scale: [1, 1.1, 1],
                       opacity: [0.2, 0.3, 0.2],

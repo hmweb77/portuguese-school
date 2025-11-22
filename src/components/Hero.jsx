@@ -1,71 +1,39 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, Play, Globe, Users, BookOpen, Sparkles } from "lucide-react";
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
-import gsap from "gsap";
+import { CheckCircle2, Play, Globe, Users, BookOpen } from "lucide-react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroSection({ onEnrollClick, onTestClick }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroRef = useRef(null);
-  const floatingRef = useRef(null);
   const statsRef = useRef(null);
   const isStatsInView = useInView(statsRef, { once: true });
 
   const { scrollY } = useScroll();
   
-  // Smooth parallax transforms
-  const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
-  const contentY = useTransform(scrollY, [0, 500], [0, -50]);
+  // Simplified parallax for better performance
+  const backgroundY = useTransform(scrollY, [0, 500], [0, 100]);
   const opacityTransform = useTransform(scrollY, [0, 300], [1, 0]);
-  const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
-  
-  // Smooth spring physics
-  const smoothBackgroundY = useSpring(backgroundY, { stiffness: 50, damping: 20 });
-  const smoothContentY = useSpring(contentY, { stiffness: 50, damping: 20 });
 
-  // Background images that will cycle
+  // Background images - IMPORTANT: Update these paths after running optimize-images.js
+  // Use optimized images from /public/optimized/ folder
   const backgrounds = [
-    '/her1.png',
-    '/hero2.png',
-    '/hero3.png'
+    '/optimized/her1-1080.webp',     // Update after optimization
+    '/optimized/hero2-1080.webp',    // Update after optimization
+    '/optimized/hero3-1080.webp'     // Update after optimization
   ];
 
-  // Floating elements animation with GSAP
-  useEffect(() => {
-    if (floatingRef.current) {
-      const elements = floatingRef.current.querySelectorAll('.floating-element');
-      
-      elements.forEach((element, index) => {
-        gsap.to(element, {
-          y: -20,
-          rotation: index % 2 === 0 ? 5 : -5,
-          duration: 2 + index * 0.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut",
-          delay: index * 0.2
-        });
-      });
-    }
-  }, []);
-
-  // Background slideshow
+  // Simplified background slideshow
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % backgrounds.length);
     }, 6000);
     return () => clearInterval(interval);
-  });
+  }, [backgrounds.length]);
 
-  // Animated stats
-  const stats = [
-    { icon: Users, value: 30, suffix: "+ years", label: " helping learners speak " },
-    { icon: Globe, label: "Language immersion experience from anywhere in the world" },
-    { icon: BookOpen, value: 100, suffix: "%", label: "focus on oral communication" }
-  ];
-
-  // Typewriter effect for headline
+  // Simplified typewriter effect
   const headline = "Master Portuguese in Just 10 Weeks";
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -78,118 +46,73 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
       }, 50);
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex]);
+  }, [currentIndex, headline]);
+
+  const stats = [
+    { icon: Users, value: 30, suffix: "+ years", label: " helping learners speak " },
+    { icon: Globe, label: "Language immersion experience from anywhere in the world" },
+    { icon: BookOpen, value: 100, suffix: "%", label: "focus on oral communication" }
+  ];
 
   return (
     <section 
       ref={heroRef}
-      className="relative  flex items-center justify-center overflow-hidden pt-20"
+      className="relative flex items-center justify-center overflow-hidden pt-20 min-h-[90vh]"
     >
-      {/* Animated Background Slideshow */}
+      {/* Optimized Background Images */}
       <div className="absolute inset-0">
         {backgrounds.map((bg, index) => (
-          <motion.div
+          <div
             key={bg}
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 transition-opacity duration-1000"
             style={{
-              backgroundImage: `url(${bg})`,
-              y: smoothBackgroundY,
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ 
               opacity: currentSlide === index ? 1 : 0,
-              scale: currentSlide === index ? 1.1 : 1
             }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-          />
+          >
+            <Image
+              src={bg}
+              alt={`Hero background ${index + 1}`}
+              fill
+              priority={index === 0}
+              quality={index === 0 ? 85 : 75}
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+              // Add blur placeholders after running optimization script
+              // The script generates blur data URLs in /public/optimized/blur-data-urls.json
+            />
+          </div>
         ))}
       </div>
 
-      {/* Gradient Overlay with animated mesh */}
-      <motion.div 
+      {/* Simplified Gradient Overlay */}
+      <div 
         className="absolute inset-0"
         style={{
-          background: `
-            radial-gradient(circle at 20% 50%, rgba(59, 169, 163, 0.9) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(255, 138, 92, 0.7) 0%, transparent 50%),
-            linear-gradient(to bottom, rgba(59, 169, 163, 0.85), rgba(59, 169, 163, 0.75))
-          `
+          background: `linear-gradient(to bottom, rgba(59, 169, 163, 0.85), rgba(59, 169, 163, 0.75))`
         }}
-        animate={{
-          background: [
-            `radial-gradient(circle at 20% 50%, rgba(59, 169, 163, 0.9) 0%, transparent 50%),
-             radial-gradient(circle at 80% 80%, rgba(255, 138, 92, 0.7) 0%, transparent 50%),
-             linear-gradient(to bottom, rgba(59, 169, 163, 0.85), rgba(59, 169, 163, 0.75))`,
-            `radial-gradient(circle at 80% 30%, rgba(59, 169, 163, 0.9) 0%, transparent 50%),
-             radial-gradient(circle at 20% 70%, rgba(255, 138, 92, 0.7) 0%, transparent 50%),
-             linear-gradient(to bottom, rgba(59, 169, 163, 0.85), rgba(59, 169, 163, 0.75))`,
-            `radial-gradient(circle at 20% 50%, rgba(59, 169, 163, 0.9) 0%, transparent 50%),
-             radial-gradient(circle at 80% 80%, rgba(255, 138, 92, 0.7) 0%, transparent 50%),
-             linear-gradient(to bottom, rgba(59, 169, 163, 0.85), rgba(59, 169, 163, 0.75))`
-          ]
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Floating Elements */}
-      <div ref={floatingRef} className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div 
-          className="floating-element absolute top-20 left-10 text-white/20 text-6xl font-bold"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          Olá
-        </motion.div>
-        <motion.div 
-          className="floating-element absolute top-40 right-20 text-white/20 text-5xl font-bold"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-        >
-          Bom dia
-        </motion.div>
-        <motion.div 
-          className="floating-element absolute bottom-40 left-20 text-white/20 text-4xl font-bold"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
-        >
-          Obrigado
-        </motion.div>
-        <motion.div 
-          className="floating-element absolute bottom-20 right-40 text-white/20 text-5xl font-bold"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1 }}
-        >
-          Boa tarde
-        </motion.div>
-      </div>
-
-      {/* Particle Effects */}
+      {/* Reduced particle count for performance - only 8 particles instead of 20 */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-white/30 rounded-full"
             style={{
-              // eslint-disable-next-line react-hooks/purity
-              left: `${Math.random() * 100}%`,
-                // eslint-disable-next-line react-hooks/purity
-              top: `${Math.random() * 100}%`,
+              left: `${(i * 12.5)}%`,
+              top: `${50 + (i % 2 ? 20 : -20)}%`,
             }}
             animate={{
               y: [0, -30, 0],
               opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.5, 1]
             }}
             transition={{
-              // eslint-disable-next-line react-hooks/purity
-              duration: 3 + Math.random() * 2,
+              duration: 3,
               repeat: Infinity,
-                // eslint-disable-next-line react-hooks/purity
-              delay: Math.random() * 2,
+              delay: i * 0.3,
               ease: "easeInOut"
             }}
           />
@@ -199,24 +122,19 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
       {/* Main Content */}
       <motion.div
         className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center text-white"
-        style={{ 
-   
-      
-          y: smoothContentY
-        }}
+       
       >
-        {/* Sparkle Badge */}
+        {/* Simplified Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/30 mb-8"
         >
-          <Sparkles className="w-4 h-4 text-yellow-300" />
           <span className="text-sm font-semibold">Enrollment Open</span>
         </motion.div>
 
-        {/* Animated Headline with Typewriter Effect */}
+        {/* Headline */}
         <motion.div
           className="mb-6"
           initial={{ opacity: 0 }}
@@ -224,82 +142,57 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
           transition={{ duration: 0.8 }}
         >
           <h1
-            className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight"
             data-testid="text-hero-headline"
           >
             {displayedText}
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
-              className="inline-block w-1 h-16 bg-white ml-2 align-middle"
+              className="inline-block w-1 h-12 md:h-16 bg-white ml-2 align-middle"
             />
           </h1>
         </motion.div>
 
-        {/* Subheadline with staggered animation */}
-        <motion.div
+        {/* Subheadline */}
+        <motion.p
+          className="text-lg md:text-xl mb-10 font-medium opacity-95 max-w-3xl mx-auto leading-relaxed"
+          data-testid="text-hero-subheadline"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <p
-            className="text-xl md:text-2xl mb-10 font-medium opacity-95 max-w-3xl mx-auto leading-relaxed"
-            data-testid="text-hero-subheadline"
-          >
-            Go from zero to confident conversation. Live classes. Real teachers. Real results.
-          </p>
-        </motion.div>
+          Go from zero to confident conversation. Live classes. Real teachers. Real results.
+        </motion.p>
 
-        {/* CTA Buttons with advanced animations */}
+        {/* CTA Buttons */}
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <motion.button
-            className="group relative px-10 py-6 text-lg font-semibold rounded-full min-w-[220px] bg-[#FF8A5C] text-white overflow-hidden"
+          <button
+            className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold rounded-full min-w-[200px] md:min-w-[220px] bg-[#FF8A5C] text-white hover:bg-[#FF7A4C] transition-colors"
             onClick={onEnrollClick}
             data-testid="button-enroll-hero"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
-            {/* Shine effect */}
-            <motion.div
-              className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: "100%" }}
-              transition={{ duration: 0.6 }}
-            />
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              Enroll Now
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </span>
-          </motion.button>
-          <Link href="/https://form.jotform.com/222385082740353">
-  <motion.button
-    className="group px-10 py-6 text-lg font-semibold text-white rounded-full min-w-[220px] bg-white/10 backdrop-blur-md border-2 border-white/30 relative overflow-hidden"
-    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
-    whileTap={{ scale: 0.95 }}
-  >
-    <span className="relative z-10 flex items-center justify-center gap-2">
-      <Play className="w-5 h-5" />
-      Take Free Test
-    </span>
-  </motion.button>
-</Link>
-
+            Enroll Now →
+          </button>
+          <Link href="https://form.jotform.com/222385082740353">
+            <button
+              className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold text-white rounded-full min-w-[200px] md:min-w-[220px] bg-white/10 backdrop-blur-md border-2 border-white/30 hover:bg-white/20 transition-colors flex items-center justify-center gap-2"
+            >
+              <Play className="w-5 h-5" />
+              Take Free Test
+            </button>
+          </Link>
         </motion.div>
 
-        {/* Animated Stats */}
+        {/* Stats */}
         <motion.div
           ref={statsRef}
-          className="flex flex-wrap justify-center gap-8 mb-8"
+          className="flex flex-wrap justify-center gap-4 md:gap-8 mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
@@ -309,25 +202,18 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             return (
               <motion.div
                 key={index}
-                className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20"
+                className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-4 h-4 md:w-5 md:h-5" />
                 <div className="text-left">
-                <motion.div
-  className="text-2xl font-bold"
-  initial={{ opacity: 0 }}
-  animate={isStatsInView ? { opacity: 1 } : {}}
->
-  {isStatsInView && stat.value != null && (
-    <CountUp end={stat.value} suffix={stat.suffix} />
-  )}
-</motion.div>
-
-
+                  {stat.value != null && (
+                    <div className="text-xl md:text-2xl font-bold">
+                      {isStatsInView && <CountUp end={stat.value} suffix={stat.suffix} />}
+                    </div>
+                  )}
                   <div className="text-xs opacity-90">{stat.label}</div>
                 </div>
               </motion.div>
@@ -337,21 +223,15 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
 
         {/* Trust Badge */}
         <motion.div
-          className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20"
+          className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
           data-testid="text-trust-badge"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          whileHover={{ scale: 1.05 }}
         >
-          <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <CheckCircle2 className="w-5 h-5 text-green-400" />
-          </motion.div>
-          <span className="text-sm font-medium">
-          Trusted by 200+ learners from all over the world
+          <CheckCircle2 className="w-5 h-5 text-green-400" />
+          <span className="text-xs md:text-sm font-medium">
+            Trusted by 200+ learners from all over the world
           </span>
         </motion.div>
       </motion.div>
@@ -368,20 +248,20 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <motion.div className="w-1.5 h-1.5 bg-white rounded-full" />
+          <div className="w-1.5 h-1.5 bg-white rounded-full" />
         </motion.div>
       </motion.div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 right-8 flex gap-2">
+      <div className="absolute bottom-8 right-4 md:right-8 flex gap-2">
         {backgrounds.map((_, index) => (
-          <motion.button
+          <button
             key={index}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               currentSlide === index ? 'bg-white w-8' : 'bg-white/40'
             }`}
             onClick={() => setCurrentSlide(index)}
-            whileHover={{ scale: 1.2 }}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
@@ -389,7 +269,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
   );
 }
 
-// CountUp Animation Component
+// Simplified CountUp Component
 function CountUp({ end, suffix = "" }) {
   const [count, setCount] = useState(0);
 

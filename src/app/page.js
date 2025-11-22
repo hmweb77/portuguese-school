@@ -1,23 +1,50 @@
 'use client';
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/Hero";
-import AboutProgram from "@/components/About";
-import BenefitsSection from "@/components/Benefits";
-import PricingSection from "@/components/Pricing";
-import TestimonialsSection from "@/components/Testimonials";
-import WhatYouGetSection from "@/components/WhatYouGet";
-import LeadMagnetSection from "@/components/LeadMagnet";
-import FinalCTASection from "@/components/FinalCTA";
-import FAQSection from "@/components/FAQ";
-import Footer from "@/components/Footer";
-import EnrollmentModal from "@/components/Enrollment";
-import PortugueseTestModal from "@/components/Portuguesetest";
-import FloatingCTA from "@/components/FloatingCTA";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import Toast from "@/components/Toast";
+
+// Lazy load below-the-fold components with loading skeletons
+const AboutProgram = dynamic(() => import("@/components/About"), {
+  loading: () => <div className="min-h-screen bg-gray-50 animate-pulse" />
+});
+
+const BenefitsSection = dynamic(() => import("@/components/Benefits"), {
+  loading: () => <div className="min-h-screen bg-[#3BA9A3] animate-pulse" />
+});
+
+const PricingSection = dynamic(() => import("@/components/Pricing"), {
+  loading: () => <div className="min-h-screen bg-[#3BA9A3] animate-pulse" />
+});
+
+const TestimonialsSection = dynamic(() => import("@/components/Testimonials"), {
+  loading: () => <div className="min-h-screen bg-gray-50 animate-pulse" />
+});
+
+const LeadMagnetSection = dynamic(() => import("@/components/LeadMagnet"), {
+  loading: () => <div className="min-h-screen bg-[#3BA9A3] animate-pulse" />
+});
+
+const FinalCTASection = dynamic(() => import("@/components/FinalCTA"), {
+  loading: () => <div className="min-h-screen bg-cover animate-pulse" />
+});
+
+const FAQSection = dynamic(() => import("@/components/FAQ"), {
+  loading: () => <div className="min-h-screen bg-gray-50 animate-pulse" />
+});
+
+const Footer = dynamic(() => import("@/components/Footer"), {
+  loading: () => <div className="min-h-[400px] bg-gray-100 animate-pulse" />
+});
+
+// Lazy load modals and floating elements (only when needed)
+const EnrollmentModal = dynamic(() => import("@/components/Enrollment"));
+const PortugueseTestModal = dynamic(() => import("@/components/Portuguesetest"));
+const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), {
+  ssr: false // Don't render on server
+});
+const Toast = dynamic(() => import("@/components/Toast"));
 
 
 export default function Home() {
@@ -80,43 +107,50 @@ export default function Home() {
         onEnrollClick={() => handleEnrollClick()}
         onTestClick={handleTestClick}
       />
-      <AboutProgram />
-      <BenefitsSection />
-      <PricingSection onSelectPlan={handleEnrollClick} />
-      <TestimonialsSection />
-      {/* <WhatYouGetSection onEnrollClick={() => handleEnrollClick()} /> */}
-      <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />
-      <FinalCTASection onEnrollClick={() => handleEnrollClick()} />
-      <FAQSection />
-      <Footer />
       
-      <EnrollmentModal
-        open={enrollmentModalOpen}
-        onClose={() => setEnrollmentModalOpen(false)}
-        onSubmit={handleEnrollmentSubmit}
-        selectedPlan={selectedPlan}
-      />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <AboutProgram />
+        <BenefitsSection />
+        <PricingSection onSelectPlan={handleEnrollClick} />
+        <TestimonialsSection />
+        <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />
+        <FinalCTASection onEnrollClick={() => handleEnrollClick()} />
+        <FAQSection />
+        <Footer />
+      </Suspense>
       
-      <PortugueseTestModal
-        open={testModalOpen}
-        onClose={() => setTestModalOpen(false)}
-        onComplete={handleTestComplete}
-      />
+      {enrollmentModalOpen && (
+        <EnrollmentModal
+          open={enrollmentModalOpen}
+          onClose={() => setEnrollmentModalOpen(false)}
+          onSubmit={handleEnrollmentSubmit}
+          selectedPlan={selectedPlan}
+        />
+      )}
       
-      {/* <FloatingCTA onEnrollClick={() => handleEnrollClick()} /> */}
+      {testModalOpen && (
+        <PortugueseTestModal
+          open={testModalOpen}
+          onClose={() => setTestModalOpen(false)}
+          onComplete={handleTestComplete}
+        />
+      )}
+      
       <WhatsAppButton />
       
       {/* Toast Container */}
-      <div className="fixed bottom-6 right-6  flex flex-col gap-3 pointer-events-none">
-        {toasts.map(toast => (
-          <Toast
-            key={toast.id}
-            title={toast.title}
-            description={toast.description}
-            onClose={() => removeToast(toast.id)}
-          />
-        ))}
-      </div>
+      {toasts.length > 0 && (
+        <div className="fixed bottom-6 right-6 flex flex-col gap-3 pointer-events-none z-50">
+          {toasts.map(toast => (
+            <Toast
+              key={toast.id}
+              title={toast.title}
+              description={toast.description}
+              onClose={() => removeToast(toast.id)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

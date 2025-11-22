@@ -80,7 +80,7 @@ export default function AboutProgram() {
   ];
 
   return (
-    <section id="about" className="relative py-24 md:py-32 px-6 bg-gradient-to-b from-white via-[#F5F6F7] to-white overflow-hidden" data-testid="section-about-program">
+    <section id="about" className="relative py-24 md:py-32 px-6 bg-linear-to-b from-white via-[#F5F6F7] to-white overflow-hidden" data-testid="section-about-program">
       {/* Background Decorative Elements */}
       <div className="absolute top-20 right-0 w-72 h-72 bg-[#3BA9A3]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-0 w-96 h-96 bg-[#FF8A5C]/5 rounded-full blur-3xl" />
@@ -130,7 +130,7 @@ export default function AboutProgram() {
               
               {/* Decorative border animation */}
               <motion.div
-                className="absolute -inset-4 bg-gradient-to-r from-[#3BA9A3] to-[#FF8A5C] rounded-3xl opacity-20 blur-xl"
+                className="absolute -inset-4 bg-linear-to-r from-[#3BA9A3] to-[#FF8A5C] rounded-3xl opacity-20 blur-xl"
                 animate={{
                   scale: [1, 1.05, 1],
                   opacity: [0.2, 0.3, 0.2]
@@ -190,7 +190,7 @@ export default function AboutProgram() {
         viewport={{ once: true }}
         transition={{ delay: 0.4 + index * 0.1 }}
       >
-        <div className="w-6 h-6 rounded-full bg-[#3BA9A3]/10 flex items-center justify-center flex-shrink-0">
+        <div className="w-6 h-6 rounded-full bg-[#3BA9A3]/10 flex items-center justify-center shrink-0">
           <span className="text-[#3BA9A3] font-bold text-sm">{item.icon}</span>
         </div>
         <span className="text-[#394D5C]">{item.text}</span>
@@ -218,12 +218,12 @@ export default function AboutProgram() {
                 >
                   {/* Gradient background on hover */}
                   <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                    className={`absolute inset-0 bg-linear-to-br ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
                   />
                   
                   {/* Icon with gradient background */}
                   <motion.div
-                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 relative z-10`}
+                    className={`w-14 h-14 rounded-xl bg-linear-to-br ${item.color} flex items-center justify-center mb-4 relative z-10`}
                     whileHover={{ rotate: 5, scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -238,7 +238,7 @@ export default function AboutProgram() {
                   </p>
 
                   {/* Decorative corner */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#3BA9A3]/5 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-[#3BA9A3]/5 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </motion.div>
               </motion.div>
             );
@@ -267,7 +267,7 @@ export default function AboutProgram() {
                 whileHover={{ y: -5 }}
               >
                 <motion.div
-                  className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#3BA9A3] to-[#2D8B85] flex items-center justify-center"
+                  className="w-16 h-16 mx-auto mb-4 rounded-full bg-linear-to-br from-[#3BA9A3] to-[#2D8B85] flex items-center justify-center"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
