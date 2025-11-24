@@ -22,7 +22,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
   const backgrounds = [
     '/optimized/her1-1080.webp',     // Update after optimization
     '/optimized/hero2-1080.webp',    // Update after optimization
-    '/optimized/hero3-1080.webp'     // Update after optimization
+    '/algarve.png'     // Update after optimization
   ];
 
   // Simplified background slideshow
@@ -34,7 +34,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
   }, [backgrounds.length]);
 
   // Simplified typewriter effect
-  const headline = "Master Portuguese in Just 10 Weeks";
+  const headline = "Speak Portuguese in Just 10 Weeks";
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -47,12 +47,6 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, headline]);
-
-  const stats = [
-    { icon: Users, value: 30, suffix: "+ years", label: " helping learners speak " },
-    { icon: Globe, label: "Language immersion experience from anywhere in the world" },
-    { icon: BookOpen, value: 100, suffix: "%", label: "focus on oral communication" }
-  ];
 
   return (
     <section 
@@ -197,28 +191,73 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={index}
-                className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-              >
-                <Icon className="w-4 h-4 md:w-5 md:h-5" />
-                <div className="text-left">
-                  {stat.value != null && (
-                    <div className="text-xl md:text-2xl font-bold">
-                      {isStatsInView && <CountUp end={stat.value} suffix={stat.suffix} />}
-                    </div>
-                  )}
-                  <div className="text-xs opacity-90">{stat.label}</div>
-                </div>
-              </motion.div>
-            );
-          })}
+          {/* Stat 1: 30+ years */}
+          <motion.div
+            className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.8 }}
+          >
+            <Users className="w-4 h-4 md:w-5 md:h-5" />
+            <div className="text-left">
+              <div className="text-xl md:text-2xl font-bold">
+                {isStatsInView && <CountUp end={30} suffix="+ years" />}
+              </div>
+              <div className="text-sm opacity-90">
+                helping learners speak
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="flex items-center gap-1 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.8 }}
+          >
+            <Globe className="w-4 h-4 md:w-5 md:h-5" />
+            <div className="text-center">
+              <div className="text-xl md:text-2xl font-bold">
+              Language immersion experience
+              </div>
+              <div className="text-sm opacity-90">
+              from anywhere in the world
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Stat 2: Language immersion */}
+          {/* <motion.div
+            className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.9 }}
+          >
+            <Globe className="w-4 h-4 md:w-5 md:h-5" />
+            <div className="text-left">
+              <div className=" md:text-xs font-bold opacity-90">
+               
+              </div>
+            </div>
+          </motion.div> */}
+
+          {/* Stat 3: 100% focus */}
+          <motion.div
+            className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 1.0 }}
+          >
+            <BookOpen className="w-4 h-4 md:w-5 md:h-5" />
+            <div className="text-left">
+              <div className="text-xl md:text-2xl font-bold">
+                {isStatsInView && <CountUp end={100} suffix="%" />}
+              </div>
+              <div className="text-sm md:text-base opacity-90">
+                focus on oral communication
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Trust Badge */}

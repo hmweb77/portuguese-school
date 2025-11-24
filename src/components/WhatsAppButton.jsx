@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
   
   // Replace this with your actual WhatsApp number (include country code without + or spaces)
   const whatsappNumber = "351933292112"; // Example: 351 for Portugal
-  const whatsappMessage = encodeURIComponent("Hi! I'm interested in the Portuguese Winter Immersion program.");
+  const whatsappMessage = encodeURIComponent("Hi! I'm interested in the Portuguese Immersion program.");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (

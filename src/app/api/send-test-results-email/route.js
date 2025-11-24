@@ -79,13 +79,13 @@ export async function POST(request) {
                 
                 <div style="background: #FFF3E0; border-left: 4px solid #FF8A5C; padding: 15px; margin: 30px 0;">
                   <p style="margin: 0; font-size: 14px;">
-                    <strong>⏰ Limited Time:</strong> Winter Immersion 2026 enrollment closes <strong>January 10th</strong>. Program starts January 19th!
+                    <strong>⏰ Limited Time:</strong>  Immersion 2026 enrollment closes <strong>January 10th</strong>. Program starts January 19th!
                   </p>
                 </div>
                 
                 <div style="text-align: center; margin: 30px 0;">
                   <a href="#" style="display: inline-block; background: linear-gradient(135deg, #FF8A5C 0%, #FF7A4C 100%); color: white; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px;">
-                    Enroll in Winter Immersion
+                    Enroll in  Immersion
                   </a>
                 </div>
                 

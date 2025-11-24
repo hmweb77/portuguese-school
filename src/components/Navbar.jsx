@@ -92,9 +92,7 @@ export default function Navbar({ onEnrollClick }) {
               <motion.button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className={`text-sm font-medium transition-all relative ${
-                  isScrolled ? "text-[#394D5C]" : "text-white"
-                } ${activeSection === link.href.slice(1) ? "font-bold" : ""}`}
+                className={`text-sm font-medium transition-all relative text-white ${activeSection === link.href.slice(1) ? "font-bold" : ""}`}
                 data-testid={`link-nav-${link.label.toLowerCase()}`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}

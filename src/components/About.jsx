@@ -51,6 +51,13 @@ export default function AboutProgram() {
       bgColor: "bg-blue-50"
     },
     { 
+      icon: MessageCircle, 
+      title: "Live Sessions", 
+      description: "One hour per day Monday to friday",
+      color: "from-orange-400 to-orange-600",
+      bgColor: "bg-orange-50"
+    },
+    { 
       icon: Users, 
       title: "Small Groups", 
       description: "Max 12 participants per session",
@@ -64,17 +71,11 @@ export default function AboutProgram() {
       color: "from-green-400 to-green-600",
       bgColor: "bg-green-50"
     },
-    { 
-      icon: MessageCircle, 
-      title: "Live Sessions", 
-      description: "Interactive real-time learning",
-      color: "from-orange-400 to-orange-600",
-      bgColor: "bg-orange-50"
-    },
+    
   ];
 
   const stats = [
-    { value: 250, suffix: "+", label: "Students Enrolled", icon: Users },
+    { value: 200, suffix: "+", label: "Students Enrolled", icon: Users },
     { value: 98, suffix: "%", label: "Success Rate", icon: TrendingUp },
     { value: 50, suffix: "+", label: "Live Sessions", icon: BookOpen },
   ];
@@ -150,7 +151,7 @@ export default function AboutProgram() {
     transition={{ duration: 0.6, delay: 0.1 }}
   >
     <p className="text-lg leading-relaxed text-[#394D5C]">
-      The IFLI Immersion Experience is <span className="font-semibold text-[#3BA9A3]">more than just language classes</span>. 
+      The IFLI Immersion Experience is <span className="font-semibold text-[#3BA9A3]">more than just language sessions</span>. 
       It’s a complete learning ecosystem designed to get you speaking Portuguese with confidence.
     </p>
   </motion.div>
@@ -163,8 +164,8 @@ export default function AboutProgram() {
     transition={{ duration: 0.6, delay: 0.2 }}
   >
     <p className="text-lg leading-relaxed text-[#394D5C]">
-      You’ll learn from <span className="font-semibold text-[#3BA9A3]">experienced native speakers</span> in live, online interactive sessions. 
-      Every class is recorded so you can review anytime. Plus, you get <span className="font-semibold">(lifetime)</span> access to our extensive Portuguese digital library.
+      You’ll learn from <span className="font-semibold text-[#3BA9A3]">experienced and qualified native facilitators</span> in live, online interactive sessions 1 hour a day, from Monday to Friday. 
+      Every session is recorded so you can review anytime. Plus, you get access to our extensive Portuguese digital library.
     </p>
   </motion.div>
 
@@ -177,10 +178,10 @@ export default function AboutProgram() {
     transition={{ duration: 0.6, delay: 0.3 }}
   >
     {[
-      { icon: "✓", text: "Native Portuguese facilitators" },
+      { icon: "✓", text: "Experienced native Portuguese facilitators" },
       { icon: "✓", text: "Interactive live sessions" },
-      { icon: "✓", text: "Session recordings (review anytime)" },
-      { icon: "✓", text: "Access to the recordings of your sessions" }
+      { icon: "✓", text: "Session recordings available (review anytime)" },
+      { icon: "✓", text: "Immersionexperience from anywhere" }
     ].map((item, index) => (
       <motion.div
         key={index}

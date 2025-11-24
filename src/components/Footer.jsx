@@ -153,11 +153,12 @@ export default function Footer() {
   </div>
 
   <Link
-    href="tel:+351933292112"
-    className="text-[#6B8299] text-sm hover:text-[#3BA9A3] transition"
-  >
-    +351 933 292 112
-  </Link>
+  href="https://wa.me/351933292112"
+  className="text-[#6B8299] text-sm hover:text-[#3BA9A3] transition"
+>
+  +351 933 292 112
+</Link>
+
 </motion.li>
 
 {/* EMAIL */}

@@ -30,7 +30,7 @@ export async function POST(request) {
             name: name,
           },
         ],
-        subject: 'Enrollment Received - IFLI Winter Immersion 2026',
+        subject: 'Pre-Enrollment Received - IFLI Immersion 2026',
         htmlContent: `
           <!DOCTYPE html>
           <html>
@@ -48,7 +48,7 @@ export async function POST(request) {
                 <p style="font-size: 16px; margin-bottom: 20px;">Dear ${name},</p>
                 
                 <p style="font-size: 16px; margin-bottom: 20px;">
-                  We've received your enrollment request for the <strong>${plan}</strong> plan of our Winter Immersion Program 2026!
+                  We've received your enrollment request for the <strong>${plan}</strong> plan of our Immersion Program 2026!
                 </p>
                 
                 <div style="background: #F5F6F7; padding: 20px; border-radius: 8px; margin: 30px 0;">

@@ -258,7 +258,7 @@ export default function BenefitsSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <motion.p 
-            className="text-lg text-white/90 mb-4"
+            className="text-2xl font-semibold text-white/90 mb-4"
             animate={isInView ? { opacity: [0.9, 1, 0.9] } : {}}
             transition={{ duration: 2, repeat: Infinity }}
           >
