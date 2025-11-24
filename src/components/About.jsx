@@ -53,7 +53,7 @@ export default function AboutProgram() {
     { 
       icon: MessageCircle, 
       title: "Live Sessions", 
-      description: "One hour per day Monday to friday",
+      description: "One hour per day Monday to Friday",
       color: "from-orange-400 to-orange-600",
       bgColor: "bg-orange-50"
     },
@@ -181,7 +181,7 @@ export default function AboutProgram() {
       { icon: "✓", text: "Experienced native Portuguese facilitators" },
       { icon: "✓", text: "Interactive live sessions" },
       { icon: "✓", text: "Session recordings available (review anytime)" },
-      { icon: "✓", text: "Immersionexperience from anywhere" }
+      { icon: "✓", text: "Immersion experience from anywhere" }
     ].map((item, index) => (
       <motion.div
         key={index}
