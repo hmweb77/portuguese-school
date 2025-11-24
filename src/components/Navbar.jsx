@@ -40,18 +40,22 @@ export default function Navbar({ onEnrollClick }) {
   ];
 
   const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const navHeight = 80;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - navHeight;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-      setIsMobileMenuOpen(false);
-    }
+    setIsMobileMenuOpen(false); // Close menu immediately
+    
+    // Small delay for smooth UX
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        const navHeight = 80;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - navHeight;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }, 100);
   };
 
   return (

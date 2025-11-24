@@ -252,7 +252,6 @@ export default function LeadMagnetSection({ onSubmit }) {
                             </>
                           ) : (
                             <>
-                              <Download className="w-5 h-5" />
                               Access Your Free Sample Account
                             </>
                           )}

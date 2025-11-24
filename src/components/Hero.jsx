@@ -17,12 +17,20 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
   const backgroundY = useTransform(scrollY, [0, 500], [0, 100]);
   const opacityTransform = useTransform(scrollY, [0, 300], [1, 0]);
 
-  // Background images - IMPORTANT: Update these paths after running optimize-images.js
-  // Use optimized images from /public/optimized/ folder
+  // Background images
   const backgrounds = [
-    '/optimized/her1-1080.webp',     // Update after optimization
-    '/optimized/hero2-1080.webp',    // Update after optimization
-    '/algarve.png'     // Update after optimization
+    '/optimized/her1-1080.webp',
+    '/optimized/hero2-1080.webp',
+    '/algarve.png'
+  ];
+
+  // Portuguese words to animate
+  const portugueseWords = [
+    { text: "Bom dia", size: "text-4xl md:text-5xl" },
+    { text: "Olá", size: "text-3xl md:text-4xl" },
+    { text: "Boa noite", size: "text-4xl md:text-5xl" },
+    { text: "Bem-vindo", size: "text-3xl md:text-4xl" },
+    { text: "Obrigado", size: "text-4xl md:text-5xl" },
   ];
 
   // Simplified background slideshow
@@ -74,8 +82,6 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
                 objectFit: 'cover',
                 objectPosition: 'center',
               }}
-              // Add blur placeholders after running optimization script
-              // The script generates blur data URLs in /public/optimized/blur-data-urls.json
             />
           </div>
         ))}
@@ -89,27 +95,31 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
         }}
       />
 
-      {/* Reduced particle count for performance - only 8 particles instead of 20 */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(8)].map((_, i) => (
+      {/* Animated Portuguese Words Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {portugueseWords.map((word, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-white/30 rounded-full"
+            className={`absolute ${word.size} font-bold text-white whitespace-nowrap`}
             style={{
-              left: `${(i * 12.5)}%`,
-              top: `${50 + (i % 2 ? 20 : -20)}%`,
+              left: `${10 + (i * 18)}%`,
+              top: `${15 + (i * 15)}%`,
             }}
             animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.6, 0.3],
+              x: [0, (i % 2 === 0 ? 50 : -50), 0],
+              y: [0, (i % 2 === 0 ? -30 : 30), 0],
+              rotate: [0, (i % 2 === 0 ? 5 : -5), 0],
+              opacity: [0.15, 0.25, 0.15],
             }}
             transition={{
-              duration: 3,
+              duration: 8 + i,
               repeat: Infinity,
-              delay: i * 0.3,
-              ease: "easeInOut"
+              ease: "easeInOut",
+              delay: i * 0.5,
             }}
-          />
+          >
+            {word.text}
+          </motion.div>
         ))}
       </div>
 
@@ -225,21 +235,6 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
               </div>
             </div>
           </motion.div>
-
-          {/* Stat 2: Language immersion */}
-          {/* <motion.div
-            className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.9 }}
-          >
-            <Globe className="w-4 h-4 md:w-5 md:h-5" />
-            <div className="text-left">
-              <div className=" md:text-xs font-bold opacity-90">
-               
-              </div>
-            </div>
-          </motion.div> */}
 
           {/* Stat 3: 100% focus */}
           <motion.div

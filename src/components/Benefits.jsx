@@ -1,7 +1,7 @@
 "use client"
 import { Zap, Users2, Globe2, Clock, Award, Sparkles, TrendingUp } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -24,6 +24,16 @@ const staggerItem = (index) => ({
 export default function BenefitsSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  // Generate deterministic positions for particles to avoid hydration errors
+  const particlePositions = useMemo(() => {
+    return Array.from({ length: 15 }, (_, i) => ({
+      left: `${(i * 7 + 10) % 100}%`,
+      top: `${(i * 11 + 15) % 100}%`,
+      duration: 3 + (i % 3),
+      delay: (i % 5) * 0.4
+    }));
+  }, []);
 
   const benefits = [
     {
@@ -98,16 +108,14 @@ export default function BenefitsSection() {
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Floating particles */}
-        {[...Array(15)].map((_, i) => (
+        {/* Floating particles - using deterministic positions */}
+        {particlePositions.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
             style={{
-              // eslint-disable-next-line react-hooks/purity
-              left: `${Math.random() * 100}%`,
-                      // eslint-disable-next-line react-hooks/purity
-              top: `${Math.random() * 100}%`,
+              left: particle.left,
+              top: particle.top,
             }}
             animate={{
               y: [0, -30, 0],
@@ -115,11 +123,9 @@ export default function BenefitsSection() {
               scale: [1, 1.5, 1]
             }}
             transition={{
-                      // eslint-disable-next-line react-hooks/purity
-              duration: 3 + Math.random() * 2,
+              duration: particle.duration,
               repeat: Infinity,
-                      // eslint-disable-next-line react-hooks/purity
-              delay: Math.random() * 2,
+              delay: particle.delay,
               ease: "easeInOut"
             }}
           />
@@ -175,7 +181,7 @@ export default function BenefitsSection() {
                     transition: { duration: 0.3, ease: "easeOut" }
                   }}
                   style={{
-                    boxShadow: "0px_20px_30px_-6px_rgba(0,0,0,0.15)"
+                    boxShadow: "0px 20px 30px -6px rgba(0,0,0,0.15)"
                   }}
                 >
                   {/* Gradient background on hover */}
