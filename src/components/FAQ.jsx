@@ -172,29 +172,6 @@ export default function FAQSection() {
           </AnimatePresence>
         </div>
 
-        {/* Still have questions CTA */}
-        <motion.div
-          className="mt-16 text-center p-8 bg-white border-2 border-[#E3E5E8] rounded-2xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          <h3 className="text-2xl font-bold mb-3 text-[#394D5C]">
-            Still have questions?
-          </h3>
-          <p className="text-[#6B8299] mb-6">
-            Our team is here to help! Contact us and we&apos;ll get back to you within 24 hours.
-          </p>
-          <motion.a
-            href="mailto:support@ifli.com"
-            className="inline-block px-8 py-4 bg-[#FF8A5C] text-white rounded-full font-semibold hover:shadow-lg transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Contact Support
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );
