@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Clock, Users, Sparkles, ArrowRight, Zap } from "lucide-react";
 import ctaBackground from "../../public/finalctaSec.png";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,6 +7,16 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function FinalCTASection({ onEnrollClick }) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isExpired, setIsExpired] = useState(false);
+
+    // ✅ FIX: Generate deterministic particle positions
+    const particlePositions = useMemo(() => {
+      return Array.from({ length: 15 }, (_, i) => ({
+        left: `${(i * 13.7 + 23) % 100}%`,
+        top: `${(i * 17.3 + 15) % 100}%`,
+        duration: 3 + (i % 3),
+        delay: (i % 5) * 0.4
+      }));
+    }, []);
 
   useEffect(() => {
     // Set target date to January 10, 2026 at 23:59:59
@@ -110,16 +120,13 @@ export default function FinalCTASection({ onEnrollClick }) {
 
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-white/20 rounded-full"
-            style={{
-              // eslint-disable-next-line react-hooks/purity
-              left: `${Math.random() * 100}%`,
-                            // eslint-disable-next-line react-hooks/purity
-              top: `${Math.random() * 100}%`,
-            }}
+      {particlePositions.map((particle, i) => (
+  <motion.div
+    key={i}
+    style={{
+      left: particle.left,
+      top: particle.top,
+    }}
             animate={{
               y: [0, -30, 0],
               opacity: [0.2, 0.5, 0.2],

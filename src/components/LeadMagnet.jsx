@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Download, CheckCircle, Mail, FileText, Sparkles, Lock, User, Phone } from "lucide-react";
 import pdfImage from "../../public/leadSec.png";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,6 +18,16 @@ export default function LeadMagnetSection({ onSubmit }) {
   const [whatsapp, setWhatsapp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const particlePositions = useMemo(() => {
+    return Array.from({ length: 10 }, (_, i) => ({
+      left: `${(i * 13.7 + 23) % 100}%`,
+      top: `${(i * 17.3 + 15) % 100}%`,
+      duration: 3 + (i % 3),
+      delay: (i % 5) * 0.4
+    }));
+  }, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,26 +85,29 @@ export default function LeadMagnetSection({ onSubmit }) {
           transition={{ duration: 10, repeat: Infinity }}
         />
 
-        {/* Floating particles */}
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-white/20 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+
+      {/* Floating Particles - FIXED VERSION */}
+<div className="absolute inset-0 overflow-hidden pointer-events-none">
+  {particlePositions.map((particle, i) => (
+    <motion.div
+      key={i}
+      className="absolute w-2 h-2 bg-white/20 rounded-full"
+      style={{
+        left: particle.left,
+        top: particle.top,
+      }}
+      animate={{
+        y: [0, -20, 0],
+        opacity: [0.2, 0.5, 0.2],
+      }}
+      transition={{
+        duration: particle.duration,
+        repeat: Infinity,
+        delay: particle.delay,
+      }}
+    />
+  ))}
+</div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">

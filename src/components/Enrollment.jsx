@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { X, Phone } from "lucide-react";
+import { X, Phone, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan }) {
   const [formData, setFormData] = useState({
@@ -13,23 +13,69 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
     termsAccepted: false
   });
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (!formData.termsAccepted) {
-      alert("Please accept the terms and conditions to continue.");
+      setError("Please accept the terms and conditions to continue.");
       return;
     }
-    onSubmit(formData);
-    setFormData({ 
-      firstName: "", 
-      lastName: "", 
-      email: "", 
-      whatsapp: "", 
-      comments: "",
-      plan: "online",
-      termsAccepted: false 
-    });
-    onClose();
+
+    setIsSubmitting(true);
+    setError("");
+    setSuccess(false);
+
+    try {
+      // Call API to save enrollment
+      const response = await fetch('/api/send-enrollment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit enrollment');
+      }
+
+      console.log('✅ Enrollment successful:', data);
+      
+      // Show success message
+      setSuccess(true);
+      
+      // Call parent callback
+      if (onSubmit) {
+        onSubmit(formData);
+      }
+      
+      // Reset form after delay
+      setTimeout(() => {
+        setFormData({ 
+          firstName: "", 
+          lastName: "", 
+          email: "", 
+          whatsapp: "", 
+          comments: "",
+          plan: "online",
+          termsAccepted: false 
+        });
+        setSuccess(false);
+        onClose();
+      }, 2000);
+      
+    } catch (err) {
+      console.error('❌ Enrollment error:', err);
+      setError(err.message || 'Failed to submit enrollment. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!open) return null;
@@ -47,6 +93,20 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
         className="relative bg-white rounded-xl shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)] w-full max-w-md mx-4 p-6 max-h-[90vh] overflow-y-auto"
         data-testid="modal-enrollment"
       >
+        {/* Success Message */}
+        {success && (
+          <div className="absolute inset-0 bg-white rounded-xl flex items-center justify-center z-10">
+            <div className="text-center p-8">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 className="w-10 h-10 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-green-600 mb-2">Success!</h3>
+              <p className="text-gray-600">Your enrollment has been submitted successfully.</p>
+              <p className="text-sm text-gray-500 mt-2">Check your email for confirmation.</p>
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
@@ -56,6 +116,7 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
             <button
               onClick={onClose}
               className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
+              disabled={isSubmitting}
             >
               <X className="w-5 h-5" />
             </button>
@@ -64,6 +125,14 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
             Fill out the form below and we'll be in touch within 24 hours to complete your enrollment.
           </p>
         </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <p className="text-sm text-red-800">{error}</p>
+          </div>
+        )}
         
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* First Name Input */}
@@ -77,7 +146,8 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
               value={formData.firstName}
               onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
               required
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+              disabled={isSubmitting}
+              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] disabled:bg-gray-50 disabled:cursor-not-allowed"
               data-testid="input-first-name"
             />
           </div>
@@ -93,7 +163,8 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
               value={formData.lastName}
               onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
               required
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+              disabled={isSubmitting}
+              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] disabled:bg-gray-50 disabled:cursor-not-allowed"
               data-testid="input-last-name"
             />
           </div>
@@ -109,7 +180,8 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+              disabled={isSubmitting}
+              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] disabled:bg-gray-50 disabled:cursor-not-allowed"
               data-testid="input-email"
             />
           </div>
@@ -117,7 +189,7 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
           {/* WhatsApp Number Input */}
           <div>
             <label htmlFor="whatsapp" className="block text-sm font-medium text-[#394D5C] mb-2">
-              WhatsApp Number (Include Country Code, e.g., +44 for UK, +34 for Spain) | Número de WhatsApp (Incluye código de país, ej. +34 para España) | Número de WhatsApp (Inclua o código do país, ex. +351 para Portugal) <span className="text-red-500">*</span>
+              WhatsApp Number (Include Country Code) <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
@@ -128,7 +200,8 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
                 value={formData.whatsapp}
                 onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
                 required
-                className="w-full pl-11 pr-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C]"
+                disabled={isSubmitting}
+                className="w-full pl-11 pr-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] disabled:bg-gray-50 disabled:cursor-not-allowed"
                 data-testid="input-whatsapp"
               />
             </div>
@@ -143,7 +216,8 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
               id="plan"
               value={formData.plan}
               onChange={(e) => setFormData({ ...formData, plan: e.target.value })}
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] bg-white"
+              disabled={isSubmitting}
+              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] bg-white disabled:bg-gray-50 disabled:cursor-not-allowed"
               data-testid="select-plan"
             >
               <option value="offline" data-testid="option-offline">Offline - €145</option>
@@ -159,14 +233,15 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
           {/* Comments Input */}
           <div>
             <label htmlFor="comments" className="block text-sm font-medium text-[#394D5C] mb-2">
-              Any additional comments? | ¿Algún otro comentario? | Algum comentário adicional?
+              Any additional comments?
             </label>
             <textarea
               id="comments"
               value={formData.comments}
               onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
               rows={4}
-              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] resize-none"
+              disabled={isSubmitting}
+              className="w-full px-4 py-2 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] resize-none disabled:bg-gray-50 disabled:cursor-not-allowed"
               data-testid="input-comments"
             />
           </div>
@@ -186,7 +261,8 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
                 checked={formData.termsAccepted}
                 onChange={(e) => setFormData({ ...formData, termsAccepted: e.target.checked })}
                 required
-                className="mt-1 w-4 h-4 border-2 border-[#E3E5E8] rounded focus:ring-2 focus:ring-[#3BA9A3] text-[#3BA9A3]"
+                disabled={isSubmitting}
+                className="mt-1 w-4 h-4 border-2 border-[#E3E5E8] rounded focus:ring-2 focus:ring-[#3BA9A3] text-[#3BA9A3] disabled:cursor-not-allowed"
                 data-testid="checkbox-terms"
               />
               <label htmlFor="terms" className="text-sm text-[#394D5C] cursor-pointer">
@@ -200,17 +276,26 @@ export default function EnrollmentModal({ open, onClose, onSubmit, selectedPlan 
             <button 
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
+              disabled={isSubmitting}
+              className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               data-testid="button-cancel"
             >
               Cancel
             </button>
             <button 
               type="submit"
-              className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200 shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.08),0px_2px_4px_-1px_rgba(0,0,0,0.05)]"
+              disabled={isSubmitting}
+              className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200 shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.08),0px_2px_4px_-1px_rgba(0,0,0,0.05)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               data-testid="button-submit-enrollment"
             >
-              Submit Enrollment
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                'Submit Enrollment'
+              )}
             </button>
           </div>
         </form>
