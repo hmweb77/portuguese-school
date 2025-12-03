@@ -228,7 +228,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             <Globe className="w-4 h-4 md:w-5 md:h-5" />
             <div className="text-center">
               <div className="text-xl md:text-2xl font-bold">
-              Language immersion experience
+              Language immersion
               </div>
               <div className="text-sm opacity-90">
               from anywhere in the world
