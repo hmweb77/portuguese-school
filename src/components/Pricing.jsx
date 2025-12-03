@@ -28,21 +28,22 @@ export default function PricingSection({ onSelectPlan }) {
   const [selectedPremiumLevel, setSelectedPremiumLevel] = useState("A1");
 
   const onlineLevels = {
-    "A1": { price: "295€", label: "A1 Level" },
-    "A2-I": { price: "395€", label: "A2 Part I" },
-    "A2-II": { price: "445€", label: "A2 Part II" }
+    "A1": { price: "295€", originalPrice: "345€", label: "A1 Level" },
+    "A2-I": { price: "395€", originalPrice: "445€", label: "A2 Part I" },
+    "A2-II": { price: "445€", originalPrice: "495€", label: "A2 Part II" }
   };
 
   const premiumLevels = {
-    "A1": { price: "345€", label: "A1 Level" },
-    "A2-I": { price: "445€", label: "A2 Part I" },
-    "A2-II": { price: "495€", label: "A2 Part II" }
+    "A1": { price: "345€", originalPrice: "395€", label: "A1 Level" },
+    "A2-I": { price: "445€", originalPrice: "495€", label: "A2 Part I" },
+    "A2-II": { price: "495€", originalPrice: "545€", label: "A2 Part II" }
   };
 
   const plans = [
     {
       name: "Offline",
       price: "145€",
+      originalPrice: "195€",
       subtitle: "6-month access",
       description: "Perfect for self-directed learners",
       icon: Zap,
@@ -61,6 +62,7 @@ export default function PricingSection({ onSelectPlan }) {
     {
       name: "Online",
       price: onlineLevels[selectedOnlineLevel].price,
+      originalPrice: onlineLevels[selectedOnlineLevel].originalPrice,
       subtitle: "6-month access",
       description: "The complete live learning experience",
       icon: MessageCircle,
@@ -81,6 +83,7 @@ export default function PricingSection({ onSelectPlan }) {
     {
       name: "Premium",
       price: premiumLevels[selectedPremiumLevel].price,
+      originalPrice: premiumLevels[selectedPremiumLevel].originalPrice,
       subtitle: "6-month access",
       description: "Maximum results with 1-on-1 support",
       icon: Crown,
@@ -248,14 +251,38 @@ export default function PricingSection({ onSelectPlan }) {
                     )}
 
                     <div className="mb-2">
-                      <motion.span 
-                        className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}
-                        animate={hoveredPlan === index ? { scale: [1, 1.05, 1] } : {}}
-                        transition={{ duration: 0.3 }}
-                        key={plan.price}
+                      {/* Discount Badge */}
+                      <motion.div 
+                        className="inline-flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-full text-base font-bold mb-3 shadow-lg"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
                       >
-                        {plan.price}
-                      </motion.span>
+                    
+                        <span>SAVE 50€</span>
+                      </motion.div>
+
+                      {/* Price Display */}
+                      <div className="flex items-center justify-center gap-3 mb-1">
+                        {/* Original Price - Crossed Out */}
+                        <div className="relative">
+                          <span className="text-2xl font-bold text-gray-400">
+                            {plan.originalPrice}
+                          </span>
+                          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></div>
+                        </div>
+                        
+                      
+                        
+                        {/* Current Price */}
+                        <motion.div
+  animate={hoveredPlan === index ? { scale: [1, 1.05, 1] } : {}}
+  transition={{ duration: 0.3 }}
+>
+  <span className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}>
+    {plan.price}
+  </span>
+</motion.div>
+                      </div>
                     </div>
                     <p className="text-sm text-[#6B8299]">{plan.subtitle}</p>
                   </div>

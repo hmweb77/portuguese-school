@@ -32,12 +32,36 @@ export default function LeadMagnetSection({ onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !whatsapp) return;
+    if (!name || !email || !whatsapp) {
+      alert('Please fill in all fields');
+      return;
+    }
 
     setIsSubmitting(true);
 
-    // Optional: send data somewhere first
     try {
+      // Call API to save lead to Airtable and send email
+      const response = await fetch('/api/send-lead-magnet', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          name, 
+          email, 
+          whatsapp 
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit');
+      }
+
+      console.log('✅ Lead captured successfully:', data);
+
+      // Call parent callback if provided
       if (onSubmit) {
         await onSubmit({ name, email, whatsapp });
       }
@@ -47,10 +71,13 @@ export default function LeadMagnetSection({ onSubmit }) {
       // Small delay for UX, then redirect to sample page
       setTimeout(() => {
         if (typeof window !== "undefined") {
-          window.location.href = "https://iflimmersion.com/en/ifli-portugues-sample-page/";
+          window.location.href = data.redirectUrl || "https://iflimmersion.com/en/ifli-portugues-sample-page/";
         }
       }, 800);
-    } finally {
+
+    } catch (error) {
+      console.error('❌ Lead magnet submission error:', error);
+      alert('Something went wrong. Please try again or contact us directly.');
       setIsSubmitting(false);
     }
   };
@@ -205,7 +232,8 @@ export default function LeadMagnetSection({ onSubmit }) {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           required
-                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all"
+                          disabled={isSubmitting}
+                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
                           whileFocus={{ scale: 1.02 }}
                         />
                       </div>
@@ -219,7 +247,8 @@ export default function LeadMagnetSection({ onSubmit }) {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
-                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all"
+                          disabled={isSubmitting}
+                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
                           data-testid="input-email-lead"
                           whileFocus={{ scale: 1.02 }}
                         />
@@ -234,7 +263,8 @@ export default function LeadMagnetSection({ onSubmit }) {
                           value={whatsapp}
                           onChange={(e) => setWhatsapp(e.target.value)}
                           required
-                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all"
+                          disabled={isSubmitting}
+                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
                           whileFocus={{ scale: 1.02 }}
                         />
                       </div>
@@ -242,10 +272,10 @@ export default function LeadMagnetSection({ onSubmit }) {
                       <motion.button
                         type="submit"
                         disabled={isSubmitting}
-                        className="group relative w-full rounded-full py-6 text-base font-semibold bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg disabled:opacity-50"
+                        className="group relative w-full rounded-full py-6 text-base font-semibold bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                         data-testid="button-download-guide"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                        whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                       >
                         <motion.div
                           className="absolute inset-0 bg-linear-to-r from-[#FF7A4C] to-[#FF6A3C]"
@@ -261,7 +291,7 @@ export default function LeadMagnetSection({ onSubmit }) {
                                 animate={{ rotate: 360 }}
                                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                               />
-                              Sending...
+                              Processing...
                             </>
                           ) : (
                             <>
