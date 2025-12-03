@@ -208,7 +208,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.8 }}
           >
-            <Users className="w-4 h-4 md:w-5 md:h-5" />
+         
             <div className="text-left">
               <div className="text-xl md:text-2xl font-bold">
                 {isStatsInView && <CountUp end={30} suffix="+ years" />}
@@ -225,7 +225,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.8 }}
           >
-            <Globe className="w-4 h-4 md:w-5 md:h-5" />
+           
             <div className="text-center">
               <div className="text-xl md:text-2xl font-bold">
               Language immersion
@@ -243,7 +243,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 1.0 }}
           >
-            <BookOpen className="w-4 h-4 md:w-5 md:h-5" />
+       
             <div className="text-left">
               <div className="text-xl md:text-2xl font-bold">
                 {isStatsInView && <CountUp end={100} suffix="%" />}
