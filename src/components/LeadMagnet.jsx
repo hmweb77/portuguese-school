@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import { Download, CheckCircle, Mail, FileText, Sparkles, Lock, User, Phone } from "lucide-react";
-import pdfImage from "../../public/leadSec.png";
+import pdfImage from "../../public/freeS.png";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -185,11 +185,11 @@ export default function LeadMagnetSection({ onSubmit }) {
                   className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-[#394D5C]"
                   data-testid="text-lead-magnet-headline"
                 >
-                  Get INSTANT Access to FREE SAMPLE RESOUCES
+                  Get INSTANT Access to FREE SAMPLE RESOURCES
                 </h2>
 
                 <p className="text-lg text-[#6B8299] mb-6 leading-relaxed">
-                  See how IFLI will help you speak Portuguese confidently—no commitment, just value.
+                  See how IFLI will help you speak Portuguese confidently, no commitment, just value.
                 </p>
 
                 {/* Benefits List */}

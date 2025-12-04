@@ -1,6 +1,6 @@
 "use client"
 import { Calendar, Users, BookOpen, MessageCircle, TrendingUp, Award } from "lucide-react";
-import programImage from "../../public/aboutSec.png";
+import programImage from "../../public/aboutt.png";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";

@@ -29,14 +29,14 @@ export default function PricingSection({ onSelectPlan }) {
 
   const onlineLevels = {
     "A1": { price: "295€", originalPrice: "345€", label: "A1 Level" },
-    "A2-I": { price: "395€", originalPrice: "445€", label: "A2 Part I" },
-    "A2-II": { price: "445€", originalPrice: "495€", label: "A2 Part II" }
+    "A2-I": { price: "295€", originalPrice: "345€", label: "A2 Part I" },
+    "A2-II": { price: "295€", originalPrice: "345€", label: "A2 Part II" }
   };
 
   const premiumLevels = {
     "A1": { price: "345€", originalPrice: "395€", label: "A1 Level" },
-    "A2-I": { price: "445€", originalPrice: "495€", label: "A2 Part I" },
-    "A2-II": { price: "495€", originalPrice: "545€", label: "A2 Part II" }
+    "A2-I": { price: "345€", originalPrice: "395€", label: "A2 Part I" },
+    "A2-II": { price: "345€", originalPrice: "395€", label: "A2 Part II" }
   };
 
   const plans = [
@@ -49,11 +49,11 @@ export default function PricingSection({ onSelectPlan }) {
       icon: Zap,
       iconColor: "from-blue-400 to-blue-600",
       features: [
-        { name: "Access to session recordings", included: true },
-        { name: "Access to online library", included: true },
+        { name: "Access to 50hs of session recordings", included: true },
+        { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
-        { name: "Access to live online sessions", included: false },
-        { name: "Access to weekend resources", included: false }
+        { name: "50hs of live online group sessions", included: false },
+        { name: "Additional 1-on-1 support", included: false }
       ],
       cta: "Get Started",
       featured: false,
@@ -69,11 +69,11 @@ export default function PricingSection({ onSelectPlan }) {
       iconColor: "from-orange-400 to-orange-600",
       hasLevelSelector: true,
       features: [
-        { name: "Access to 50hs of session recordings", included: true },
+        { name: "Access to 50hs of live online sessions", included: true },
+        { name: "Access to 50hs of sessions recordings", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
-        { name: "Access to 50hs of live online sessions", included: true },
-        { name: "Access to additional 1-1 supports", included: true }
+        { name: "Access to additional 1-1 supports", included: false }
       ],
       cta: "Enroll Now",
       featured: true,
@@ -90,12 +90,11 @@ export default function PricingSection({ onSelectPlan }) {
       iconColor: "from-purple-400 to-purple-600",
       hasLevelSelector: true,
       features: [
-        { name: "50hs of session recordings", included: true },
+        { name: "Access to 50hs of live online sessions", included: true },
+        { name: "Access to 50hs of sessions recordings", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
-        { name: "50hs of live online sessions", included: true },
-        { name: "Additional 1-on-1 support", included: true },
-        { name: "4x 30 min private sessions", included: true },
+        { name: "Access to additional 1-1 supports", included: true }
       ],
       cta: "Go Premium",
       featured: false,

@@ -187,7 +187,7 @@ export default function TestimonialsSection() {
                       className="group relative p-8 h-full bg-white border-2 border-[#E3E5E8] rounded-2xl overflow-hidden cursor-pointer" 
                       data-testid={`card-testimonial-${currentIndex + index}`}
                       whileHover={{ 
-                        y: -8,
+                  
                         borderColor: "#3BA9A3",
                         transition: { duration: 0.3 }
                       }}
