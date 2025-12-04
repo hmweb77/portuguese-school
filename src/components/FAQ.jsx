@@ -24,7 +24,7 @@ export default function FAQSection() {
   const faqs = [
     {
       question: "What if I can't attend all the live sessions?",
-      answer: "No problem! Every live session is recorded and available for at least 3 months. You can watch them anytime at your own pace. We recommend attending live when possible for the interactive experience, but recordings ensure you never miss content.",
+      answer: "No problem! Every live session is recorded and available for at least 1 year. You can watch them anytime at your own pace. We recommend attending live when possible for the interactive experience, but recordings ensure you never miss content.",
 
     },
     {
@@ -49,7 +49,7 @@ export default function FAQSection() {
     },
     {
       question: "Do I get to keep the materials after the course ends?",
-      answer: "Yes. You’ll have access to all materials, recordings, and resources for at least 3 months after the course ends.",
+      answer: "Yes. You’ll have access to all materials, recordings, and resources for at least 1 year after the course ends.",
 
     },
     {
@@ -64,7 +64,7 @@ export default function FAQSection() {
     },
     {
       question: "Can I switch between plans later?",
-      answer: "Yes, you can upgrade or switch plans anytime before the course starts.",
+      answer: "Yes, you can upgrade at any time. You cannot downgrade, through.",
 
     }
   ];

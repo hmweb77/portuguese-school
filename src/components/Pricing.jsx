@@ -44,7 +44,7 @@ export default function PricingSection({ onSelectPlan }) {
       name: "Offline",
       price: "145€",
       originalPrice: "195€",
-      subtitle: "6-month access",
+      subtitle: "1 year access",
       description: "Perfect for self-directed learners",
       icon: Zap,
       iconColor: "from-blue-400 to-blue-600",
@@ -63,7 +63,7 @@ export default function PricingSection({ onSelectPlan }) {
       name: "Online",
       price: onlineLevels[selectedOnlineLevel].price,
       originalPrice: onlineLevels[selectedOnlineLevel].originalPrice,
-      subtitle: "6-month access",
+      subtitle: "1 year access",
       description: "The complete live learning experience",
       icon: MessageCircle,
       iconColor: "from-orange-400 to-orange-600",
@@ -84,7 +84,7 @@ export default function PricingSection({ onSelectPlan }) {
       name: "Premium",
       price: premiumLevels[selectedPremiumLevel].price,
       originalPrice: premiumLevels[selectedPremiumLevel].originalPrice,
-      subtitle: "6-month access",
+      subtitle: "1 year access",
       description: "Maximum results with 1-on-1 support",
       icon: Crown,
       iconColor: "from-purple-400 to-purple-600",
@@ -148,7 +148,7 @@ export default function PricingSection({ onSelectPlan }) {
             Choose Your Learning Path
           </h2>
           <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-          All plans include 3-month access to materials and lifetime access to our student community.
+          All plans include 1 year access to materials and lifetime access to our student community.
           </p>
         </motion.div>
 

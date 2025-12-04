@@ -255,7 +255,7 @@ const jsonLd = {
           name: 'What if I can\'t attend all the live sessions?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Every live session is recorded and available for at least 3 months. You can watch them anytime at your own pace.',
+            text: 'Every live session is recorded and available for at least 1 year. You can watch them anytime at your own pace.',
           },
         },
         {
@@ -302,7 +302,8 @@ export default function RootLayout({ children }) {
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+        <link rel="dns-prefetch" href="https://airtable.com" />
+<link rel="preconnect" href="https://airtable.com" crossOrigin="anonymous" />
         {/* Canonical URL for subdirectory */}
         <link rel="canonical" href="https://iflimmersion.com/ifli-portuguese-language-immersion" />
         

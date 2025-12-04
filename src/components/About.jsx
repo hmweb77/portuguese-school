@@ -52,7 +52,7 @@ export default function AboutProgram() {
     },
     { 
       icon: MessageCircle, 
-      title: "Live Sessions", 
+      title: "Live Sessions Online", 
       description: "One hour per day Monday to Friday",
       color: "from-orange-400 to-orange-600",
       bgColor: "bg-orange-50"
@@ -67,7 +67,7 @@ export default function AboutProgram() {
     { 
       icon: BookOpen, 
       title: "All Materials Included", 
-      description: "presentations, recordings & library",
+      description: "Presentations, recordings & library",
       color: "from-green-400 to-green-600",
       bgColor: "bg-green-50"
     },
@@ -106,7 +106,7 @@ export default function AboutProgram() {
           About the Portuguese Immersion Experiences
           </h2>
           <p className="text-xl text-[#6B8299] max-w-3xl mx-auto leading-relaxed">
-          An intensive 10-week Portuguese language program designed for busy professionals and anyone who wants to become a fluent and confident speaker of Portuguese. Real results, fast.
+          An intensive 10-week Portuguese language program designed for busy professionals and anyone who wants to become a fluent and confident speaker of Portuguese.<br/> Real results, fast.
           </p>
         </motion.div>
 
@@ -179,7 +179,7 @@ export default function AboutProgram() {
   >
     {[
       { icon: "✓", text: "Experienced native Portuguese facilitators" },
-      { icon: "✓", text: "Interactive live sessions" },
+      { icon: "✓", text: "Interactive live sessions online" },
       { icon: "✓", text: "Session recordings available (review anytime)" },
       { icon: "✓", text: "Immersion experience from anywhere" }
     ].map((item, index) => (

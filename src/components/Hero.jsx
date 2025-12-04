@@ -1,7 +1,8 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, Play, Globe, Users, BookOpen } from "lucide-react";
+import { Play } from "lucide-react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -183,13 +184,11 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
           >
             Enroll Now →
           </button>
-          <Link href="https://form.jotform.com/222385082740353">
-            <button
-              className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold text-white rounded-full min-w-[200px] md:min-w-[220px] bg-white/10 backdrop-blur-md border-2 border-white/30 hover:bg-white/20 transition-colors flex items-center justify-center gap-2"
-            >
+          <Link  className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold text-white rounded-full min-w-[200px] bg-[#FF8A5C] hover:bg-[#FF7A4C] md:min-w-[220px]  border-2 border-white/30 flex items-center justify-center gap-2" href="https://form.jotform.com/222385082740353" target="_blank" >
+          
               <Play className="w-5 h-5" />
               Take Free Test
-            </button>
+     
           </Link>
         </motion.div>
 
@@ -209,7 +208,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             transition={{ duration: 0.5, delay: 0.8 }}
           >
          
-            <div className="text-left">
+            <div className="text-center">
               <div className="text-xl md:text-2xl font-bold">
                 {isStatsInView && <CountUp end={30} suffix="+ years" />}
               </div>
@@ -218,7 +217,6 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
               </div>
             </div>
           </motion.div>
-
           <motion.div
             className="flex items-center gap-1 bg-white/10 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -244,7 +242,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
             transition={{ duration: 0.5, delay: 1.0 }}
           >
        
-            <div className="text-left">
+            <div className="text-center">
               <div className="text-xl md:text-2xl font-bold">
                 {isStatsInView && <CountUp end={100} suffix="%" />}
               </div>
@@ -263,7 +261,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.9 }}
         >
-          <CheckCircle2 className="w-5 h-5 text-green-400" />
+          {/* <CheckCircle2 className="w-5 h-5 text-green-400" /> */}
           <span className="text-xs md:text-sm font-medium">
             Trusted by 200+ learners from all over the world
           </span>
@@ -271,7 +269,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
       </motion.div>
 
       {/* Scroll Indicator */}
-      <motion.div
+      {/* <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -284,7 +282,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
         >
           <div className="w-1.5 h-1.5 bg-white rounded-full" />
         </motion.div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Slide Indicators */}
       <div className="absolute bottom-8 right-4 md:right-8 flex gap-2">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/Hero";
@@ -52,6 +52,27 @@ export default function Home() {
   const [testModalOpen, setTestModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(undefined);
   const [toasts, setToasts] = useState([]);
+
+  // Preload Airtable connection for faster iframe loading
+  useEffect(() => {
+    // Create preconnect links for Airtable
+    const preconnect = document.createElement('link');
+    preconnect.rel = 'preconnect';
+    preconnect.href = 'https://airtable.com';
+    preconnect.crossOrigin = 'anonymous';
+    document.head.appendChild(preconnect);
+
+    const dnsPrefetch = document.createElement('link');
+    dnsPrefetch.rel = 'dns-prefetch';
+    dnsPrefetch.href = 'https://airtable.com';
+    document.head.appendChild(dnsPrefetch);
+
+    // Cleanup
+    return () => {
+      document.head.removeChild(preconnect);
+      document.head.removeChild(dnsPrefetch);
+    };
+  }, []);
 
   const showToast = (title, description) => {
     const id = Date.now();

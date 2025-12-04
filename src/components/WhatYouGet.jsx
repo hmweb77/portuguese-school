@@ -53,7 +53,7 @@ export default function WhatYouGetSection({ onEnrollClick }) {
       color: "from-purple-400 to-purple-600",
       bgColor: "bg-purple-50",
       items: [
-        "All session recordings (6 months access)",
+        "All session recordings (1 year access)",
         "Portuguese media library (podcasts, videos)",
         "Mobile app for learning on the go",
         "Progress tracking dashboard"

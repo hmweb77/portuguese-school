@@ -47,7 +47,7 @@ export default function BenefitsSection() {
     {
       icon: Users2,
       title: "Small Group Learning",
-      description: "Max 12 participants per session. means more speaking time, personal attention, and faster skill development.",
+      description: "Max 12 participants per session. Means more speaking time, personal attention, and faster skill development.",
       gradient: "from-blue-400 via-cyan-400 to-teal-500",
       bgGradient: "from-blue-50 to-cyan-50",
       accentColor: "#3B82F6"
@@ -55,7 +55,7 @@ export default function BenefitsSection() {
     {
       icon: Globe2,
       title: "European Portuguese for Real Life",
-      description: "Learn practical, modern European Portuguese used in everyday situations. Not just textbook phrases—real conversation skills.",
+      description: "Learn practical, modern European Portuguese used in everyday situations. Not just textbook phrases - real conversation skills.",
       gradient: "from-green-400 via-emerald-400 to-teal-500",
       bgGradient: "from-green-50 to-emerald-50",
       accentColor: "#10B981"
@@ -63,7 +63,7 @@ export default function BenefitsSection() {
     {
       icon: Clock,
       title: "Flexible Access",
-      description: "Can't make a live session? Every class is recorded. Study on your schedule with 6 Months access to all materials.",
+      description: "Can't make a live session? No worries! It was recorded. Study on your schedule with 1 year access to all materials.",
       gradient: "from-purple-400 via-pink-400 to-rose-500",
       bgGradient: "from-purple-50 to-pink-50",
       accentColor: "#A855F7"
