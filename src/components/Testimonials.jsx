@@ -24,39 +24,64 @@ export default function TestimonialsSection() {
   const testimonials = [
     {
       name: "Raele",
-      role: "Software Engineer",
-      country: "🇺🇸 USA",
-      location: "Porto",
       achievement: "A1",
       rating: 5,
       quote: "Always useful and educational, often fun. Classes are challenging, but manageable.",
-      image: testimonial1,
-      gradient: "from-blue-400 to-cyan-500",
-      hasVideo: true
+      gradient: "from-orange-400 to-red-500",
     },
     {
       name: "Kira",
       role: "Business Consultant",
-      country: "🇬🇧 UK",
+    
       location: "Lisbon",
       achievement: "A1",
       rating: 5,
       quote: "I learn a lot every week. I really appreciate that it is Monday to Friday.",
       image: testimonial2,
-      gradient: "from-purple-400 to-pink-500",
+      gradient: "from-orange-400 to-red-500",
       hasVideo: false
     },
     {
       name: "Tasha",
       role: "Digital Nomad",
-      country: "🇨🇦 Canada",
+
       location: "US",
       achievement: "A1",
       rating: 5,
       quote: "Class is the high point of my day — I look forward to it.",
-      image: testimonial3,
       gradient: "from-orange-400 to-red-500",
-      hasVideo: true
+    },
+    
+ {
+      name: "Marisa",
+      achievement: "A2 part I",
+      rating: 5,
+      quote: "The classes are a good mix of didactic and experiential. Lots of speaking which is so challenging but really helps with learning. We have an excellent teacher!",
+      gradient: "from-blue-400 to-cyan-500",
+    },
+    
+ {
+      name: "Christiane",
+      achievement: "A1",
+      rating: 5,
+      quote: "It was the best choice - I am really happy I found this course! The experience is just great, we have a fantastic teacher and our progress is amazing!",
+      gradient: "from-orange-400 to-red-500",
+    },
+    
+ {
+      name: "Anita",
+      achievement: "A1",
+      rating: 5,
+      quote: "I have found the classes excellent, a good blend of explanation and interaction with classmates through speaking. This method of learning really works for me and I am looking forward to more classes.",
+      gradient: "from-orange-400 to-red-500 ",
+    },
+    
+ {
+      name: "Lara",
+      achievement: "A1",
+      rating: 5,
+      quote: "The sessions have been wonderful! I love the progression of things we are learning and building upon each other.",
+      gradient: "from-orange-400 to-red-500 ",
     },
     
     
