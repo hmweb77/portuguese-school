@@ -24,20 +24,6 @@ const staggerItem = (index) => ({
 export default function PricingSection({ onSelectPlan }) {
   const sectionRef = useRef(null);
   const [hoveredPlan, setHoveredPlan] = useState(null);
-  const [selectedOnlineLevel, setSelectedOnlineLevel] = useState("A1");
-  const [selectedPremiumLevel, setSelectedPremiumLevel] = useState("A1");
-
-  const onlineLevels = {
-    "A1": { price: "295€", originalPrice: "345€", label: "A1 Level" },
-    "A2-I": { price: "295€", originalPrice: "345€", label: "A2 Part I" },
-    "A2-II": { price: "295€", originalPrice: "345€", label: "A2 Part II" }
-  };
-
-  const premiumLevels = {
-    "A1": { price: "345€", originalPrice: "395€", label: "A1 Level" },
-    "A2-I": { price: "345€", originalPrice: "395€", label: "A2 Part I" },
-    "A2-II": { price: "345€", originalPrice: "395€", label: "A2 Part II" }
-  };
 
   const plans = [
     {
@@ -61,19 +47,18 @@ export default function PricingSection({ onSelectPlan }) {
     },
     {
       name: "Online",
-      price: onlineLevels[selectedOnlineLevel].price,
-      originalPrice: onlineLevels[selectedOnlineLevel].originalPrice,
-      subtitle: "1 year access",
+      price: "295€",
+      originalPrice: "345€",
+      subtitle: "All levels included • 1 year access",
       description: "The complete live learning experience",
       icon: MessageCircle,
       iconColor: "from-orange-400 to-orange-600",
-      hasLevelSelector: true,
       features: [
         { name: "Access to 50hs of live online sessions", included: true },
         { name: "Access to 50hs of sessions recordings", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
-        { name: "Access to additional 1-1 supports", included: false }
+        { name: "Access to additional 1-1 support", included: false }
       ],
       cta: "Enroll Now",
       featured: true,
@@ -82,19 +67,18 @@ export default function PricingSection({ onSelectPlan }) {
     },
     {
       name: "Premium",
-      price: premiumLevels[selectedPremiumLevel].price,
-      originalPrice: premiumLevels[selectedPremiumLevel].originalPrice,
-      subtitle: "1 year access",
+      price: "345€",
+      originalPrice: "395€",
+      subtitle: "All levels included • 1 year access",
       description: "Maximum results with 1-on-1 support",
       icon: Crown,
       iconColor: "from-purple-400 to-purple-600",
-      hasLevelSelector: true,
       features: [
         { name: "Access to 50hs of live online sessions", included: true },
         { name: "Access to 50hs of sessions recordings", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
-        { name: "Access to additional 1-1 supports", included: true }
+        { name: "Access to additional 1-1 support", included: true }
       ],
       cta: "Go Premium",
       featured: false,
@@ -188,32 +172,6 @@ export default function PricingSection({ onSelectPlan }) {
                     transition={{ duration: 3, repeat: Infinity }}
                   />
 
-                  {/* Badge Container - Fixed Position */}
-                  <div className="absolute top-3 left-0 right-0 flex justify-center" style={{ height: '28px' }}>
-                    {plan.badge && (
-                      <motion.div 
-                        className={`px-4 py-1 bg-linear-to-br ${plan.gradient} text-white rounded-full text-sm font-semibold shadow-lg`}
-                        data-testid="badge-featured"
-                        animate={{ y: [0, -3, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <span className="flex items-center gap-1">
-                          <Sparkles className="w-3 h-3" />
-                          {plan.badge}
-                        </span>
-                      </motion.div>
-                    )}
-                    {plan.seatsLeft && (
-                      <motion.div 
-                        className="px-4 py-1 bg-[#DC2626] text-white rounded-full text-sm font-semibold shadow-lg" 
-                        data-testid="badge-seats-left"
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        Only {plan.seatsLeft} seats left
-                      </motion.div>
-                    )}
-                  </div>
                   
                   {/* Plan Header */}
                   <div className={`text-center ${hasBadge ? 'mb-6 mt-6' : 'mb-8 mt-4'}`}>
@@ -227,37 +185,15 @@ export default function PricingSection({ onSelectPlan }) {
 
                     <h3 className="text-2xl font-bold mb-2 text-[#394D5C]">{plan.name}</h3>
                     <p className="text-sm text-[#6B8299] mb-6 min-h-10">{plan.description}</p>
-                    
-                    {/* Level Selector for Online and Premium Plans */}
-                    {plan.hasLevelSelector && (
-                      <div className="mb-4 px-2">
-                        <div className="flex gap-2 bg-gray-100 p-1.5 rounded-xl">
-                          {Object.entries(plan.name === "Online" ? onlineLevels : premiumLevels).map(([key, level]) => (
-                            <button
-                              key={key}
-                              onClick={() => plan.name === "Online" ? setSelectedOnlineLevel(key) : setSelectedPremiumLevel(key)}
-                              className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-300 ${
-                                (plan.name === "Online" ? selectedOnlineLevel : selectedPremiumLevel) === key
-                                  ? 'bg-linear-to-br ' + plan.gradient + ' text-white shadow-md'
-                                  : 'text-gray-600 hover:bg-gray-200'
-                              }`}
-                            >
-                              {level.label}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
 
                     <div className="mb-2">
                       {/* Discount Badge */}
-                      <motion.div 
+                      <motion.div
                         className="inline-flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-full text-base font-bold mb-3 shadow-lg"
                         animate={{ scale: [1, 1.05, 1] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       >
-                    
-                        <span>SAVE 50€</span>
+                        <span>SAVE 50€*</span>
                       </motion.div>
 
                       {/* Price Display */}
@@ -283,7 +219,8 @@ export default function PricingSection({ onSelectPlan }) {
 </motion.div>
                       </div>
                     </div>
-                    <p className="text-sm text-[#6B8299]">{plan.subtitle}</p>
+                    <p className="text-sm text-[#6B8299] mb-1">{plan.subtitle}</p>
+                    <p className="text-base text-red-700 italic">*Early bird discount until Dec 31st, 2025</p>
                   </div>
 
                   {/* Features List - Equal Height */}
@@ -315,14 +252,9 @@ export default function PricingSection({ onSelectPlan }) {
                   </ul>
 
                   {/* CTA Button - Fixed at Bottom */}
-                  <motion.button 
+                  <motion.button
                     className={`w-full relative rounded-full py-6 text-base font-semibold text-white overflow-hidden shadow-lg mt-auto`}
-                    onClick={() => onSelectPlan(
-                      plan.name, 
-                      plan.hasLevelSelector 
-                        ? (plan.name === "Online" ? selectedOnlineLevel : selectedPremiumLevel)
-                        : null
-                    )}
+                    onClick={() => onSelectPlan(plan.name)}
                     data-testid={`button-select-${plan.name.toLowerCase()}`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

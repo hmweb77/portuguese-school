@@ -29,10 +29,10 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook", color: "hover:bg-blue-500" },
-    { icon: Instagram, href: "#", label: "Instagram", color: "hover:bg-pink-500" },
-    { icon: Youtube, href: "#", label: "YouTube", color: "hover:bg-red-500" },
-    { icon: Linkedin, href: "#", label: "LinkedIn", color: "hover:bg-blue-600" }
+    { icon: Facebook, href: "https://web.facebook.com/iflimmersion", label: "Facebook", color: "hover:bg-blue-500" },
+    { icon: Instagram, href: "https://www.instagram.com/iflimmersion/", label: "Instagram", color: "hover:bg-pink-500" },
+    { icon: Youtube, href: "https://www.youtube.com/channel/UC_8Xi94QukzHuN7X4SEMHUA", label: "YouTube", color: "hover:bg-red-500" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/iflimmersion/", label: "LinkedIn", color: "hover:bg-blue-600" }
   ];
 
   const quickLinks = [
@@ -51,7 +51,7 @@ export default function Footer() {
       <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#3BA9A3] via-[#FF8A5C] to-[#3BA9A3]" />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -180,52 +180,9 @@ export default function Footer() {
    info@iflimmersion.com
   </Link>
 </motion.li>
-
-
-
 </ul>
-
-
           </motion.div>
-
-          {/* Newsletter */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <h4 className="font-bold text-lg mb-6 text-[#394D5C]">Stay Updated</h4>
-            <p className="text-[#6B8299] mb-4 text-sm leading-relaxed">
-              Get course updates, Portuguese tips, and exclusive offers delivered to your inbox.
-            </p>
-            
-            <form onSubmit={handleNewsletterSubmit} className="space-y-3">
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  required
-                  className="w-full h-12 pl-12 pr-4 border-2 border-[#E3E5E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all"
-                  data-testid="input-newsletter"
-                />
-              </div>
-              
-              <motion.button 
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full h-12 bg-linear-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50"
-                data-testid="button-newsletter"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {isSubmitting ? "Subscribing..." : showSuccess ? "✓ Subscribed!" : "Subscribe"}
-              </motion.button>
-            </form>
-          </motion.div>
+    
         </div>
 
         {/* Bottom Bar */}
