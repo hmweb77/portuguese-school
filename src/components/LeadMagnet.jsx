@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import { Download, CheckCircle, Mail, FileText, Sparkles, Lock, User, Phone } from "lucide-react";
-import pdfImage from "../../public/freeSs.png";
+import pdfImage from "../../public/freeS.png";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
