@@ -29,18 +29,7 @@ export default function TestimonialsSection() {
       quote: "Always useful and educational, often fun. Classes are challenging, but manageable.",
       gradient: "from-orange-400 to-red-500",
     },
-    {
-      name: "Kira",
-      role: "Business Consultant",
     
-      location: "Lisbon",
-      achievement: "A1",
-      rating: 5,
-      quote: "I learn a lot every week. I really appreciate that it is Monday to Friday.",
-      image: testimonial2,
-      gradient: "from-orange-400 to-red-500",
-      hasVideo: false
-    },
     {
       name: "Tasha",
       role: "Digital Nomad",
@@ -66,6 +55,18 @@ export default function TestimonialsSection() {
       rating: 5,
       quote: "It was the best choice - I am really happy I found this course! The experience is just great, we have a fantastic teacher and our progress is amazing!",
       gradient: "from-orange-400 to-red-500",
+    },
+    {
+      name: "Kira",
+      role: "Business Consultant",
+    
+      location: "Lisbon",
+      achievement: "A1",
+      rating: 5,
+      quote: "I learn a lot every week. I really appreciate that it is Monday to Friday.",
+      image: testimonial2,
+      gradient: "from-orange-400 to-red-500",
+      hasVideo: false
     },
     
  {

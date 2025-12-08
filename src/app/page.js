@@ -81,7 +81,7 @@ export default function Home() {
     // Auto remove after 5 seconds
     setTimeout(() => {
       setToasts(prev => prev.filter(toast => toast.id !== id));
-    }, 5000);
+    }, 10000);
   };
 
   const removeToast = (id) => {

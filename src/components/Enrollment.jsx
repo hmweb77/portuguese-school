@@ -8,9 +8,7 @@ export default function EnrollmentModal({ open, onClose, selectedPlan }) {
   if (!open) return null;
 
   // Construct the Airtable URL with pre-filled plan if provided
-  const airtableUrl = selectedPlan 
-    ? `https://airtable.com/embed/appXmu812dVuCZf1d/paguXAaQRr6fIeUa9/form?prefill_Plan=${encodeURIComponent(selectedPlan)}`
-    : "https://airtable.com/embed/appXmu812dVuCZf1d/paguXAaQRr6fIeUa9/form";
+  const airtableUrl = "https://airtable.com/embed/appXmu812dVuCZf1d/paguXAaQRr6fIeUa9/form";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
