@@ -198,11 +198,11 @@ export default function Footer() {
               <p>© 2026 IFLI. All rights reserved.</p>
               <span className="hidden md:inline">•</span>
               <p className="flex items-center gap-1">
-                Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> in Portugal
+                Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> in Portugal By <Link href="https://www.hmwebs.com/" target="blank" className="text-red-700 hover:text-[#394D5C] transition-colors font-medium">Oussama</Link>
               </p>
             </div>
             
-            <div className="flex flex-wrap gap-6 text-sm">
+            {/* <div className="flex flex-wrap gap-6 text-sm">
               <a href="#privacy" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-privacy">
                 Privacy Policy
               </a>
@@ -212,7 +212,7 @@ export default function Footer() {
               <a href="#refund" className="text-[#6B8299] hover:text-[#394D5C] transition-colors" data-testid="link-refund">
                 Refund Policy
               </a>
-            </div>
+            </div> */}
           </div>
         </motion.div>
       </div>
