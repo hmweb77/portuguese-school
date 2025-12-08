@@ -19,7 +19,7 @@ export default function FinalCTASection({ onEnrollClick }) {
     }, []);
 
   useEffect(() => {
-    // Set target date to January 10, 2026 at 23:59:59
+    // Set target date to January 18, 2026 at 23:59:59
     const targetDate = new Date('2026-01-18T23:59:59').getTime();
     
     const updateCountdown = () => {

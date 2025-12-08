@@ -92,7 +92,7 @@ export async function POST(request) {
                     
                     <div style="background: #FFF3E0; border-left: 4px solid #FF8A5C; padding: 15px; margin: 30px 0;">
                       <p style="margin: 0; font-size: 14px;">
-                        <strong>⏰ Important:</strong> Enrollment closes on <strong>January 10, 2026</strong>. Secure your spot now!
+                        <strong>⏰ Important:</strong> Enrollment closes on <strong>January 18, 2026</strong>. Secure your spot now!
                       </p>
                     </div>
                     

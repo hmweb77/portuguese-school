@@ -124,7 +124,7 @@ export default function PricingSection({ onSelectPlan }) {
             transition={{ duration: 2, repeat: Infinity }}
           >
             <Sparkles className="w-4 h-4" />
-            <span className="text-sm font-semibold">Limited Seats Available - Enroll by January 10, 2026</span>
+            <span className="text-sm font-semibold">Limited Seats Available - Enroll by January 18, 2026</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white" data-testid="text-pricing-headline">
