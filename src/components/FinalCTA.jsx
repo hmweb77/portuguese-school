@@ -231,7 +231,7 @@ export default function FinalCTASection({ onEnrollClick }) {
             whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
           >
             <Clock className="w-5 h-5 text-yellow-300" />
-            <span className="text-sm font-medium">Deadline: January 10, 2026</span>
+            <span className="text-sm font-medium">Deadline: January 18, 2026</span>
           </motion.div>
           
           <motion.div 
