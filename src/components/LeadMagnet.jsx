@@ -68,13 +68,6 @@ export default function LeadMagnetSection({ onSubmit }) {
 
       setShowSuccess(true);
 
-      // Small delay for UX, then redirect to sample page
-      setTimeout(() => {
-        if (typeof window !== "undefined") {
-          window.location.href = data.redirectUrl || "https://iflimmersion.com/en/ifli-portugues-sample-page/";
-        }
-      }, 800);
-
     } catch (error) {
       console.error('❌ Lead magnet submission error:', error);
       alert('Something went wrong. Please try again or contact us directly.');
@@ -83,7 +76,7 @@ export default function LeadMagnetSection({ onSubmit }) {
   };
 
   const benefits = [
-    { icon: FileText, text: "Sample IFLI account view" },
+    { icon: FileText, text: "Join a sample IFLI Google Classroom" },
     { icon: Sparkles, text: "1h recording of a sample session" },
     { icon: CheckCircle, text: "A taste of our digital library" },
   ];
@@ -295,7 +288,7 @@ export default function LeadMagnetSection({ onSubmit }) {
                             </>
                           ) : (
                             <>
-                              Access Your Free Sample Account
+                              Join Your Sample IFLI Google Classroom 
                             </>
                           )}
                         </span>
@@ -313,9 +306,12 @@ export default function LeadMagnetSection({ onSubmit }) {
                           <CheckCircle className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                          <h3 className="font-bold text-green-900">Success!</h3>
+                          <h3 className="font-bold text-green-900">Thank You!</h3>
                           <p className="text-sm text-green-700">
-                            Redirecting to your free sample account...
+                            You'll receive an email with access shortly.
+                          </p>
+                          <p className="text-xs text-green-600 mt-1">
+                            Check your inbox for the next steps!
                           </p>
                         </div>
                       </div>

@@ -145,7 +145,6 @@ export async function POST(request) {
       success: true,
       message: 'Lead captured successfully',
       airtableId: airtableRecord?.id,
-      redirectUrl: 'https://iflimmersion.com/en/ifli-portugues-sample-page/'
     });
 
   } catch (error) {
