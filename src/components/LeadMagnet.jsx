@@ -308,7 +308,7 @@ export default function LeadMagnetSection({ onSubmit }) {
                         <div>
                           <h3 className="font-bold text-green-900">Thank You!</h3>
                           <p className="text-sm text-green-700">
-                            You'll receive an email with access shortly.
+                            You&apos;ll receive an email with access shortly.
                           </p>
                           <p className="text-xs text-green-600 mt-1">
                             Check your inbox for the next steps!
