@@ -178,12 +178,13 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
         
-          <Link href="https://airtable.com/embed/appXmu812dVuCZf1d/paguXAaQRr6fIeUa9/form" target="_blank" className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold rounded-full min-w-[200px] md:min-w-[220px] bg-[#FF8A5C] text-white hover:bg-[#FF7A4C] transition-colors"
-       
+          <button
+            className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold rounded-full min-w-[200px] md:min-w-[220px] bg-[#FF8A5C] text-white hover:bg-[#FF7A4C] transition-colors"
+            onClick={onEnrollClick}
             data-testid="button-enroll-hero"
           >
             Enroll Now →
-          </Link>
+          </button>
           <Link  className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold text-white rounded-full min-w-[200px] bg-[#FF8A5C] hover:bg-[#FF7A4C] md:min-w-[220px]  border-2 border-white/30 flex items-center justify-center gap-2" href="https://form.jotform.com/222385082740353" target="_blank" >
           
               <Play className="w-5 h-5" />
