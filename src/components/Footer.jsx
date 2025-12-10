@@ -76,28 +76,32 @@ export default function Footer() {
             </p>
             
             {/* Social Links */}
-            <div className="flex gap-3">
-              {socialLinks.map((social, index) => {
-                const IconComponent = social.icon;
-                return (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    aria-label={social.label}
-                    className={`p-3 bg-white border-2 border-[#E3E5E8] rounded-xl transition-all duration-300 ${social.color} hover:text-white hover:border-transparent group`}
-                    data-testid={`button-social-${social.label.toLowerCase()}`}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <IconComponent className="w-5 h-5 text-[#394D5C] group-hover:text-white transition-colors" />
-                  </motion.a>
-                );
-              })}
-            </div>
+          {/* Social Links */}
+<div className="flex gap-3">
+  {socialLinks.map((social, index) => {
+    const IconComponent = social.icon;
+    return (
+      <motion.div
+        key={social.label}
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.1 }}
+        whileHover={{ y: -5 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <Link
+          href={social.href}
+          aria-label={social.label}
+          className={`block p-3 bg-white border-2 border-[#E3E5E8] rounded-xl transition-all duration-300 ${social.color} hover:text-white hover:border-transparent group`}
+          data-testid={`button-social-${social.label.toLowerCase()}`}
+        >
+          <IconComponent className="w-5 h-5 text-[#394D5C] group-hover:text-white transition-colors" />
+        </Link>
+      </motion.div>
+    );
+  })}
+</div>
           </motion.div>
 
           {/* Quick Links */}

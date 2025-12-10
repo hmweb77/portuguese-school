@@ -17,38 +17,11 @@ const fadeInUp = {
 export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true });
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  // const sectionRef = useRef(null);
+  // const isInView = useInView(sectionRef, { once: true });
+  // const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  const testimonials = [
-    {
-      name: "Raele",
-      achievement: "A1",
-      rating: 5,
-      quote: "Always useful and educational, often fun. Classes are challenging, but manageable.",
-      gradient: "from-orange-400 to-red-500",
-    },
-    
-    {
-      name: "Tasha",
-      role: "Digital Nomad",
-
-      location: "US",
-      achievement: "A1",
-      rating: 5,
-      quote: "Class is the high point of my day — I look forward to it.",
-      gradient: "from-orange-400 to-red-500",
-    },
-    
- {
-      name: "Marisa",
-      achievement: "A2 part I",
-      rating: 5,
-      quote: "The classes are a good mix of didactic and experiential. Lots of speaking which is so challenging but really helps with learning. We have an excellent teacher!",
-      gradient: "from-blue-400 to-cyan-500",
-    },
-    
+  const testimonials = [  
  {
       name: "Christiane",
       achievement: "A1",
@@ -56,11 +29,29 @@ export default function TestimonialsSection() {
       quote: "It was the best choice - I am really happy I found this course! The experience is just great, we have a fantastic teacher and our progress is amazing!",
       gradient: "from-orange-400 to-red-500",
     },
+     {
+      name: "Tasha",
+      achievement: "A1",
+      rating: 5,
+      quote: "Class is the high point of my day — I look forward to it.",
+      gradient: "from-orange-400 to-red-500",
+    },
+    {
+      name: "Marisa",
+      achievement: "A2 part I",
+      rating: 5,
+      quote: "The classes are a good mix of didactic and experiential. Lots of speaking which is so challenging but really helps with learning. We have an excellent teacher!",
+      gradient: "from-blue-400 to-cyan-500",
+    },
+     {
+      name: "Raele",
+      achievement: "A1",
+      rating: 5,
+      quote: "Always useful and educational, often fun. Classes are challenging, but manageable.",
+      gradient: "from-orange-400 to-red-500",
+    },
     {
       name: "Kira",
-      role: "Business Consultant",
-    
-      location: "Lisbon",
       achievement: "A1",
       rating: 5,
       quote: "I learn a lot every week. I really appreciate that it is Monday to Friday.",
@@ -68,7 +59,7 @@ export default function TestimonialsSection() {
       gradient: "from-orange-400 to-red-500",
       hasVideo: false
     },
-    
+
  {
       name: "Anita",
       achievement: "A1",
@@ -107,18 +98,18 @@ export default function TestimonialsSection() {
   };
 
   // Auto-play functionality
-  useEffect(() => {
-    if (isAutoPlaying) {
-      const interval = setInterval(() => {
-        nextSlide();
-      }, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [isAutoPlaying, currentIndex, nextSlide]);
+  // useEffect(() => {
+  //   if (isAutoPlaying) {
+  //     const interval = setInterval(() => {
+  //       nextSlide();
+  //     }, 5000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [isAutoPlaying, currentIndex, nextSlide]);
 
   // Pause auto-play on hover
-  const handleMouseEnter = () => setIsAutoPlaying(false);
-  const handleMouseLeave = () => setIsAutoPlaying(true);
+  // const handleMouseEnter = () => setIsAutoPlaying(false);
+  // const handleMouseLeave = () => setIsAutoPlaying(true);
 
   const slideVariants = {
     enter: (direction) => ({
@@ -137,7 +128,7 @@ export default function TestimonialsSection() {
 
   return (
     <section 
-      ref={sectionRef}
+    
       id="testimonials" 
       className="relative py-24 md:py-32 px-6 bg-linear-to-br from-white via-[#F5F6F7] to-white overflow-hidden" 
       data-testid="section-testimonials"
@@ -162,8 +153,7 @@ export default function TestimonialsSection() {
         {/* Carousel Container */}
         <div 
           className="relative"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+      
         >
           {/* Navigation Arrows */}
           <motion.button
