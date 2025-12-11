@@ -146,7 +146,7 @@ const jsonLd = {
       name: 'IFLI Portuguese Immersion 2026',
       description: 'Intensive 10-week European Portuguese immersion program starting January 2026',
       isPartOf: {
-        '@id': 'https://iflimmersion.com/#website'
+        '@id': 'https://iflimmersion.com/'
       },
       breadcrumb: {
         '@type': 'BreadcrumbList',

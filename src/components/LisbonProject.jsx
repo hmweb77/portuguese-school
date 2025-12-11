@@ -1,0 +1,128 @@
+"use client"
+import { ExternalLink, Globe, Users } from "lucide-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 60 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
+export default function LisbonProject() {
+  return (
+    <section className="relative py-24 md:py-32 px-6 bg-[#DEFDF6]">
+      <div className="max-w-5xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div className="text-center mb-16" {...fadeInUp}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-[#394D5C]">
+            Supporting Important Causes
+          </h2>
+          <p className="text-xl text-[#6B8299] max-w-2xl mx-auto leading-relaxed">
+            At IFLI, we&apos;re proud to support organizations making a real difference in communities around the world.
+          </p>
+        </motion.div>
+
+        {/* Main Content Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative"
+        >
+          <motion.div
+            className="bg-white rounded-3xl shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden border-2 border-gray-100"
+            whileHover={{ y: -8 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Centered Content */}
+            <div className="p-10 md:p-16 text-center">
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                {/* Lisbon Project Logo */}
+                <div className="mb-8 flex justify-center">
+                  <Image
+                    src="/lisbon-project.png"
+                    alt="Lisbon Project Logo"
+                    width={250}
+                    height={100}
+                    className="h-20 w-auto"
+                    priority
+                  />
+                </div>
+
+                <h3 className="text-3xl md:text-4xl font-bold text-[#394D5C] mb-6">
+                  Lisbon Project Association
+                </h3>
+
+                <p className="text-lg text-[#6B8299] leading-relaxed mb-8 max-w-2xl mx-auto">
+                  At IFLI, we are proud to donate to the mission of the Lisbon Project Association.
+                </p>
+
+                <div className="space-y-4 mb-10">
+                  <p className="text-base text-[#394D5C] font-medium">
+                    To learn more about the Lisbon Project and their impactful work,<br />
+                    visit their website and follow them on social media:
+                  </p>
+
+                  {/* Social Links - Centered */}
+                  <div className="flex flex-col items-center gap-3 text-sm text-[#6B8299]">
+                    <div className="flex items-center gap-2">
+                      <Globe className="w-4 h-4 text-teal-600" />
+                      <span>Website: www.lisbonproject.org</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-teal-600" />
+                      <span>Instagram: @lisbonprojectassociation</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-teal-600" />
+                      <span>Facebook: Lisbon Project Association</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-teal-600" />
+                      <span>LinkedIn: Lisbon Project</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Button - Centered */}
+                <div className="flex justify-center">
+                  <Link
+                    href="https://donorbox.org/ifli-proudly-supports-the-lisbon-project"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <motion.button
+                      className="group relative px-10 py-5 bg-linear-to-r from-teal-500 to-teal-600 text-white rounded-full font-semibold text-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-linear-to-r from-teal-600 to-teal-700"
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: 0 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        Donate Here
+                        <ExternalLink className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </span>
+                    </motion.button>
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

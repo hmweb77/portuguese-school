@@ -144,7 +144,7 @@ export default function FinalCTASection({ onEnrollClick }) {
 
       <div className="relative z-10 max-w-5xl mx-auto text-center text-white">
         {/* Rotating Urgency Messages */}
-        <motion.div
+        {/* <motion.div
           className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -164,7 +164,7 @@ export default function FinalCTASection({ onEnrollClick }) {
               </span>
             </motion.div>
           </AnimatePresence>
-        </motion.div>
+        </motion.div> */}
 
         {/* Headline */}
         <motion.h2 

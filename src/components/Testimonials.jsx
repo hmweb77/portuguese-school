@@ -1,8 +1,6 @@
 "use client"
 import { Star, Quote, Play, ChevronLeft, ChevronRight, Award, TrendingUp } from "lucide-react";
-import testimonial1 from "../../public/Portuguese_learning_materials_flatlay_c6fe93fe.png";
-import testimonial2 from "../../public/Portuguese_learning_materials_flatlay_c6fe93fe.png";
-import testimonial3 from "../../public/Portuguese_learning_materials_flatlay_c6fe93fe.png";
+
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
@@ -55,7 +53,6 @@ export default function TestimonialsSection() {
       achievement: "A1",
       rating: 5,
       quote: "I learn a lot every week. I really appreciate that it is Monday to Friday.",
-      image: testimonial2,
       gradient: "from-orange-400 to-red-500",
       hasVideo: false
     },

@@ -4,6 +4,7 @@ import { useState, Suspense, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/Hero";
+import LisbonProject from "@/components/LisbonProject";
 
 // Lazy load below-the-fold components with loading skeletons
 const AboutProgram = dynamic(() => import("@/components/About"), {
@@ -137,6 +138,7 @@ export default function Home() {
         <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />
         <FinalCTASection onEnrollClick={() => handleEnrollClick()} />
         <FAQSection />
+       <LisbonProject/>
         <Footer />
       </Suspense>
       
