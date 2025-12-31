@@ -220,7 +220,7 @@ export default function PricingSection({ onSelectPlan }) {
                       </div>
                     </div>
                     <p className="text-sm text-[#6B8299] mb-1">{plan.subtitle}</p>
-                    <p className="text-base text-red-700 italic">*Early bird discount until Dec 31st, 2025</p>
+                    <p className="text-base text-red-700 italic">*Early bird discount until Jan 2nd, 2026</p>
                   </div>
 
                   {/* Features List - Equal Height */}
