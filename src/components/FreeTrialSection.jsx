@@ -72,23 +72,16 @@ export default function FreeTrialSection() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header Section */}
         <motion.div className="text-center mb-16" {...fadeInUp}>
-          <motion.div
-            className="inline-flex items-center gap-2 px-5 py-2 bg-green-500 text-white rounded-full mb-6 shadow-lg"
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <Sparkles className="w-4 h-4" />
-            <span className="text-sm font-semibold">100% FREE - No Credit Card Required</span>
-          </motion.div>
+         
 
           <h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-[#394D5C]"
             data-testid="text-free-trial-headline"
           >
-            Try a Free Session First
+            Try a Session First
           </h2>
           <p className="text-xl text-[#6B8299] max-w-2xl mx-auto leading-relaxed">
-            Not sure if this is right for you? Join a free live session and experience our teaching method firsthand.
+            Not sure if this is right for you? Join a live session and experience our teaching method firsthand.
           </p>
         </motion.div>
 
@@ -185,7 +178,7 @@ export default function FreeTrialSection() {
           transition={{ delay: 0.4 }}
         >
           <p className="text-sm text-[#6B8299]">
-            🎁 Click on any session above to register - completely free!
+            🎁 Click on any session above to register!
           </p>
         </motion.div>
       </div>
