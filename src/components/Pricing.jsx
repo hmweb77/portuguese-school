@@ -165,7 +165,7 @@ export default function PricingSection({ onSelectPlan }) {
                 <motion.div
                   className={`relative p-8 flex flex-col bg-white rounded-2xl overflow-hidden ${
                     plan.featured
-                      ? "shadow-[0px_30px_60px_-12px_rgba(0,0,0,0.25)]"
+                      ? "shadow-[0px_30px_60px_-12px_rgba(0,0,0,0.25)] ring-2 ring-[#FF8A5C]"
                       : "shadow-[0px_20px_40px_-12px_rgba(0,0,0,0.15)]"
                   }`}
                   style={{
@@ -178,6 +178,20 @@ export default function PricingSection({ onSelectPlan }) {
                     transition: { duration: 0.3 },
                   }}
                 >
+                  {/* Most Popular Badge */}
+                  {plan.badge && (
+                    <motion.div
+                      className="absolute top-4 right-4 z-10"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <div className="bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                        ⭐ {plan.badge}
+                      </div>
+                    </motion.div>
+                  )}
+
                   {/* Top gradient bar */}
                   <motion.div
                     className={`absolute top-0 left-0 right-0 h-2 bg-linear-to-br ${plan.gradient}`}
@@ -217,38 +231,13 @@ export default function PricingSection({ onSelectPlan }) {
                     </p>
 
                     <div className="mb-2">
-                      {/* Discount Badge */}
-                      {/* <motion.div
-                        className="inline-flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-full text-base font-bold mb-3 shadow-lg"
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <span>SAVE 50€*</span>
-                      </motion.div> */}
-
                       {/* Price Display */}
                       <div className="flex items-center justify-center gap-3 mb-1">
-                        {/* Original Price - Crossed Out */}
                         <div className="relative">
-                          <span                             className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}>
+                          <span className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}>
                             {plan.originalPrice}
                           </span>
-                          {/* <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></div> */}
                         </div>
-
-                        {/* Current Price */}
-                        {/* <motion.div
-                          animate={
-                            hoveredPlan === index ? { scale: [1, 1.05, 1] } : {}
-                          }
-                          transition={{ duration: 0.3 }}
-                        >
-                          <span
-                            className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}
-                          >
-                            {plan.price}
-                          </span>
-                        </motion.div> */}
                       </div>
                     </div>
                     <p className="text-sm text-[#6B8299] mb-1">

@@ -143,28 +143,6 @@ export default function FinalCTASection({ onEnrollClick }) {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto text-center text-white">
-        {/* Rotating Urgency Messages */}
-        {/* <motion.div
-          className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentMessage}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-2"
-            >
-              <span className="text-sm font-semibold">
-                {urgencyMessages[currentMessage].text}
-              </span>
-            </motion.div>
-          </AnimatePresence>
-        </motion.div> */}
 
         {/* Headline */}
         <motion.h2 
