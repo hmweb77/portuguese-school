@@ -44,7 +44,7 @@ export default function PricingSection({ onSelectPlan }) {
       icon: Zap,
       iconColor: "from-blue-400 to-blue-600",
       features: [
-        { name: "Access to 50hs of session recordings", included: true },
+        { name: "Access to 50hs of session recordings *", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
         { name: "50hs of live online group sessions", included: false },
@@ -58,15 +58,15 @@ export default function PricingSection({ onSelectPlan }) {
       name: "Online",
       price: "295€",
       originalPrice: "345€",
-      subtitle: "All levels • 1 year access",
+      subtitle: "All levels • 10 weeks",
       description: "The complete live learning experience",
-      priceBreakdown: "€5.90/session • 50 live sessions over 10 weeks",
+      priceBreakdown: "50 live sessions over 10 weeks",
       priceBreakdownColor: "text-[#3BA9A3]",
       icon: MessageCircle,
       iconColor: "from-orange-400 to-orange-600",
       features: [
         { name: "Access to 50hs of live online sessions", included: true },
-        { name: "Access to 50hs of sessions recordings", included: true },
+        { name: "Access to 50hs of sessions recordings *", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
         { name: "Access to additional 1-1 support", included: false },
@@ -80,15 +80,15 @@ export default function PricingSection({ onSelectPlan }) {
       name: "Premium",
       price: "345€",
       originalPrice: "395€",
-      subtitle: "All levels  • 1 year access",
+      subtitle: "All levels  • 10 weeks",
       description: "Maximum results with 1-on-1 support",
-      priceBreakdown: "€6.90/session • 50 live sessions + 1-on-1",
+      priceBreakdown: "50 live sessions + 1-on-1",
       priceBreakdownColor: "text-[#8B5CF6]",
       icon: Crown,
       iconColor: "from-purple-400 to-purple-600",
       features: [
         { name: "Access to 50hs of live online sessions", included: true },
-        { name: "Access to 50hs of sessions recordings", included: true },
+        { name: "Access to 50hs of sessions recordings *", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
         { name: "Access to additional 1-1 support", included: true },
@@ -246,16 +246,7 @@ export default function PricingSection({ onSelectPlan }) {
                         </span>
                       </div>
 
-                      {/* Price Breakdown */}
-                      {plan.priceBreakdown && (
-                        <p
-                          className={`text-xs font-medium mt-2 ${
-                            plan.priceBreakdownColor || "text-[#6B8299]"
-                          }`}
-                        >
-                          {plan.priceBreakdown}
-                        </p>
-                      )}
+                     
                     </div>
                     <p className="text-sm text-[#6B8299] mt-3">
                       {plan.subtitle}
@@ -334,6 +325,9 @@ export default function PricingSection({ onSelectPlan }) {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center">
+            <p className="text-white/90 text-sm mb-3 font-semibold">
+             * 1-year access to all sessions recordings
+            </p>
             <p className="text-white/90 text-lg mb-3 font-semibold">
               Multiple Payment Options Available
             </p>
