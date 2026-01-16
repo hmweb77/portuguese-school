@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/Hero";
 import LisbonProject from "@/components/LisbonProject";
-import FreeTrialSection from "@/components/FreeTrialSection";
+// import FreeTrialSection from "@/components/FreeTrialSection";
 
 // Lazy load below-the-fold components with loading skeletons
 const AboutProgram = dynamic(() => import("@/components/About"), {
@@ -135,7 +135,7 @@ export default function Home() {
         <AboutProgram />
         <BenefitsSection />
         <PricingSection onSelectPlan={handleEnrollClick} />
-        <FreeTrialSection/>
+        {/* <FreeTrialSection/> */}
         <TestimonialsSection />
         <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />
         <FinalCTASection onEnrollClick={() => handleEnrollClick()} />

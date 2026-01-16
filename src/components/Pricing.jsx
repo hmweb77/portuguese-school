@@ -40,6 +40,7 @@ export default function PricingSection({ onSelectPlan }) {
       originalPrice: "195€",
       subtitle: "All levels  • 1 year access",
       description: "Perfect for self-directed learners",
+      priceBreakdown: "Self-paced recordings",
       icon: Zap,
       iconColor: "from-blue-400 to-blue-600",
       features: [
@@ -59,6 +60,8 @@ export default function PricingSection({ onSelectPlan }) {
       originalPrice: "345€",
       subtitle: "All levels • 1 year access",
       description: "The complete live learning experience",
+      priceBreakdown: "€5.90/session • 50 live sessions over 10 weeks",
+      priceBreakdownColor: "text-[#3BA9A3]",
       icon: MessageCircle,
       iconColor: "from-orange-400 to-orange-600",
       features: [
@@ -79,6 +82,8 @@ export default function PricingSection({ onSelectPlan }) {
       originalPrice: "395€",
       subtitle: "All levels  • 1 year access",
       description: "Maximum results with 1-on-1 support",
+      priceBreakdown: "€6.90/session • 50 live sessions + 1-on-1",
+      priceBreakdownColor: "text-[#8B5CF6]",
       icon: Crown,
       iconColor: "from-purple-400 to-purple-600",
       features: [
@@ -170,7 +175,7 @@ export default function PricingSection({ onSelectPlan }) {
                   }`}
                   style={{
                     height: "100%",
-                    minHeight: hasBadge ? "680px" : "650px",
+                    minHeight: hasBadge ? "720px" : "690px",
                   }}
                   data-testid={`card-plan-${plan.name.toLowerCase()}`}
                   whileHover={{
@@ -233,14 +238,26 @@ export default function PricingSection({ onSelectPlan }) {
                     <div className="mb-2">
                       {/* Price Display */}
                       <div className="flex items-center justify-center gap-3 mb-1">
-                        <div className="relative">
-                          <span className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}>
-                            {plan.originalPrice}
-                          </span>
-                        </div>
+                       
+                        <span
+                          className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}
+                        >
+                          {plan.originalPrice}
+                        </span>
                       </div>
+
+                      {/* Price Breakdown */}
+                      {plan.priceBreakdown && (
+                        <p
+                          className={`text-xs font-medium mt-2 ${
+                            plan.priceBreakdownColor || "text-[#6B8299]"
+                          }`}
+                        >
+                          {plan.priceBreakdown}
+                        </p>
+                      )}
                     </div>
-                    <p className="text-sm text-[#6B8299] mb-1">
+                    <p className="text-sm text-[#6B8299] mt-3">
                       {plan.subtitle}
                     </p>
                   </div>
