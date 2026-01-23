@@ -83,7 +83,7 @@ export default function FinalCTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          Last Chance to Signup
+          Last Chance to Sign Up
         </motion.h2>
         
         {/* Subtitle */}
