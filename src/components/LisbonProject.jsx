@@ -76,19 +76,47 @@ export default function LisbonProject() {
                   <div className="flex flex-col items-center gap-3 text-sm text-[#6B8299]">
                     <div className="flex items-center gap-2">
                       <Globe className="w-4 h-4 text-teal-600" />
-                      <span>Website: www.lisbonproject.org</span>
+                      <a
+                        href="https://www.lisbonproject.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-[#2D8B85] transition-colors"
+                      >
+                        Website: www.lisbonproject.org
+                      </a>
                     </div>
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4 text-teal-600" />
-                      <span>Instagram: @lisbonprojectassociation</span>
+                      <a
+                        href="https://www.instagram.com/lisbonprojectassociation"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-[#2D8B85] transition-colors"
+                      >
+                        Instagram: @lisbonprojectassociation
+                      </a>
                     </div>
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4 text-teal-600" />
-                      <span>Facebook: Lisbon Project Association</span>
+                      <a
+                        href="https://www.facebook.com/lisbonprojectassociation"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-[#2D8B85] transition-colors"
+                      >
+                        Facebook: Lisbon Project Association
+                      </a>
                     </div>
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4 text-teal-600" />
-                      <span>LinkedIn: Lisbon Project</span>
+                      <a
+                        href="https://www.linkedin.com/company/lisbon-project"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-[#2D8B85] transition-colors"
+                      >
+                        LinkedIn: Lisbon Project
+                      </a>
                     </div>
                   </div>
                 </div>

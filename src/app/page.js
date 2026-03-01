@@ -32,6 +32,10 @@ const FinalCTASection = dynamic(() => import("@/components/FinalCTA"), {
   loading: () => <div className="min-h-screen bg-cover animate-pulse" />
 });
 
+const Experiences2026Section = dynamic(() => import("@/components/Experiences2026"), {
+  loading: () => <div className="min-h-[400px] bg-gray-50 animate-pulse" />
+});
+
 const FAQSection = dynamic(() => import("@/components/FAQ"), {
   loading: () => <div className="min-h-screen bg-gray-50 animate-pulse" />
 });
@@ -139,6 +143,7 @@ export default function Home() {
         <TestimonialsSection />
         <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />
         <FinalCTASection onEnrollClick={() => handleEnrollClick()} />
+        <Experiences2026Section />
         <FAQSection />
        <LisbonProject/>
         <Footer />

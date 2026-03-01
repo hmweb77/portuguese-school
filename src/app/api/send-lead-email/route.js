@@ -68,7 +68,7 @@ export async function POST(request) {
                 </head>
                 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #394D5C; max-width: 600px; margin: 0 auto; padding: 20px;">
                   <div style="background: linear-gradient(135deg, #3BA9A3 0%, #2D8B85 100%); padding: 40px 20px; text-align: center; border-radius: 12px 12px 0 0;">
-                    <h1 style="color: white; margin: 0; font-size: 28px;">Your Portuguese Journey Starts Now! 🎉</h1>
+                    <h1 style="color: white; margin: 0; font-size: 28px;">Your Portuguese Journey Starts Now! </h1>
                   </div>
                   
                   <div style="background: #ffffff; padding: 40px 30px; border: 1px solid #E3E5E8; border-top: none; border-radius: 0 0 12px 12px;">

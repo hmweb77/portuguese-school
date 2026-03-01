@@ -38,13 +38,14 @@ export default function PricingSection({ onSelectPlan }) {
       name: "Offline",
       price: "145€",
       originalPrice: "195€",
-      subtitle: "All levels  • 1 year access",
+      discountLabel: "SAVE 50€*",
+      discountNote: "*Early bird discount until March 14th, 2026",
+      subtitle: "All levels • 1 year access",
       description: "Perfect for self-directed learners",
-      priceBreakdown: "Self-paced recordings",
       icon: Zap,
       iconColor: "from-blue-400 to-blue-600",
       features: [
-        { name: "Access to 50hs of session recordings *", included: true },
+        { name: "Access to 50hs of session recordings", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
         { name: "50hs of live online group sessions", included: false },
@@ -58,15 +59,15 @@ export default function PricingSection({ onSelectPlan }) {
       name: "Online",
       price: "295€",
       originalPrice: "345€",
-      subtitle: "All levels • 10 weeks",
+      discountLabel: "SAVE 50€*",
+      discountNote: "*Early bird discount until March 14th, 2026",
+      subtitle: "All levels • 1 year access",
       description: "The complete live learning experience",
-      priceBreakdown: "50 live sessions over 10 weeks",
-      priceBreakdownColor: "text-[#3BA9A3]",
       icon: MessageCircle,
       iconColor: "from-orange-400 to-orange-600",
       features: [
         { name: "Access to 50hs of live online sessions", included: true },
-        { name: "Access to 50hs of sessions recordings *", included: true },
+        { name: "Access to 50hs of sessions recordings", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
         { name: "Access to additional 1-1 support", included: false },
@@ -80,15 +81,15 @@ export default function PricingSection({ onSelectPlan }) {
       name: "Premium",
       price: "345€",
       originalPrice: "395€",
-      subtitle: "All levels  • 10 weeks",
+      discountLabel: "SAVE 50€*",
+      discountNote: "*Early bird discount until March 14th, 2026",
+      subtitle: "All levels • 1 year access",
       description: "Maximum results with 1-on-1 support",
-      priceBreakdown: "50 live sessions + 1-on-1",
-      priceBreakdownColor: "text-[#8B5CF6]",
       icon: Crown,
       iconColor: "from-purple-400 to-purple-600",
       features: [
         { name: "Access to 50hs of live online sessions", included: true },
-        { name: "Access to 50hs of sessions recordings *", included: true },
+        { name: "Access to 50hs of sessions recordings", included: true },
         { name: "Access to digital library", included: true },
         { name: "Exclusive WhatsApp Community", included: true },
         { name: "Access to additional 1-1 support", included: true },
@@ -138,7 +139,7 @@ export default function PricingSection({ onSelectPlan }) {
           >
             <Sparkles className="w-4 h-4" />
             <span className="text-sm font-semibold">
-              Limited Seats Available - Enroll by January 18, 2026
+              Limited Seats Available - Enroll by April 12, 2026
             </span>
           </motion.div>
 
@@ -236,17 +237,27 @@ export default function PricingSection({ onSelectPlan }) {
                     </p>
 
                     <div className="mb-2">
+                      {plan.discountLabel && (
+                        <p className="text-sm font-semibold text-emerald-600 mb-1">
+                          {plan.discountLabel}
+                        </p>
+                      )}
                       {/* Price Display */}
-                      <div className="flex items-center justify-center gap-3 mb-1">
-                       
+                      <div className="flex items-center justify-center gap-3 mb-1 flex-wrap">
+                        <span className="text-xl text-[#6B8299] line-through">
+                          {plan.originalPrice}
+                        </span>
                         <span
                           className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}
                         >
-                          {plan.originalPrice}
+                          {plan.price}
                         </span>
                       </div>
-
-                     
+                      {plan.discountNote && (
+                        <p className="text-xs text-[#6B8299] mt-1">
+                          {plan.discountNote}
+                        </p>
+                      )}
                     </div>
                     <p className="text-sm text-[#6B8299] mt-3">
                       {plan.subtitle}
@@ -325,17 +336,13 @@ export default function PricingSection({ onSelectPlan }) {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center">
-            <p className="text-white/90 text-sm mb-3 font-semibold">
-             * 1-year access to all sessions recordings
-            </p>
             <p className="text-white/90 text-lg mb-3 font-semibold">
               Multiple Payment Options Available
             </p>
             <p className="text-white/80 text-sm">
               We accept credit cards, MBWAY (Portugal), Bizum (Spain), and
-              Revolut for your convenience.
-              <br />
-              Choose your preferred payment method during checkout.
+              Revolut for your convenience. Choose your preferred payment method
+              during checkout.
             </p>
           </div>
         </motion.div>

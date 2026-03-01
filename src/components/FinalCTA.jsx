@@ -1,15 +1,64 @@
 "use client"
-import { useMemo } from "react";
-import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
+import { useMemo, useState, useEffect } from "react";
+import { Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
+const JOURNEY_START = new Date("2026-04-13T00:00:00");
+
+function useCountdown(targetDate) {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const tick = () => {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [targetDate]);
+
+  if (!mounted) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  return timeLeft;
+}
+
+function CountdownBox({ value, label }) {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="w-16 sm:w-20 md:w-24 h-14 sm:h-16 md:h-20 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center border border-white/20 shadow-lg">
+        <span className="text-2xl sm:text-3xl md:text-4xl font-bold tabular-nums">
+          {String(value).padStart(2, "0")}
+        </span>
+      </div>
+      <span className="mt-2 text-xs sm:text-sm font-medium text-white/80 uppercase tracking-wider">
+        {label}
+      </span>
+    </div>
+  );
+}
+
 export default function FinalCTASection() {
-  // WhatsApp configuration
   const whatsappNumber = "351933292112";
   const whatsappMessage = encodeURIComponent("Hi! I'm interested in the Portuguese Immersion program and would like to secure a spot.");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-  // Generate deterministic particle positions
+  const { days, hours, minutes, seconds } = useCountdown(JOURNEY_START);
+
   const particlePositions = useMemo(() => {
     return Array.from({ length: 20 }, (_, i) => ({
       left: `${(i * 13.7 + 23) % 100}%`,
@@ -22,27 +71,24 @@ export default function FinalCTASection() {
 
   return (
     <section className="relative py-28 md:py-36 px-6 overflow-hidden" data-testid="section-final-cta">
-      {/* Background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#3BA9A3] via-[#2D9B95] to-[#1E7A75]" />
-      
-      {/* Decorative circles */}
-      <motion.div 
+
+      <motion.div
         className="absolute top-0 left-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div 
+      <motion.div
         className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#FF8A5C]/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"
         animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div 
+      <motion.div
         className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
         animate={{ scale: [1, 1.4, 1] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particlePositions.map((particle, i) => (
           <motion.div
@@ -69,36 +115,65 @@ export default function FinalCTASection() {
         ))}
       </div>
 
-      {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
-        
-       
-
-        {/* Headline */}
-        <motion.h2 
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" 
+        <motion.h2
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
           data-testid="text-final-cta-headline"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          Last Chance to Sign Up
+          Your Portuguese Journey Starts
+          <br />
+          <span className="text-white drop-shadow-sm">April 13, 2026</span>
         </motion.h2>
-        
-        {/* Subtitle */}
-        <motion.p 
-          className="text-lg md:text-xl mb-12 text-white/90 max-w-2xl mx-auto leading-relaxed"
+
+        <motion.p
+          className="text-lg md:text-xl mb-10 text-white/90 max-w-2xl mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Contact us to secure a spot or for information about our next cohort
+          Become a confident Portuguese speaker in just 10 weeks.
         </motion.p>
 
-        {/* CTA Button */}
-        <motion.a 
+        {/* Countdown */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.25 }}
+        >
+          <CountdownBox value={days} label="Days" />
+          <CountdownBox value={hours} label="Hours" />
+          <CountdownBox value={minutes} label="Minutes" />
+          <CountdownBox value={seconds} label="Seconds" />
+        </motion.div>
+
+        <motion.p
+          className="text-sm text-white/80 mb-2"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          Deadline: April 12, 2026
+        </motion.p>
+
+        <motion.p
+          className="text-base font-semibold text-white/95 mb-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+        >
+          Limited Seats Remaining
+        </motion.p>
+
+        <motion.a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -107,18 +182,16 @@ export default function FinalCTASection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
         >
-          {/* Hover gradient overlay */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-[#FF8A5C] to-[#FF7A4C] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           />
-          
-          <MessageCircle className="w-5 h-5 relative z-10 group-hover:text-white transition-colors duration-300" />
+          <Lock className="w-5 h-5 relative z-10 group-hover:text-white transition-colors duration-300" />
           <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-            Enroll Now
+            Secure Your Spot Now
           </span>
           <motion.div
             className="relative z-10"
@@ -127,8 +200,6 @@ export default function FinalCTASection() {
           >
             <ArrowRight className="w-5 h-5 group-hover:text-white transition-colors duration-300" />
           </motion.div>
-
-          {/* Pulse ring */}
           <motion.div
             className="absolute inset-0 rounded-full border-2 border-white/50"
             animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0, 0.5] }}
@@ -136,27 +207,15 @@ export default function FinalCTASection() {
           />
         </motion.a>
 
-        {/* Trust indicators */}
-        <motion.div 
-          className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-white/70"
+        <motion.p
+          className="mt-8 text-sm text-white/80"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-400"></span>
-            Quick Response
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-400"></span>
-            5-Day Money-Back Guarantee
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-400"></span>
-            200+ Happy Learners
-          </span>
-        </motion.div>
+          🔒 Secure payment • 💯 5-day money-back guarantee
+        </motion.p>
       </div>
     </section>
   );
