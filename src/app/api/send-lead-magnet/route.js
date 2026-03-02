@@ -14,11 +14,12 @@ export async function POST(request) {
     }
 
     // Save to Airtable – field names match "CRM All leads" table.
+    // Target Language: use array for Multiple select, or exact option string for Single select.
     const airtableData = {
       'Email Address': email,
       'First Name': name.split(' ')[0] || name,
       'Phone Number': whatsapp,
-      'Target Language': 'IFLI Português | Recursos Gratuitos',
+      'Target Language': ['IFLI Português | Recursos Gratuitos'],
     };
 
     let airtableRecord = null;
