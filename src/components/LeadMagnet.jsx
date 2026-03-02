@@ -68,6 +68,12 @@ export default function LeadMagnetSection({ onSubmit }) {
 
       setShowSuccess(true);
 
+      // Redirect to Google Classroom after a short delay so user sees success
+      const classroomUrl = "https://classroom.google.com/c/NzkyNzEyNzIzMzgw?cjc=clutbctc";
+      setTimeout(() => {
+        window.location.href = classroomUrl;
+      }, 1500);
+
     } catch (error) {
       console.error('❌ Lead magnet submission error:', error);
       alert('Something went wrong. Please try again or contact us directly.');
