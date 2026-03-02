@@ -13,17 +13,11 @@ export async function POST(request) {
       );
     }
 
-    // Save to Airtable
-    // IMPORTANT: Field names must match your Airtable table exactly
-    // Check your Airtable table and update these field names if needed
+    // Save to Airtable – field names match "CRM All leads" table (Email Address, First Name, Phone Number).
     const airtableData = {
-      'Email': email,
+      'Email Address': email,
       'First Name': name.split(' ')[0] || name,
-      'Last Name': name.split(' ').slice(1).join(' ') || '',
-      'Phone': whatsapp,
-      // Add these fields only if they exist in your Airtable table:
-      // 'Source': 'Lead Magnet - Free Resources',
-      // 'Status': 'New Lead',
+      'Phone Number': whatsapp,
     };
 
     let airtableRecord = null;
