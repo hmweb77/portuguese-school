@@ -94,9 +94,10 @@ export default function Home() {
     setToasts(prev => prev.filter(toast => toast.id !== id));
   };
 
-  const handleEnrollClick = (plan) => {
-    setSelectedPlan(plan);
-    setEnrollmentModalOpen(true);
+  // Temporary: all Enroll buttons go to WhatsApp. Set back to modal when form is ready.
+  const WHATSAPP_ENROLL_URL = "https://wa.me/351933292112?text=" + encodeURIComponent("Hi! I'm interested in the Portuguese Immersion program and would like to secure a spot.");
+  const handleEnrollClick = () => {
+    window.open(WHATSAPP_ENROLL_URL, "_blank", "noopener,noreferrer");
   };
 
   const handleEnrollmentSubmit = (data) => {
@@ -138,7 +139,7 @@ export default function Home() {
       <Suspense fallback={<div className="min-h-screen" />}>
         <AboutProgram />
         <BenefitsSection />
-        <PricingSection onSelectPlan={handleEnrollClick} />
+        <PricingSection onSelectPlan={() => handleEnrollClick()} />
         {/* <FreeTrialSection/> */}
         <TestimonialsSection />
         <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />

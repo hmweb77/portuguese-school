@@ -461,10 +461,8 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                   <button
                     onClick={() => {
                       handleClose();
-                      setTimeout(() => {
-                        const pricingSection = document.getElementById('pricing');
-                        pricingSection?.scrollIntoView({ behavior: 'smooth' });
-                      }, 300);
+                      const url = "https://wa.me/351933292112?text=" + encodeURIComponent("Hi! I'm interested in the Portuguese Immersion program and would like to secure a spot.");
+                      window.open(url, "_blank", "noopener,noreferrer");
                     }}
                     className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200"
                     data-testid="button-enroll-from-test"
