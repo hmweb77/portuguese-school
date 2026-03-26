@@ -36,10 +36,7 @@ export default function PricingSection({ onSelectPlan }) {
   const plans = [
     {
       name: "Offline",
-      price: "145€",
-      originalPrice: "195€",
-      discountLabel: "SAVE 50€*",
-      discountNote: "*Early bird discount until March 22nd, 2026",
+      price: "195€",
       subtitle: "All levels • 1 year access",
       description: "Perfect for self-directed learners",
       icon: Zap,
@@ -57,10 +54,7 @@ export default function PricingSection({ onSelectPlan }) {
     },
     {
       name: "Online",
-      price: "295€",
-      originalPrice: "345€",
-      discountLabel: "SAVE 50€*",
-      discountNote: "*Early bird discount until March 22nd, 2026",
+      price: "345€",
       subtitle: "All levels • 1 year access",
       description: "The complete live learning experience",
       icon: MessageCircle,
@@ -79,10 +73,7 @@ export default function PricingSection({ onSelectPlan }) {
     },
     {
       name: "Premium",
-      price: "345€",
-      originalPrice: "395€",
-      discountLabel: "SAVE 50€*",
-      discountNote: "*Early bird discount until March 22nd, 2026",
+      price: "395€",
       subtitle: "All levels • 1 year access",
       description: "Maximum results with 1-on-1 support",
       icon: Crown,
@@ -237,27 +228,14 @@ export default function PricingSection({ onSelectPlan }) {
                     </p>
 
                     <div className="mb-2">
-                      {plan.discountLabel && (
-                        <p className="text-sm font-semibold text-emerald-600 mb-1">
-                          {plan.discountLabel}
-                        </p>
-                      )}
                       {/* Price Display */}
                       <div className="flex items-center justify-center gap-3 mb-1 flex-wrap">
-                        <span className="text-xl text-[#6B8299] line-through">
-                          {plan.originalPrice}
-                        </span>
                         <span
                           className={`text-5xl font-bold bg-linear-to-br ${plan.gradient} bg-clip-text text-transparent`}
                         >
                           {plan.price}
                         </span>
                       </div>
-                      {plan.discountNote && (
-                        <p className="text-xs text-[#6B8299] mt-1">
-                          {plan.discountNote}
-                        </p>
-                      )}
                     </div>
                     <p className="text-sm text-[#6B8299] mt-3">
                       {plan.subtitle}
