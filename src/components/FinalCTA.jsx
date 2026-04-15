@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const JOURNEY_START = new Date("2026-04-13T00:00:00");
+const ENROLLMENT_DEADLINE = new Date("2026-04-19T23:59:59");
 
 function useCountdown(targetDate) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -57,7 +57,7 @@ export default function FinalCTASection() {
   const whatsappMessage = encodeURIComponent("Hi! I'm interested in the Portuguese Immersion program and would like to secure a spot.");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-  const { days, hours, minutes, seconds } = useCountdown(JOURNEY_START);
+  const { days, hours, minutes, seconds } = useCountdown(ENROLLMENT_DEADLINE);
 
   const particlePositions = useMemo(() => {
     return Array.from({ length: 20 }, (_, i) => ({
@@ -126,7 +126,7 @@ export default function FinalCTASection() {
         >
           Your Portuguese Journey Starts
           <br />
-          <span className="text-white drop-shadow-sm">April 13, 2026</span>
+          <span className="text-white drop-shadow-sm">April 20, 2026</span>
         </motion.h2>
 
         <motion.p
@@ -160,7 +160,7 @@ export default function FinalCTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Deadline: April 12, 2026
+          Deadline: April 19, 2026
         </motion.p>
 
         <motion.p
