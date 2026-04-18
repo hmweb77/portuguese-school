@@ -3,10 +3,10 @@ import { createLead } from '@/lib/airtable';
 
 export async function POST(request) {
   try {
-    const { email, name, whatsapp } = await request.json();
+    const { email, firstName, lastName, whatsapp } = await request.json();
 
     // Validate required fields
-    if (!email || !name || !whatsapp) {
+    if (!email || !firstName || !lastName || !whatsapp) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -14,17 +14,12 @@ export async function POST(request) {
     }
 
     // Save to Airtable – field names match "CRM All leads" table.
-    // Target Language: use array for Multiple select, or exact option string for Single select.
-    const nameParts = name.trim().split(/\s+/);
-    const firstName = nameParts[0] || name;
-    const lastName = nameParts.slice(1).join(' ') || '';
-
     const airtableData = {
       'Email Address': email,
       'First Name': firstName,
-      ...(lastName && { 'Last Name': lastName }),
+      'Last Name': lastName,
       'Phone Number': whatsapp,
-      'Target Language': ['IFLI Português | Recursos Gratuitos'],
+      'Target Language': 'IFLI Português | Recursos Gratuitos',
     };
 
     let airtableRecord = null;

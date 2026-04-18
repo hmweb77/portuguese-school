@@ -13,7 +13,8 @@ const fadeInUp = {
 };
 
 export default function LeadMagnetSection({ onSubmit }) {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,7 +33,7 @@ export default function LeadMagnetSection({ onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !whatsapp) {
+    if (!firstName || !lastName || !email || !whatsapp) {
       alert('Please fill in all fields');
       return;
     }
@@ -46,10 +47,11 @@ export default function LeadMagnetSection({ onSubmit }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          name, 
-          email, 
-          whatsapp 
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          whatsapp,
         }),
       });
 
@@ -63,7 +65,7 @@ export default function LeadMagnetSection({ onSubmit }) {
 
       // Call parent callback if provided
       if (onSubmit) {
-        await onSubmit({ name, email, whatsapp });
+        await onSubmit({ firstName, lastName, email, whatsapp });
       }
 
       setShowSuccess(true);
@@ -223,18 +225,33 @@ export default function LeadMagnetSection({ onSubmit }) {
                       exit={{ opacity: 0 }}
                     >
                       {/* Name */}
-                      <div className="relative">
-                        <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
-                        <motion.input
-                          type="text"
-                          placeholder="Enter your name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          required
-                          disabled={isSubmitting}
-                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
-                          whileFocus={{ scale: 1.02 }}
-                        />
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="relative">
+                          <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
+                          <motion.input
+                            type="text"
+                            placeholder="First name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                            disabled={isSubmitting}
+                            className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
+                            whileFocus={{ scale: 1.02 }}
+                          />
+                        </div>
+                        <div className="relative">
+                          <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
+                          <motion.input
+                            type="text"
+                            placeholder="Last name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                            disabled={isSubmitting}
+                            className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
+                            whileFocus={{ scale: 1.02 }}
+                          />
+                        </div>
                       </div>
 
                       {/* Email */}
