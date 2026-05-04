@@ -126,6 +126,7 @@ export default function FAQSection() {
                     whileHover={{ boxShadow: "0px 10px 30px -10px rgba(0,0,0,0.1)" }}
                   >
                     <button
+                      id={`btn-faq-${index}`}
                       onClick={() => toggleAccordion(index)}
                       className="w-full text-left font-bold text-base px-6 py-6 flex items-center justify-between text-[#394D5C] hover:text-[#3BA9A3] transition-colors"
                     >

@@ -130,7 +130,7 @@ export default function PricingSection({ onSelectPlan }) {
           >
             <Sparkles className="w-4 h-4" />
             <span className="text-sm font-semibold">
-              Limited Seats Available - Enroll by April 12, 2026
+              Limited Seats Available - Enroll by July 5, 2026
             </span>
           </motion.div>
 
@@ -280,6 +280,7 @@ export default function PricingSection({ onSelectPlan }) {
 
                   {/* CTA Button - Fixed at Bottom */}
                   <motion.button
+                    id={`btn-plan-${plan.name.toLowerCase()}`}
                     className={`w-full relative rounded-full py-6 text-base font-semibold text-white overflow-hidden shadow-lg mt-auto`}
                     onClick={() => onSelectPlan(plan.name)}
                     data-testid={`button-select-${plan.name.toLowerCase()}`}

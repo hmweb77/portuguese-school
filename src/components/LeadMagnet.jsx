@@ -286,6 +286,7 @@ export default function LeadMagnetSection({ onSubmit }) {
                       </div>
 
                       <motion.button
+                        id="btn-lead-magnet-submit"
                         type="submit"
                         disabled={isSubmitting}
                         className="group relative w-full rounded-full py-6 text-base font-semibold bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"

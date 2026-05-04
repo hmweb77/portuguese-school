@@ -179,6 +179,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
         >
         
           <button
+            id="btn-enroll-hero"
             className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold rounded-full min-w-[200px] md:min-w-[220px] bg-[#FF8A5C] text-white hover:bg-[#FF7A4C] transition-colors"
             onClick={onEnrollClick}
             data-testid="button-enroll-hero"
@@ -290,6 +291,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
         {backgrounds.map((_, index) => (
           <button
             key={index}
+            id={`btn-slide-dot-${index}`}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               currentSlide === index ? 'bg-white w-8' : 'bg-white/40'
             }`}

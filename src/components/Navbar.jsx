@@ -95,6 +95,7 @@ export default function Navbar({ onEnrollClick }) {
             {navLinks.map((link, index) => (
               <motion.button
                 key={link.href}
+                id={`btn-nav-${link.label.toLowerCase()}`}
                 onClick={() => scrollToSection(link.href)}
                 className={`text-sm font-medium transition-all relative text-white ${activeSection === link.href.slice(1) ? "font-bold" : ""}`}
                 data-testid={`link-nav-${link.label.toLowerCase()}`}
@@ -118,6 +119,7 @@ export default function Navbar({ onEnrollClick }) {
 
             {/* Enroll Button */}
             <motion.button 
+              id="btn-enroll-nav"
               onClick={onEnrollClick}
               className="relative px-6 py-2 bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white rounded-full font-semibold overflow-hidden group"
               data-testid="button-enroll-nav"
@@ -139,6 +141,7 @@ export default function Navbar({ onEnrollClick }) {
 
           {/* Mobile Menu Button */}
           <motion.button
+            id="btn-mobile-menu"
             className="md:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             data-testid="button-mobile-menu"
@@ -184,6 +187,7 @@ export default function Navbar({ onEnrollClick }) {
               {navLinks.map((link, index) => (
                 <motion.button
                   key={link.href}
+                  id={`btn-mobile-${link.label.toLowerCase()}`}
                   onClick={() => scrollToSection(link.href)}
                   className={`block w-full text-left px-4 py-3 text-sm font-medium rounded-xl transition-all ${
                     activeSection === link.href.slice(1)
@@ -217,6 +221,7 @@ export default function Navbar({ onEnrollClick }) {
               </motion.div>
               
               <motion.button 
+                id="btn-enroll-mobile"
                 onClick={() => {
                   onEnrollClick();
                   setIsMobileMenuOpen(false);

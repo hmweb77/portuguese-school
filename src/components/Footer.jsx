@@ -223,6 +223,7 @@ export default function Footer() {
 
       {/* Scroll to Top Button */}
       <motion.button
+        id="btn-scroll-top"
         onClick={scrollToTop}
         className="fixed bottom-8 right-8 p-4 bg-linear-to-r from-[#3BA9A3] to-[#2D8B85] text-white rounded-full shadow-lg hover:shadow-xl transition-all z-40"
         initial={{ opacity: 0, scale: 0 }}

@@ -29,7 +29,7 @@ export const metadata = {
   },
 
   description:
-    "Learn European Portuguese in just 10 weeks with IFLI's intensive immersion program. Live online classes with native teachers, small groups (max 12), and proven results. Enrollment now open for January 2026 cohort.",
+    "Learn European Portuguese in just 10 weeks with IFLI's intensive immersion program. Live online classes with native teachers, small groups (max 12), and proven results. Enrollment now open for Summer 2026 cohort.",
 
   keywords: [
     "learn Portuguese",
@@ -74,7 +74,7 @@ export const metadata = {
     title:
       "IFLI Portuguese Immersion 2026 - Learn European Portuguese in 10 Weeks",
     description:
-      "Transform into a confident Portuguese speaker in 10 weeks. Live classes, native teachers, small groups. Enrollment open for January 2026.",
+      "Transform into a confident Portuguese speaker in 10 weeks. Live classes, native teachers, small groups. Enrollment open for Summer 2026.",
     images: [
       {
         url: "https://iflimmersion.com/ifli-portuguese-language-immersion/og-image.jpg",
@@ -89,7 +89,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "IFLI Portuguese Immersion 2026 - Learn European Portuguese Fast",
     description:
-      "Speak Portuguese confidently in 10 weeks. Live online classes with native teachers. Enroll now for January 2026!",
+      "Speak Portuguese confidently in 10 weeks. Live online classes with native teachers. Enroll now for Summer 2026!",
     images: [
       "https://iflimmersion.com/ifli-portuguese-language-immersion/twitter-image.jpg",
     ],
@@ -159,7 +159,7 @@ const jsonLd = {
       url: "https://iflimmersion.com/ifli-portuguese-language-immersion",
       name: "IFLI Portuguese Immersion 2026",
       description:
-        "Intensive 10-week European Portuguese immersion program starting January 2026",
+        "Intensive 10-week European Portuguese immersion program starting July 2026",
       isPartOf: {
         "@id": "https://iflimmersion.com/",
       },
@@ -202,8 +202,8 @@ const jsonLd = {
       hasCourseInstance: {
         "@type": "CourseInstance",
         courseMode: "online",
-        startDate: "2026-01-19",
-        endDate: "2026-03-27",
+        startDate: "2026-07-06",
+        endDate: "2026-09-11",
         courseWorkload: "PT1H",
         instructor: {
           "@type": "Person",

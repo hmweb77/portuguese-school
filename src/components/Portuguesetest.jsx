@@ -249,6 +249,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     </p>
                   </div>
                   <button
+                    id="btn-test-close-quiz"
                     onClick={handleClose}
                     className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
                   >
@@ -302,6 +303,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
 
                 <div className="flex justify-between pt-4">
                   <button
+                    id="btn-test-back"
                     onClick={handleBack}
                     disabled={currentQuestion === 0}
                     className={`px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200 flex items-center gap-2 ${
@@ -313,6 +315,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     Back
                   </button>
                   <button
+                    id="btn-test-next"
                     onClick={handleNext}
                     disabled={selectedAnswer === null}
                     className={`px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200 flex items-center gap-2 ${
@@ -342,6 +345,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     </p>
                   </div>
                   <button
+                    id="btn-test-close-email"
                     onClick={handleClose}
                     className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
                     disabled={isSubmitting}
@@ -377,6 +381,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
 
                 <div className="flex gap-3 pt-4">
                   <button
+                    id="btn-test-back-to-test"
                     type="button"
                     onClick={() => setShowEmailCapture(false)}
                     disabled={isSubmitting}
@@ -386,6 +391,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     Back to Test
                   </button>
                   <button 
+                    id="btn-test-submit"
                     type="submit"
                     disabled={isSubmitting}
                     className="flex-1 px-4 py-2 bg-[#3BA9A3] text-white rounded-xl font-medium hover:bg-[#359690] transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -419,6 +425,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     </p>
                   </div>
                   <button
+                    id="btn-test-close-results"
                     onClick={handleClose}
                     className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
                   >
@@ -452,6 +459,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
 
                 <div className="flex gap-3 pt-4">
                   <button
+                    id="btn-test-close"
                     onClick={handleClose}
                     className="flex-1 px-4 py-2 border-2 border-[#E3E5E8] rounded-xl font-medium text-[#394D5C] hover:bg-[#F5F6F7] transition-colors duration-200"
                     data-testid="button-close-results"
@@ -459,6 +467,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
                     Close
                   </button>
                   <button
+                    id="btn-test-enroll"
                     onClick={() => {
                       handleClose();
                       const url = "https://wa.me/351933292112?text=" + encodeURIComponent("Hi! I'm interested in the Portuguese Immersion program and would like to secure a spot.");

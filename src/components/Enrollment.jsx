@@ -29,6 +29,7 @@ export default function EnrollmentModal({ open, onClose, selectedPlan }) {
             Pre-Enroll in Portuguese Immersion
           </h2>
           <button
+            id="btn-enrollment-close"
             onClick={onClose}
             className="text-[#6B8299] hover:text-[#394D5C] transition-colors"
             aria-label="Close modal"

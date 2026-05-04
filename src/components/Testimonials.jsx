@@ -154,6 +154,7 @@ export default function TestimonialsSection() {
         >
           {/* Navigation Arrows */}
           <motion.button
+            id="btn-testimonials-prev"
             onClick={prevSlide}
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-12 h-12 bg-white border-2 border-[#E3E5E8] rounded-full flex items-center justify-center hover:bg-[#3BA9A3] hover:border-[#3BA9A3] hover:text-white transition-all duration-300 shadow-lg"
             whileHover={{ scale: 1.1 }}
@@ -164,6 +165,7 @@ export default function TestimonialsSection() {
           </motion.button>
 
           <motion.button
+            id="btn-testimonials-next"
             onClick={nextSlide}
             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-12 h-12 bg-white border-2 border-[#E3E5E8] rounded-full flex items-center justify-center hover:bg-[#3BA9A3] hover:border-[#3BA9A3] hover:text-white transition-all duration-300 shadow-lg"
             whileHover={{ scale: 1.1 }}
@@ -278,6 +280,7 @@ export default function TestimonialsSection() {
             {[...Array(maxIndex + 1)].map((_, index) => (
               <motion.button
                 key={index}
+                id={`btn-testimonials-dot-${index}`}
                 onClick={() => goToSlide(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   currentIndex === index ? 'w-8 bg-[#3BA9A3]' : 'w-2 bg-[#E3E5E8]'

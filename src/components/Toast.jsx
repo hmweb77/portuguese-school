@@ -26,6 +26,7 @@ export default function Toast({ title, description, onClose }) {
         </div>
         
         <button
+          id="btn-toast-close"
           onClick={onClose}
           className="flex-shrink-0 text-[#6B8299] hover:text-[#394D5C] transition-colors"
         >
