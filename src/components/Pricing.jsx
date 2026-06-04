@@ -130,7 +130,7 @@ export default function PricingSection({ onSelectPlan }) {
           >
             <Sparkles className="w-4 h-4" />
             <span className="text-sm font-semibold">
-              Limited Seats Available - Enroll by July 5, 2026
+              Limited Seats Available - Enroll by July 12, 2026
             </span>
           </motion.div>
 

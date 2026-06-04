@@ -202,8 +202,8 @@ const jsonLd = {
       hasCourseInstance: {
         "@type": "CourseInstance",
         courseMode: "online",
-        startDate: "2026-07-06",
-        endDate: "2026-09-11",
+        startDate: "2026-07-13",
+        endDate: "2026-09-18",
         courseWorkload: "PT1H",
         instructor: {
           "@type": "Person",

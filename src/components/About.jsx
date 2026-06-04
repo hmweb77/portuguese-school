@@ -46,7 +46,7 @@ export default function AboutProgram() {
     { 
       icon: Calendar, 
       title: "10 Weeks", 
-      description: "Jul 6 - Sep 11, 2026",
+      description: "Jul 13 - Sep 18, 2026",
       color: "from-blue-400 to-blue-600",
       bgColor: "bg-blue-50"
     },
