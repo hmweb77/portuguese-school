@@ -98,10 +98,10 @@ export default function Home() {
     setToasts(prev => prev.filter(toast => toast.id !== id));
   };
 
-  // Temporary: all Enroll buttons go to WhatsApp. Set back to modal when form is ready.
-  const WHATSAPP_ENROLL_URL = "https://wa.me/351933292112?text=" + encodeURIComponent("Hi! I'm interested in the Portuguese Immersion program and would like to secure a spot.");
+  // All Enroll buttons go to the registration form.
+  const ENROLL_URL = "https://iflilanguages.fillout.com/registration";
   const handleEnrollClick = () => {
-    window.open(WHATSAPP_ENROLL_URL, "_blank", "noopener,noreferrer");
+    window.open(ENROLL_URL, "_blank", "noopener,noreferrer");
   };
 
   const handleEnrollmentSubmit = (data) => {
