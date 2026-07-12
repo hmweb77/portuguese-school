@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const ENROLLMENT_DEADLINE = new Date("2026-07-12T23:59:59");
+const ENROLLMENT_DEADLINE = new Date("2026-07-20T23:59:59");
 
 function useCountdown(targetDate) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -126,7 +126,7 @@ export default function FinalCTASection() {
         >
           Your Portuguese Journey Starts
           <br />
-          <span className="text-white drop-shadow-sm">July 13, 2026</span>
+          <span className="text-white drop-shadow-sm">July 21, 2026</span>
         </motion.h2>
 
         <motion.p
@@ -160,7 +160,7 @@ export default function FinalCTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Deadline: July 12, 2026
+          Deadline: July 20, 2026
         </motion.p>
 
         <motion.p
@@ -175,7 +175,7 @@ export default function FinalCTASection() {
 
         <motion.a
           id="btn-secure-spot"
-          href={whatsappUrl}
+          href="https://iflilanguages.fillout.com/registration"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative inline-flex items-center gap-3 px-10 py-5 text-lg font-bold rounded-full bg-white text-[#2D8B85] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_60px_-12px_rgba(0,0,0,0.4)] transition-shadow duration-300"
