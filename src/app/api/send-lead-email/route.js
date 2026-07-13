@@ -96,7 +96,7 @@ export async function POST(request) {
                     
                     <div style="background: #E8F5F4; border-left: 4px solid #3BA9A3; padding: 15px; margin: 30px 0;">
                       <p style="margin: 0; font-size: 14px;">
-                        <strong>💡 Ready for More?</strong> Our Immersion 2026 program starts July 21st. Enrollment closes July 20th!
+                        <strong>💡 Ready for More?</strong> Our Immersion 2026 program starts July 20th. Enrollment closes July 19th!
                       </p>
                     </div>
                     

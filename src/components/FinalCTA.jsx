@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const ENROLLMENT_DEADLINE = new Date("2026-07-20T23:59:59");
+const ENROLLMENT_DEADLINE = new Date("2026-07-19T23:59:59");
 
 function useCountdown(targetDate) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -126,7 +126,7 @@ export default function FinalCTASection() {
         >
           Your Portuguese Journey Starts
           <br />
-          <span className="text-white drop-shadow-sm">July 21, 2026</span>
+          <span className="text-white drop-shadow-sm">July 20, 2026</span>
         </motion.h2>
 
         <motion.p
@@ -160,7 +160,7 @@ export default function FinalCTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Deadline: July 20, 2026
+          Deadline: July 19, 2026
         </motion.p>
 
         <motion.p
