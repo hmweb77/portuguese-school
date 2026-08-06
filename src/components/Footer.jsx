@@ -198,11 +198,19 @@ export default function Footer() {
           transition={{ delay: 0.4 }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2 text-sm text-[#6B8299]">
+            <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-[#6B8299]">
               <p>© 2026 IFLI. All rights reserved.</p>
-              <span className="hidden md:inline">•</span>
+              <span className="hidden sm:inline">•</span>
               <p className="flex items-center gap-1">
-                Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> in Portugal By <Link href="https://www.hmwebs.com/" target="blank" className="text-red-700 hover:text-[#394D5C] transition-colors font-medium">Oussama</Link>
+                Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> in Portugal by{" "}
+                <Link
+                  href="https://www.nextdigits.ma/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#3BA9A3] hover:text-[#394D5C] transition-colors font-medium"
+                >
+                  NextDigits
+                </Link>
               </p>
             </div>
             
