@@ -15,6 +15,7 @@ const CALENDAR_URL = "https://luma.com/ifli-languages";
 export default function UpcomingEvents() {
   return (
     <section
+    id="upcoming-events"
       className="relative py-24 md:py-32 px-6 bg-[#F5F6F7] overflow-hidden"
       data-testid="section-upcoming-events"
     >
