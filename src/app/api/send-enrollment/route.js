@@ -86,7 +86,7 @@ export async function POST(request) {
                         <li style="margin-bottom: 10px;">Our team will review your enrollment within 24 hours</li>
                         <li style="margin-bottom: 10px;">You'll receive payment instructions via email</li>
                         <li style="margin-bottom: 10px;">Once payment is confirmed, you'll get access to the student portal</li>
-                        <li style="margin-bottom: 10px;">Program starts on <strong>October 5, 2026</strong></li>
+                        <li style="margin-bottom: 10px;">Program starts on <strong>October 12, 2026</strong></li>
                       </ul>
                     </div>
                     

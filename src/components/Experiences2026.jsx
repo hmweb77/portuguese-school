@@ -7,7 +7,7 @@ const EXPERIENCES = [
   { name: "Winter Immersion Experience", dates: "19 Jan – 27 Mar" },
   { name: "Spring Immersion Experience", dates: "13 Apr – 19 Jun" },
   { name: "Summer Immersion Experience", dates: "13 Jul – 18 Sep" },
-  { name: "Autumn Immersion Experience", dates: "5 Oct – 11 Dec" },
+  { name: "Autumn Immersion Experience", dates: "12 Oct – 18 Dec" },
 ];
 
 const fadeInUp = {

@@ -126,7 +126,7 @@ export default function FinalCTASection() {
         >
           Your Portuguese Journey Starts
           <br />
-          <span className="text-white drop-shadow-sm">October 5, 2026</span>
+          <span className="text-white drop-shadow-sm">October 12, 2026</span>
         </motion.h2>
 
         <motion.p
