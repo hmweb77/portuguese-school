@@ -112,14 +112,6 @@ export default function Home() {
     );
   };
 
-  const handleLeadMagnetSubmit = (email) => {
-    console.log('Lead magnet email:', email);
-    showToast(
-      "Guide Downloaded!",
-      "Check your email for the Portuguese Starter Guide."
-    );
-  };
-
   const handleTestClick = () => {
     setTestModalOpen(true);
   };
@@ -147,7 +139,7 @@ export default function Home() {
         {/* <FreeTrialSection/> */}
         <TestimonialsSection />
         <UpcomingEventsSection />
-        <LeadMagnetSection onSubmit={handleLeadMagnetSubmit} />
+        <LeadMagnetSection />
         <FinalCTASection onEnrollClick={() => handleEnrollClick()} />
         <Experiences2026Section />
         <FAQSection />

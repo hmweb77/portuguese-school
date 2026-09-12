@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const ENROLLMENT_DEADLINE = new Date("2026-10-09T23:59:59");
+const ENROLLMENT_DEADLINE = new Date("2026-10-16T23:59:59");
 
 function useCountdown(targetDate) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -160,7 +160,7 @@ export default function FinalCTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Late enrolment open until 9 October - recordings let you catch up
+          Late enrolment open until 16 October - recordings let you catch up
         </motion.p>
 
         <motion.p

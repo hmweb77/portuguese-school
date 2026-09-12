@@ -1,9 +1,12 @@
 "use client";
-import { useState, useMemo } from "react";
-import { Download, CheckCircle, Mail, FileText, Sparkles, Lock, User, Phone } from "lucide-react";
+import { useMemo } from "react";
+import { CheckCircle, FileText, Sparkles } from "lucide-react";
 import pdfImage from "../../public/freeS.png";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
+
+const CLASSROOM_URL =
+  "https://classroom.google.com/c/NzkyNzEyNzIzMzgw?cjc=clutbctc";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -12,14 +15,7 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: "easeOut" }
 };
 
-export default function LeadMagnetSection({ onSubmit }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-
+export default function LeadMagnetSection() {
   const particlePositions = useMemo(() => {
     return Array.from({ length: 10 }, (_, i) => ({
       left: `${(i * 13.7 + 23) % 100}%`,
@@ -28,60 +24,6 @@ export default function LeadMagnetSection({ onSubmit }) {
       delay: (i % 5) * 0.4
     }));
   }, []);
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!firstName || !lastName || !email || !whatsapp) {
-      alert('Please fill in all fields');
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      // Call API to save lead to Airtable and send email
-      const response = await fetch('/api/send-lead-magnet', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          whatsapp,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to submit');
-      }
-
-      console.log('✅ Lead captured successfully:', data);
-
-      // Call parent callback if provided
-      if (onSubmit) {
-        await onSubmit({ firstName, lastName, email, whatsapp });
-      }
-
-      setShowSuccess(true);
-
-      // Redirect to Google Classroom after a short delay so user sees success
-      const classroomUrl = "https://classroom.google.com/c/NzkyNzEyNzIzMzgw?cjc=clutbctc";
-      setTimeout(() => {
-        window.location.href = classroomUrl;
-      }, 1500);
-
-    } catch (error) {
-      console.error('❌ Lead magnet submission error:', error);
-      alert('Something went wrong. Please try again or contact us directly.');
-      setIsSubmitting(false);
-    }
-  };
 
   const benefits = [
     { icon: FileText, text: "Join a sample IFLI Google Classroom" },
@@ -114,7 +56,6 @@ export default function LeadMagnetSection({ onSubmit }) {
           transition={{ duration: 10, repeat: Infinity }}
         />
 
-
       {/* Floating Particles - FIXED VERSION */}
 <div className="absolute inset-0 overflow-hidden pointer-events-none">
   {particlePositions.map((particle, i) => (
@@ -142,33 +83,6 @@ export default function LeadMagnetSection({ onSubmit }) {
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div {...fadeInUp}>
           <div className="relative p-10 md:p-16 shadow-[0px_30px_50px_-12px_rgba(0,0,0,0.20),0px_15px_30px_-12px_rgba(0,0,0,0.12)] bg-white rounded-3xl overflow-hidden">
-            {/* Success confetti animation */}
-            <AnimatePresence>
-              {showSuccess && (
-                <>
-                  {[...Array(20)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-3 h-3 rounded-full"
-                      style={{
-                        left: "50%",
-                        top: "50%",
-                        background: ["#3BA9A3", "#FF8A5C", "#394D5C", "#FFD700"][i % 4],
-                      }}
-                      initial={{ scale: 0, x: 0, y: 0 }}
-                      animate={{
-                        scale: [0, 1, 0],
-                        x: Math.cos((i / 20) * Math.PI * 2) * 200,
-                        y: Math.sin((i / 20) * Math.PI * 2) * 200,
-                      }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1, ease: "easeOut" }}
-                    />
-                  ))}
-                </>
-              )}
-            </AnimatePresence>
-
             <div className="grid md:grid-cols-2 gap-12 items-center">
               {/* Left Content */}
               <div className="order-2 md:order-1">
@@ -216,140 +130,26 @@ export default function LeadMagnetSection({ onSubmit }) {
                   })}
                 </div>
 
-                {/* Form */}
-                <AnimatePresence mode="wait">
-                  {!showSuccess ? (
-                    <motion.form
-                      onSubmit={handleSubmit}
-                      className="space-y-4"
-                      initial={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      {/* Name */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="relative">
-                          <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
-                          <motion.input
-                            type="text"
-                            placeholder="First name"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            required
-                            disabled={isSubmitting}
-                            className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
-                            whileFocus={{ scale: 1.02 }}
-                          />
-                        </div>
-                        <div className="relative">
-                          <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
-                          <motion.input
-                            type="text"
-                            placeholder="Last name"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            required
-                            disabled={isSubmitting}
-                            className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
-                            whileFocus={{ scale: 1.02 }}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Email */}
-                      <div className="relative">
-                        <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
-                        <motion.input
-                          type="email"
-                          placeholder="Enter your email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          disabled={isSubmitting}
-                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
-                          data-testid="input-email-lead"
-                          whileFocus={{ scale: 1.02 }}
-                        />
-                      </div>
-
-                      {/* WhatsApp */}
-                      <div className="relative">
-                        <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B8299]" />
-                        <motion.input
-                          type="tel"
-                          placeholder="Enter your WhatsApp number"
-                          value={whatsapp}
-                          onChange={(e) => setWhatsapp(e.target.value)}
-                          required
-                          disabled={isSubmitting}
-                          className="w-full h-14 text-base pl-14 pr-6 rounded-2xl border-2 border-[#E3E5E8] focus:outline-none focus:ring-2 focus:ring-[#3BA9A3] focus:border-transparent text-[#394D5C] transition-all disabled:bg-gray-50 disabled:cursor-not-allowed"
-                          whileFocus={{ scale: 1.02 }}
-                        />
-                      </div>
-
-                      <motion.button
-                        id="btn-lead-magnet-submit"
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="group relative w-full rounded-full py-6 text-base font-semibold bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                        data-testid="button-download-guide"
-                        whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                        whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                      >
-                        <motion.div
-                          className="absolute inset-0 bg-linear-to-r from-[#FF7A4C] to-[#FF6A3C]"
-                          initial={{ x: "-100%" }}
-                          whileHover={{ x: 0 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        <span className="relative z-10 flex items-center justify-center gap-2">
-                          {isSubmitting ? (
-                            <>
-                              <motion.div
-                                className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                              />
-                              Processing...
-                            </>
-                          ) : (
-                            <>
-                              Join Your Sample IFLI Google Classroom 
-                            </>
-                          )}
-                        </span>
-                      </motion.button>
-                    </motion.form>
-                  ) : (
-                    <motion.div
-                      className="p-6 bg-green-50 border-2 border-green-200 rounded-2xl"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
-                          <CheckCircle className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="font-bold text-green-900">Thank You!</h3>
-                          
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Privacy Note */}
-                <motion.div
-                  className="flex items-center gap-2 mt-6 text-sm text-[#6B8299]"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
+                <motion.a
+                  id="btn-lead-magnet-submit"
+                  href={CLASSROOM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex w-full items-center justify-center rounded-full py-6 text-base font-semibold bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg"
+                  data-testid="button-download-guide"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <Lock className="w-4 h-4" />
-                  <span>We respect your privacy. Unsubscribe anytime.</span>
-                </motion.div>
+                  <motion.div
+                    className="absolute inset-0 bg-linear-to-r from-[#FF7A4C] to-[#FF6A3C]"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <span className="relative z-10">
+                    Join Your Sample IFLI Google Classroom
+                  </span>
+                </motion.a>
               </div>
 
               {/* Right - PDF Mockup */}
