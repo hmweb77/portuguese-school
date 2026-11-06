@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 
 const EXPERIENCES = [
-  { name: "Winter Immersion Experience", dates: "19 Jan – 27 Mar" },
-  { name: "Spring Immersion Experience", dates: "13 Apr – 19 Jun" },
-  { name: "Summer Immersion Experience", dates: "13 Jul – 18 Sep" },
-  { name: "Autumn Immersion Experience", dates: "12 Oct – 18 Dec" },
+  { name: "Winter Immersion Experience", dates: "18 Jan – 26 Mar 2027" },
+  { name: "Spring Immersion Experience", dates: "12 Apr – 18 Jun 2027" },
+  { name: "Summer Immersion Experience", dates: "5 Jul – 10 Sep 2027" },
+  { name: "Autumn Immersion Experience", dates: "4 Oct – 10 Dec 2027" },
 ];
 
 const fadeInUp = {
@@ -25,7 +25,7 @@ export default function Experiences2026() {
           className="text-3xl md:text-4xl font-bold text-center text-[#394D5C] mb-12 tracking-tight"
           {...fadeInUp}
         >
-          2026 Experiences
+          2027 Experiences
         </motion.h2>
 
         <div className="grid gap-4 sm:gap-5">

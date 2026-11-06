@@ -1,5 +1,5 @@
 "use client"
-import { Facebook, Instagram, Youtube, Linkedin, Mail, MapPin, Phone, Heart, ArrowUp } from "lucide-react";
+import { Facebook, Instagram, Youtube, Linkedin, Mail, MapPin, Phone, ArrowUp } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -201,17 +201,28 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-[#6B8299]">
               <p>© 2026 IFLI. All rights reserved.</p>
               <span className="hidden sm:inline">•</span>
-              <p className="flex items-center gap-1">
-                Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> in Portugal by{" "}
-                <Link
-                  href="https://www.nextdigits.ma/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#3BA9A3] hover:text-[#394D5C] transition-colors font-medium"
-                >
-                  NextDigits
-                </Link>
-              </p>
+              <Link
+                href="https://www.nextdigits.ma/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 rounded-xl transition-opacity hover:opacity-80"
+              >
+                <Image
+                  src="/nextdigits-logo.png"
+                  alt=""
+                  width={42}
+                  height={27}
+                  className="h-8 w-auto rounded-md"
+                />
+                <span className="flex flex-col items-start leading-none">
+                  <span className="text-sm font-bold tracking-tight text-[#071B3E]">
+                    Next Digits
+                  </span>
+                  <span className="mt-1 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#4C86F7]">
+                    Build · Automate · Scale
+                  </span>
+                </span>
+              </Link>
             </div>
             
             {/* <div className="flex flex-wrap gap-6 text-sm">

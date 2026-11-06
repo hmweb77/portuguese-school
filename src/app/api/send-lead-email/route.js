@@ -96,7 +96,7 @@ export async function POST(request) {
                     
                     <div style="background: #E8F5F4; border-left: 4px solid #3BA9A3; padding: 15px; margin: 30px 0;">
                       <p style="margin: 0; font-size: 14px;">
-                        <strong>💡 Ready for More?</strong> Our Immersion 2026 program starts October 12th. Enrollment closes October 11th!
+                        <strong>💡 Ready for More?</strong> Our next Immersion runs <strong>18 Jan – 26 Mar 2027</strong>.
                       </p>
                     </div>
                     
