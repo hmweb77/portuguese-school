@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { getNextCourseLabel } from "@/lib/courses";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -130,7 +131,7 @@ export default function PricingSection({ onSelectPlan }) {
           >
             <Sparkles className="w-4 h-4" />
             <span className="text-sm font-semibold">
-              Limited Seats Available - 18 Jan – 26 Mar 2027
+              Limited Seats Available - {getNextCourseLabel()}
             </span>
           </motion.div>
 

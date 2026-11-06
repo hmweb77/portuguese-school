@@ -2,8 +2,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-
-const ENROLLMENT_DEADLINE = new Date("2027-01-18T00:00:00");
+import { getNextCourseLabel, getNextCourseStart } from "@/lib/courses";
 
 function useCountdown(targetDate) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -57,7 +56,9 @@ export default function FinalCTASection() {
   const whatsappMessage = encodeURIComponent("Hi! I'm interested in the Portuguese Immersion program and would like to secure a spot.");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-  const { days, hours, minutes, seconds } = useCountdown(ENROLLMENT_DEADLINE);
+  const nextCourseLabel = getNextCourseLabel();
+  const nextCourseStart = useMemo(() => getNextCourseStart(), []);
+  const { days, hours, minutes, seconds } = useCountdown(nextCourseStart);
 
   const particlePositions = useMemo(() => {
     return Array.from({ length: 20 }, (_, i) => ({
@@ -126,7 +127,7 @@ export default function FinalCTASection() {
         >
           Your Portuguese Journey Starts
           <br />
-          <span className="text-white drop-shadow-sm">18 Jan – 26 Mar 2027</span>
+          <span className="text-white drop-shadow-sm">{nextCourseLabel}</span>
         </motion.h2>
 
         <motion.p
@@ -160,7 +161,7 @@ export default function FinalCTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Next course: 18 Jan – 26 Mar 2027 - recordings let you catch up
+          Next course: {nextCourseLabel} - recordings let you catch up
         </motion.p>
 
         <motion.p

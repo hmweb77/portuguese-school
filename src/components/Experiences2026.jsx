@@ -2,13 +2,12 @@
 
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
+import { COURSES_2027, formatCourseRange } from "@/lib/courses";
 
-const EXPERIENCES = [
-  { name: "Winter Immersion Experience", dates: "18 Jan – 26 Mar 2027" },
-  { name: "Spring Immersion Experience", dates: "12 Apr – 18 Jun 2027" },
-  { name: "Summer Immersion Experience", dates: "5 Jul – 10 Sep 2027" },
-  { name: "Autumn Immersion Experience", dates: "4 Oct – 10 Dec 2027" },
-];
+const EXPERIENCES = COURSES_2027.map((course) => ({
+  name: course.name,
+  dates: formatCourseRange(course),
+}));
 
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },

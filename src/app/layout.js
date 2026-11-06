@@ -2,6 +2,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { getNextCourseIso, getNextCourseLabel } from "@/lib/courses";
+
+export const revalidate = 3600;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +20,9 @@ const geistMono = Geist_Mono({
 
 const GTM_ID = "GTM-5BGNDBC8";
 
-export const metadata = {
+export async function generateMetadata() {
+  const nextCourseLabel = getNextCourseLabel();
+  return {
   metadataBase: new URL(
     "https://iflimmersion.com/ifli-portuguese-language-immersion"
   ),
@@ -29,7 +34,7 @@ export const metadata = {
   },
 
   description:
-    "Learn European Portuguese in just 10 weeks with IFLI's intensive immersion program. Live online classes with native teachers, small groups (max 12), and proven results. Enrollment now open for 18 Jan – 26 Mar 2027.",
+    `Learn European Portuguese in just 10 weeks with IFLI's intensive immersion program. Live online classes with native teachers, small groups (max 12), and proven results. Enrollment now open for ${nextCourseLabel}.`,
 
   keywords: [
     "learn Portuguese",
@@ -74,7 +79,7 @@ export const metadata = {
     title:
       "IFLI Portuguese Immersion 2026 - Learn European Portuguese in 10 Weeks",
     description:
-      "Transform into a confident Portuguese speaker in 10 weeks. Live classes, native teachers, small groups. Enrollment open for 18 Jan – 26 Mar 2027.",
+      `Transform into a confident Portuguese speaker in 10 weeks. Live classes, native teachers, small groups. Enrollment open for ${nextCourseLabel}.`,
     images: [
       {
         url: "https://iflimmersion.com/ifli-portuguese-language-immersion/og-image.jpg",
@@ -89,7 +94,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "IFLI Portuguese Immersion 2026 - Learn European Portuguese Fast",
     description:
-      "Speak Portuguese confidently in 10 weeks. Live online classes with native teachers. Enroll now for 18 Jan – 26 Mar 2027!",
+      `Speak Portuguese confidently in 10 weeks. Live online classes with native teachers. Enroll now for ${nextCourseLabel}!`,
     images: [
       "https://iflimmersion.com/ifli-portuguese-language-immersion/twitter-image.jpg",
     ],
@@ -112,10 +117,13 @@ export const metadata = {
   },
 
   category: "Education",
-};
+  };
+}
 
 // JSON-LD Structured Data for SEO
-const jsonLd = {
+function createJsonLd() {
+  const nextCourse = getNextCourseIso();
+  return {
   "@context": "https://schema.org",
   "@graph": [
     // Organization Schema
@@ -159,7 +167,7 @@ const jsonLd = {
       url: "https://iflimmersion.com/ifli-portuguese-language-immersion",
       name: "IFLI Portuguese Immersion 2026",
       description:
-        "Intensive 10-week European Portuguese immersion program, 18 Jan – 26 Mar 2027",
+        `Intensive 10-week European Portuguese immersion program, ${nextCourse.label}`,
       isPartOf: {
         "@id": "https://iflimmersion.com/",
       },
@@ -202,8 +210,8 @@ const jsonLd = {
       hasCourseInstance: {
         "@type": "CourseInstance",
         courseMode: "online",
-        startDate: "2027-01-18",
-        endDate: "2027-03-26",
+        startDate: nextCourse.startDate,
+        endDate: nextCourse.endDate,
         courseWorkload: "PT1H",
         instructor: {
           "@type": "Person",
@@ -308,7 +316,8 @@ const jsonLd = {
       ],
     },
   ],
-};
+  };
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -350,7 +359,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(createJsonLd()) }}
         />
       </head>
 

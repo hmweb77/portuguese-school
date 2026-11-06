@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getNextCourseLabel } from '@/lib/courses';
 
 export async function POST(request) {
   try {
@@ -79,7 +80,7 @@ export async function POST(request) {
                 
                 <div style="background: #FFF3E0; border-left: 4px solid #FF8A5C; padding: 15px; margin: 30px 0;">
                   <p style="margin: 0; font-size: 14px;">
-                    <strong>⏰ Limited Time:</strong> Next Immersion: <strong>18 Jan – 26 Mar 2027</strong>.
+                    <strong>⏰ Limited Time:</strong> Next Immersion: <strong>${getNextCourseLabel()}</strong>.
                   </p>
                 </div>
                 

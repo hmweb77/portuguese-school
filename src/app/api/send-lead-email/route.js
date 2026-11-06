@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createLead } from '@/lib/airtable';
+import { getNextCourseLabel } from '@/lib/courses';
 
 export async function POST(request) {
   try {
@@ -96,7 +97,7 @@ export async function POST(request) {
                     
                     <div style="background: #E8F5F4; border-left: 4px solid #3BA9A3; padding: 15px; margin: 30px 0;">
                       <p style="margin: 0; font-size: 14px;">
-                        <strong>💡 Ready for More?</strong> Our next Immersion runs <strong>18 Jan – 26 Mar 2027</strong>.
+                        <strong>💡 Ready for More?</strong> Our next Immersion runs <strong>${getNextCourseLabel()}</strong>.
                       </p>
                     </div>
                     

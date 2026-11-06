@@ -4,6 +4,7 @@ import programImage from "../../public/aboutt.png";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import { getNextCourseLabel } from "@/lib/courses";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -46,7 +47,7 @@ export default function AboutProgram() {
     { 
       icon: Calendar, 
       title: "10 Weeks", 
-      description: "18 Jan – 26 Mar 2027",
+      description: getNextCourseLabel(),
       color: "from-blue-400 to-blue-600",
       bgColor: "bg-blue-50"
     },
