@@ -64,11 +64,11 @@ export default function Footer() {
               whileHover={{ scale: 1.05 }}
             >
               <Image
-                src="/horizontal-original-sin fondo-letras blancas-400x218px.png"
-                alt="IFLI Logo"
-                width={180}
-                height={50}
-                className="brightness-0"
+                src="/ifli-logo-on-light.png"
+                alt="IFLI Languages"
+                width={220}
+                height={91}
+                className="h-14 w-auto"
               />
             </motion.div>
             <p className="text-[#6B8299] mb-6 leading-relaxed">

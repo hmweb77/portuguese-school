@@ -81,11 +81,11 @@ export default function Navbar({ onEnrollClick }) {
             whileTap={{ scale: 0.95 }}
           >
             <Image 
-              src="/horizontal-original-sin fondo-letras blancas-400x218px.png" 
-              alt="IFLI Logo" 
-              width={300} 
-              height={100}
-              className={`h-24 w-auto transition-all duration-300 `}
+              src="/ifli-logo-on-dark.png"
+              alt="IFLI Languages"
+              width={300}
+              height={124}
+              className="h-14 md:h-16 w-auto"
               priority
             />
           </motion.a>
