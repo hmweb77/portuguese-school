@@ -62,7 +62,7 @@ export default function Navbar({ onEnrollClick }) {
     <motion.nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "bg-[#3FA7A3] backdrop-blur-md border-b border-[#E3E5E8] shadow-lg" 
+          ? "bg-[#1F6A5C]/95 backdrop-blur-md border-b border-white/10 shadow-lg"
           : "bg-transparent"
       }`}
       data-testid="navbar"
@@ -156,7 +156,7 @@ export default function Navbar({ onEnrollClick }) {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <X className={`w-6 h-6 ${isScrolled ? "text-[#394D5C]" : "text-white"}`} />
+                  <X className="w-6 h-6 text-white" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -166,7 +166,7 @@ export default function Navbar({ onEnrollClick }) {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Menu className={`w-6 h-6 ${isScrolled ? "text-[#394D5C]" : "text-white"}`} />
+                  <Menu className="w-6 h-6 text-white" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -228,7 +228,7 @@ export default function Navbar({ onEnrollClick }) {
 
       {/* Progress Bar */}
       <motion.div
-        className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-[#3BA9A3] to-[#FF8A5C]"
+        className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-[#E5F4EF] to-[#FF8057]"
         style={{
           width: (typeof window === 'undefined')
             ? '0%'

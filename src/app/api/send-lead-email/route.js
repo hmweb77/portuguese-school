@@ -114,7 +114,7 @@ export async function POST(request) {
                   </div>
                   
                   <div style="text-align: center; padding: 20px; color: #6B8299; font-size: 12px;">
-                    <p>© 2026 IFLI - Instituto de Formação em Língua Portuguesa</p>
+                    <p>© 2027 IFLI - Instituto de Formação em Língua Portuguesa</p>
                     <p>Lisbon, Portugal</p>
                     <p style="margin-top: 10px;">
                       Questions? Contact us at ${whatsapp} (WhatsApp)

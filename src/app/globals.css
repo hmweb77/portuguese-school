@@ -1,2 +1,33 @@
 @import "tailwindcss";
 
+:root {
+  --ifli-green-dark: #1f6a5c;
+  --ifli-green-deep: #174f45;
+  --ifli-green-light: #e5f4ef;
+  --ifli-ink: #24477d;
+  --ifli-coral: #ff8057;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ifli-ink);
+  background: #fff;
+  font-family: var(--font-montserrat), Arial, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(255, 128, 87, 0.8);
+  outline-offset: 3px;
+}
+

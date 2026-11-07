@@ -13,9 +13,6 @@ const nextConfig = {
     ],
   },
   
-  // Enable SWC minification for better performance
-  swcMinify: true,
-  
   // Compiler options
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

@@ -34,7 +34,7 @@ export default function LeadMagnetSection() {
   return (
     <section
       id="free-resources"
-      className="relative py-24 md:py-32 px-6 bg-linear-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden"
+      className="relative py-24 md:py-32 px-6 bg-linear-to-br from-[#1F6A5C] via-[#1B5B50] to-[#174F45] text-white overflow-hidden"
       data-testid="section-lead-magnet"
     >
       {/* Animated background elements */}
@@ -135,7 +135,7 @@ export default function LeadMagnetSection() {
                   href={CLASSROOM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex w-full items-center justify-center rounded-full py-6 text-base font-semibold bg-linear-to-r from-[#FF8A5C] to-[#FF7A4C] text-white overflow-hidden shadow-lg"
+                  className="group relative inline-flex w-full items-center justify-center rounded-full py-6 text-base font-semibold bg-linear-to-r from-[#FF8057] to-[#F2744D] text-white overflow-hidden shadow-lg"
                   data-testid="button-download-guide"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}

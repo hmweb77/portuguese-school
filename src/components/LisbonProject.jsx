@@ -13,7 +13,7 @@ const fadeInUp = {
 
 export default function LisbonProject() {
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-[#DEFDF6]">
+    <section className="relative py-24 md:py-32 px-6 bg-[#E5F4EF]">
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
         <motion.div className="text-center mb-16" {...fadeInUp}>
@@ -130,7 +130,7 @@ export default function LisbonProject() {
                   >
                     <motion.button
                       id="btn-donate-lisbon"
-                      className="group relative px-10 py-5 bg-linear-to-r from-teal-500 to-teal-600 text-white rounded-full font-semibold text-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                      className="group relative px-10 py-5 bg-linear-to-r from-[#1F6A5C] to-[#174F45] text-white rounded-full font-semibold text-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >

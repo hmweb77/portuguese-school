@@ -61,7 +61,7 @@ export default function AboutProgram() {
     { 
       icon: Users, 
       title: "Small Groups", 
-      description: "Max 12 participants per session",
+      description: "4–10 participants per session",
       color: "from-purple-400 to-purple-600",
       bgColor: "bg-purple-50"
     },
@@ -165,7 +165,7 @@ export default function AboutProgram() {
     transition={{ duration: 0.6, delay: 0.2 }}
   >
     <p className="text-lg leading-relaxed text-[#394D5C]">
-      You’ll learn from <span className="font-semibold text-[#3BA9A3]">experienced and qualified native facilitators</span> in live, online interactive sessions 1 hour a day, from Monday to Friday. 
+      You’ll learn from <span className="font-semibold text-[#1F6A5C]">experienced and qualified facilitators</span> in live, online interactive sessions 1 hour a day, from Monday to Friday.
       Every session is recorded so you can review anytime. Plus, you get access to our extensive Portuguese digital library.
     </p>
   </motion.div>
@@ -179,7 +179,7 @@ export default function AboutProgram() {
     transition={{ duration: 0.6, delay: 0.3 }}
   >
     {[
-      { icon: "✓", text: "Experienced native Portuguese facilitators" },
+      { icon: "✓", text: "Inspiring Portuguese facilitators" },
       { icon: "✓", text: "Interactive live sessions online" },
       { icon: "✓", text: "Session recordings available (review anytime)" },
       { icon: "✓", text: "Immersion experience from anywhere" }

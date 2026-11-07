@@ -137,7 +137,7 @@ export default function PortugueseTestModal({ open, onClose, onComplete }) {
     } else if (percentage >= 40) {
       return "Online";
     } else {
-      return "Offline or Online";
+      return "Free sample or Online";
     }
   };
 

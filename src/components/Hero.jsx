@@ -92,7 +92,7 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
       <div 
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to bottom, rgba(59, 169, 163, 0.85), rgba(59, 169, 163, 0.75))`
+          background: `linear-gradient(to bottom, rgba(23, 79, 69, 0.88), rgba(31, 106, 92, 0.80))`
         }}
       />
 
@@ -180,13 +180,13 @@ export default function HeroSection({ onEnrollClick, onTestClick }) {
         
           <button
             id="btn-enroll-hero"
-            className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold rounded-full min-w-[200px] md:min-w-[220px] bg-[#FF8A5C] text-white hover:bg-[#FF7A4C] transition-colors"
+            className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold rounded-full min-w-[200px] md:min-w-[220px] bg-[#FF8057] text-white hover:bg-[#E96E48] transition-colors"
             onClick={onEnrollClick}
             data-testid="button-enroll-hero"
           >
             Enroll Now →
           </button>
-          <Link  className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold text-white rounded-full min-w-[200px] bg-[#FF8A5C] hover:bg-[#FF7A4C] md:min-w-[220px]  border-2 border-white/30 flex items-center justify-center gap-2" href="https://form.jotform.com/222385082740353" target="_blank" >
+          <Link  className="px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-semibold text-white rounded-full min-w-[200px] bg-transparent hover:bg-white/10 md:min-w-[220px] border-2 border-white/60 flex items-center justify-center gap-2" href="https://form.jotform.com/222385082740353" target="_blank" >
           
               <Play className="w-5 h-5" />
               Take Free Test

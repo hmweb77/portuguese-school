@@ -13,11 +13,11 @@ const AboutProgram = dynamic(() => import("@/components/About"), {
 });
 
 const BenefitsSection = dynamic(() => import("@/components/Benefits"), {
-  loading: () => <div className="min-h-screen bg-[#3BA9A3] animate-pulse" />
+  loading: () => <div className="min-h-screen bg-[#1F6A5C] animate-pulse" />
 });
 
 const PricingSection = dynamic(() => import("@/components/Pricing"), {
-  loading: () => <div className="min-h-screen bg-[#3BA9A3] animate-pulse" />
+  loading: () => <div className="min-h-screen bg-[#E5F4EF] animate-pulse" />
 });
 
 const TestimonialsSection = dynamic(() => import("@/components/Testimonials"), {
@@ -29,7 +29,7 @@ const UpcomingEventsSection = dynamic(() => import("@/components/UpcomingEvents"
 });
 
 const LeadMagnetSection = dynamic(() => import("@/components/LeadMagnet"), {
-  loading: () => <div className="min-h-screen bg-[#3BA9A3] animate-pulse" />
+  loading: () => <div className="min-h-screen bg-[#1F6A5C] animate-pulse" />
 });
 
 const FinalCTASection = dynamic(() => import("@/components/FinalCTA"), {

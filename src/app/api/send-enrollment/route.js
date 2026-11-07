@@ -60,7 +60,7 @@ export async function POST(request) {
                 name: fullName,
               },
             ],
-            subject: 'Pre-Enrollment Received - IFLI Immersion 2026',
+            subject: 'Pre-Enrollment Received - IFLI Immersion 2027',
             htmlContent: `
               <!DOCTYPE html>
               <html>
@@ -78,7 +78,7 @@ export async function POST(request) {
                     <p style="font-size: 16px; margin-bottom: 20px;">Dear ${fullName},</p>
                     
                     <p style="font-size: 16px; margin-bottom: 20px;">
-                      We've received your enrollment request for the <strong>${plan}</strong> plan of our Immersion Program 2026!
+                      We've received your enrollment request for the <strong>${plan}</strong> plan of our Immersion Program 2027!
                     </p>
                     
                     <div style="background: #F5F6F7; padding: 20px; border-radius: 8px; margin: 30px 0;">
@@ -108,7 +108,7 @@ export async function POST(request) {
                   </div>
                   
                   <div style="text-align: center; padding: 20px; color: #6B8299; font-size: 12px;">
-                    <p>© 2026 IFLI - Instituto de Formação em Língua Portuguesa</p>
+                    <p>© 2027 IFLI - Instituto de Formação em Língua Portuguesa</p>
                     <p>Lisbon, Portugal</p>
                   </div>
                 </body>

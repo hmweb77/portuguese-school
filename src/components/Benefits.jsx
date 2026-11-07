@@ -47,7 +47,7 @@ export default function BenefitsSection() {
     {
       icon: Users2,
       title: "Small Group Learning",
-      description: "Max 12 participants per session. Means more speaking time, personal attention, and faster skill development.",
+      description: "4–10 participants per session means more speaking time, personal attention, and faster skill development.",
       gradient: "from-blue-400 via-cyan-400 to-teal-500",
       bgGradient: "from-blue-50 to-cyan-50",
       accentColor: "#3B82F6"
@@ -75,7 +75,7 @@ export default function BenefitsSection() {
     <section 
       ref={sectionRef}
       id="benefits" 
-      className="relative py-24 md:py-32 px-6 bg-linear-to-br from-[#3BA9A3] via-[#359690] to-[#2D8B85] text-white overflow-hidden" 
+      className="relative py-24 md:py-32 px-6 bg-linear-to-br from-[#1F6A5C] via-[#1B5B50] to-[#174F45] text-white overflow-hidden"
       data-testid="section-benefits"
     >
       {/* Animated Background Elements */}

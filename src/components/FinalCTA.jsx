@@ -72,7 +72,7 @@ export default function FinalCTASection() {
 
   return (
     <section className="relative py-28 md:py-36 px-6 overflow-hidden" data-testid="section-final-cta">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#3BA9A3] via-[#2D9B95] to-[#1E7A75]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1F6A5C] via-[#1B5B50] to-[#174F45]" />
 
       <motion.div
         className="absolute top-0 left-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"

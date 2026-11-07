@@ -72,7 +72,7 @@ export default function Footer() {
               />
             </motion.div>
             <p className="text-[#6B8299] mb-6 leading-relaxed">
-            Learn European Portuguese fast with live online sessions, native facilitators, and a global community.
+            Learn European Portuguese fast with live online sessions, inspiring Portuguese facilitators, and a global community.
             </p>
             
             {/* Social Links */}
@@ -199,7 +199,7 @@ export default function Footer() {
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-[#6B8299]">
-              <p>© 2026 IFLI. All rights reserved.</p>
+              <p>© 2027 IFLI. All rights reserved.</p>
               <span className="hidden sm:inline">•</span>
               <Link
                 href="https://www.nextdigits.ma/"

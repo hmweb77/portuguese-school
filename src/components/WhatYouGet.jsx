@@ -29,7 +29,7 @@ export default function WhatYouGetSection({ onEnrollClick }) {
       color: "from-red-400 to-pink-500",
       bgColor: "bg-red-50",
       items: [
-        "30+ live interactive sessions with native speakers",
+        "50 hours of live interactive sessions with Portuguese facilitators",
         "Real-time Q&A and instant feedback",
         "Speaking practice with classmates",
         "Interactive exercises and activities"

@@ -1,21 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { getNextCourseIso, getNextCourseLabel } from "@/lib/courses";
 
 export const revalidate = 3600;
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
+  fallback: ["Arial", "sans-serif"],
 });
 
 const GTM_ID = "GTM-5BGNDBC8";
@@ -29,12 +24,12 @@ export async function generateMetadata() {
 
   title: {
     default:
-      "IFLI Portuguese Immersion 2026 - Learn European Portuguese in 10 Weeks",
+      "IFLI Portuguese Immersion 2027 - Learn European Portuguese in 10 Weeks",
     template: "%s | IFLI Portuguese Immersion",
   },
 
   description:
-    `Learn European Portuguese in just 10 weeks with IFLI's intensive immersion program. Live online classes with native teachers, small groups (max 12), and proven results. Enrollment now open for ${nextCourseLabel}.`,
+    `Learn European Portuguese in just 10 weeks with IFLI's intensive immersion program. 50 hours of live online classes with inspiring Portuguese facilitators and small groups of 4–10 participants. Enrollment now open for ${nextCourseLabel}.`,
 
   keywords: [
     "learn Portuguese",
@@ -48,7 +43,7 @@ export async function generateMetadata() {
     "Portuguese for beginners",
     "Portuguese intensive course",
     "IFLI Portuguese",
-    "Portuguese 2026",
+    "Portuguese 2027",
     "Portuguese Lisbon",
     "Portuguese Portugal",
     "learn Portuguese fast",
@@ -77,9 +72,9 @@ export async function generateMetadata() {
     url: "https://iflimmersion.com/ifli-portuguese-language-immersion",
     siteName: "IFLI Portuguese Immersion",
     title:
-      "IFLI Portuguese Immersion 2026 - Learn European Portuguese in 10 Weeks",
+      "IFLI Portuguese Immersion 2027 - Learn European Portuguese in 10 Weeks",
     description:
-      `Transform into a confident Portuguese speaker in 10 weeks. Live classes, native teachers, small groups. Enrollment open for ${nextCourseLabel}.`,
+      `Transform into a confident Portuguese speaker in 10 weeks. Live classes with inspiring Portuguese facilitators in groups of 4–10. Enrollment open for ${nextCourseLabel}.`,
     images: [
       {
         url: "https://iflimmersion.com/ifli-portuguese-language-immersion/og-image.jpg",
@@ -92,9 +87,9 @@ export async function generateMetadata() {
 
   twitter: {
     card: "summary_large_image",
-    title: "IFLI Portuguese Immersion 2026 - Learn European Portuguese Fast",
+    title: "IFLI Portuguese Immersion 2027 - Learn European Portuguese Fast",
     description:
-      `Speak Portuguese confidently in 10 weeks. Live online classes with native teachers. Enroll now for ${nextCourseLabel}!`,
+      `Speak Portuguese confidently in 10 weeks. 50 hours of live online classes with inspiring Portuguese facilitators. Enroll now for ${nextCourseLabel}!`,
     images: [
       "https://iflimmersion.com/ifli-portuguese-language-immersion/twitter-image.jpg",
     ],
@@ -165,7 +160,7 @@ function createJsonLd() {
       "@id":
         "https://iflimmersion.com/ifli-portuguese-language-immersion#webpage",
       url: "https://iflimmersion.com/ifli-portuguese-language-immersion",
-      name: "IFLI Portuguese Immersion 2026",
+      name: "IFLI Portuguese Immersion 2027",
       description:
         `Intensive 10-week European Portuguese immersion program, ${nextCourse.label}`,
       isPartOf: {
@@ -194,13 +189,13 @@ function createJsonLd() {
       "@type": "Course",
       "@id":
         "https://iflimmersion.com/ifli-portuguese-language-immersion#course",
-      name: "IFLI Portuguese Immersion 2026",
+      name: "IFLI Portuguese Immersion 2027",
       description:
-        "Intensive 10-week European Portuguese immersion program with live online classes, native teachers, and proven results",
+        "Intensive 10-week European Portuguese immersion program with 50 hours of live online classes, inspiring Portuguese facilitators, and proven results",
       provider: {
         "@id": "https://iflimmersion.com/#organization",
       },
-      courseCode: "IFLI-A1-2026",
+      courseCode: "IFLI-A1-2027",
       educationalLevel: "Beginner to Intermediate",
       inLanguage: "pt-PT",
       teaches: "European Portuguese Language",
@@ -215,16 +210,16 @@ function createJsonLd() {
         courseWorkload: "PT1H",
         instructor: {
           "@type": "Person",
-          name: "Native Portuguese Teachers",
+          name: "Portuguese Facilitators",
           description:
-            "Experienced and qualified native Portuguese facilitators",
+            "Experienced and qualified Portuguese facilitators",
         },
       },
       offers: [
         {
           "@type": "Offer",
-          category: "Offline Plan",
-          price: "195",
+          category: "Free Sample",
+          price: "0",
           priceCurrency: "EUR",
           availability: "https://schema.org/InStock",
           url: "https://iflimmersion.com/ifli-portuguese-language-immersion#pricing",
@@ -354,7 +349,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
 
         {/* Theme Color */}
-        <meta name="theme-color" content="#3BA9A3" />
+        <meta name="theme-color" content="#1F6A5C" />
 
         {/* Structured Data */}
         <script
@@ -364,7 +359,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${montserrat.variable} antialiased`}
       >
         <noscript>
           <iframe
